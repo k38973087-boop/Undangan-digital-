@@ -4,24 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mitra Nusantara</title>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; font-family: sans-serif; }
         body { background:#f2f5f8; padding-bottom: 90px; }
         
-        /* Header Biru */
         .header { background:#0057d9; color:white; padding: 25px 20px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; }
         .header-top { display: flex; justify-content: space-between; }
         .balance h2 { font-size: 20px; }
 
-        /* Stats Blue Box */
         .stats { background: #0d4a96; color: white; margin: 20px 15px; padding: 20px; border-radius: 12px; display: flex; justify-content: space-around; }
         .stat-box { text-align: center; }
 
-        /* Kartu Produk */
         .card { background: white; margin: 15px; padding: 20px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .top-info { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px; }
-        .logo { width: 50px; height: 50px; }
+        .logo { width: 50px; height: 50px; object-fit: cover; }
         .badge { background: #e6f0fa; color: #0056b3; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; }
         
         .params { display: flex; justify-content: space-between; margin-bottom: 20px; }
@@ -30,9 +29,8 @@
         .footer-card { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 15px; }
         .btn-invest { background: #007bff; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: bold; }
 
-        /* Bottom Nav */
         .nav { position: fixed; bottom: 0; width: 100%; background: #007bff; display: flex; justify-content: space-around; padding: 15px 0; color: white; }
-        .nav div { text-align: center; font-size: 11px; }
+        .nav a { color: white; text-decoration: none; text-align: center; font-size: 11px; }
         .nav .active { background: white; color: #007bff; padding: 5px 10px; border-radius: 8px; }
     </style>
 </head>
@@ -46,7 +44,7 @@
         </div>
         <div class="balance">
             <small>SALDO TERSEDIA</small>
-            <h2>Rp 0</h2>
+            <h2 id="saldoDisplay">Rp 0</h2>
         </div>
     </div>
 </div>
@@ -56,7 +54,6 @@
     <div class="stat-box"><p>Profit Harian</p><h3>Rp 0</h3></div>
 </div>
 
-<!-- Produk 1 -->
 <div class="card">
     <div class="top-info">
         <img src="images/logo1.png" class="logo">
@@ -77,7 +74,6 @@
     </div>
 </div>
 
-<!-- Produk 2 -->
 <div class="card">
     <div class="top-info">
         <img src="images/logo2.png" class="logo">
@@ -99,12 +95,31 @@
 </div>
 
 <div class="nav">
-    <div><i class="fas fa-home"></i><br>Beranda</div>
-    <div class="active"><i class="fas fa-chart-line"></i><br>Investasi</div>
-    <div><i class="fas fa-comments"></i><br>Forum</div>
-    <div><i class="fas fa-receipt"></i><br>Riwayat</div>
-    <div><i class="fas fa-user"></i><br>Akun</div>
+    <a href="beranda.html"><div><i class="fas fa-home"></i><br>Beranda</div></a>
+    <a href="investasi.html"><div class="active"><i class="fas fa-chart-line"></i><br>Investasi</div></a>
+    <a href="forum.html"><div><i class="fas fa-comments"></i><br>Forum</div></a>
+    <a href="riwayat.html"><div><i class="fas fa-receipt"></i><br>Riwayat</div></a>
+    <a href="akun.html"><div><i class="fas fa-user"></i><br>Akun</div></a>
 </div>
 
+<script>
+    // Inisialisasi Firebase
+    const firebaseConfig = { databaseURL: "https://admin-panel-5c204-default-rtdb.firebaseio.com/" };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    
+    // Ambil nomor HP user yang login
+    const userPhone = localStorage.getItem('n15_user');
+
+    if (userPhone) {
+        db.ref('users/' + userPhone).on('value', (snapshot) => {
+            const data = snapshot.val();
+            if (data && data.points) {
+                document.getElementById('saldoDisplay').innerText = "Rp " + data.points.toLocaleString('id-ID');
+            }
+        });
+    }
+</script>
+
 </body>
-                                                                        </html>
+</html>
