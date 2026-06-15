@@ -3,145 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar - PT Bursa Emas Indonesia</title>
+    <title>Daftar - Mitra Nusantara Partner</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         body { font-family: 'Inter', sans-serif; }
-        /* Background pattern untuk kotak verifikasi */
-        .bg-grid {
-            background-image: linear-gradient(to right, #fde68a33 1px, transparent 1px),
-                              linear-gradient(to bottom, #fde68a33 1px, transparent 1px);
-            background-size: 10px 10px;
-        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen">
+<body class="bg-slate-50 text-slate-800 min-h-screen selection:bg-blue-500 selection:text-white">
 
     <div class="max-w-md mx-auto bg-white min-h-screen shadow-sm relative pb-10">
         
-        <div class="bg-slate-50 border-b border-slate-100 px-5 py-4 text-center">
-            <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">Diawasi & Terdaftar</p>
-            <div class="flex justify-center items-center gap-4 text-slate-800 font-bold text-sm">
-                <span class="flex items-center gap-1"><i class="fa-solid fa-building-columns text-blue-600"></i> OJK</span>
-                <span class="flex items-center gap-1"><i class="fa-solid fa-building-columns text-blue-600"></i> BI</span>
-                <span class="flex items-center gap-1"><i class="fa-solid fa-chart-line text-blue-600"></i> Bappebti</span>
+        <!-- HEADER: Logo & Regulasi -->
+        <div class="bg-slate-50 border-b border-slate-100 px-5 py-8 text-center relative overflow-hidden">
+            <!-- Background glow -->
+            <div class="absolute inset-0 bg-gradient-to-b from-blue-100/50 to-transparent pointer-events-none"></div>
+            
+            <div class="relative z-10 flex justify-center mb-3">
+                <div class="bg-white p-3 rounded-2xl shadow-md border border-slate-100 flex items-center justify-center w-14 h-14 transition-transform hover:scale-105 duration-300">  
+                    <svg class="w-8 h-8 text-[#2563EB]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">  
+                        <path d="M3 3v18h18" />  
+                        <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3" />  
+                    </svg>  
+                </div>  
             </div>
-            <p class="text-[10px] text-slate-400 mt-2">No. Reg OJK: S-14/MS.72/2024</p>
+            
+            <h1 class="text-xl font-extrabold text-slate-900 tracking-tight">Mitra Nusantara</h1>
+            <p class="text-xs text-slate-500 mt-1">Platform Kemitraan Digital Terpadu</p>
+            
+            <div class="mt-4 inline-flex items-center gap-1.5 bg-white shadow-sm border border-slate-200 px-3 py-1.5 rounded-full">
+                <span class="text-red-600 font-extrabold text-[10px]">OJK</span>
+                <span class="text-slate-600 text-[10px] font-medium">Terdaftar & Diawasi</span>
+            </div>
         </div>
 
+        <!-- FORM PENDAFTARAN -->
         <div class="px-5 py-6">
             
+            <!-- Nomor HP -->
             <div class="mb-5">
-                <label class="block text-sm font-semibold text-slate-800 mb-2">Nomor HP</label>
+                <label class="block text-sm font-semibold text-slate-800 mb-2">Nomor Telepon (WhatsApp)</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                         <i class="fa-solid fa-phone text-slate-400"></i>
                     </div>
-                    <input type="tel" id="phone" placeholder="Masukkan nomor HP" class="w-full pl-11 pr-4 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all">
+                    <input type="tel" id="phone" placeholder="Contoh: 08123456789" class="w-full pl-11 pr-4 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] outline-none transition-all">
                 </div>
             </div>
 
+            <!-- Kata Sandi -->
             <div class="mb-5">
                 <label class="block text-sm font-semibold text-slate-800 mb-2">Kata Sandi</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                         <i class="fa-solid fa-lock text-slate-400"></i>
                     </div>
-                    <input type="password" id="pass1" placeholder="Masukkan kata sandi" class="w-full pl-11 pr-10 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all">
+                    <input type="password" id="pass1" placeholder="Masukkan kata sandi" class="w-full pl-11 pr-10 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] outline-none transition-all">
                     <div class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer">
                         <i class="fa-solid fa-eye text-slate-400 hover:text-slate-600" onclick="togglePassword('pass1')"></i>
                     </div>
                 </div>
             </div>
 
+            <!-- Konfirmasi Kata Sandi -->
             <div class="mb-5">
                 <label class="block text-sm font-semibold text-slate-800 mb-2">Konfirmasi Kata Sandi</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                         <i class="fa-solid fa-lock text-slate-400"></i>
                     </div>
-                    <input type="password" id="pass2" placeholder="Ulangi kata sandi" class="w-full pl-11 pr-10 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all">
+                    <input type="password" id="pass2" placeholder="Ulangi kata sandi" class="w-full pl-11 pr-10 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm focus:border-[#2563EB] focus:ring-1 focus:ring-[#2563EB] outline-none transition-all">
                     <div class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer">
                         <i class="fa-solid fa-eye text-slate-400 hover:text-slate-600" onclick="togglePassword('pass2')"></i>
                     </div>
                 </div>
             </div>
 
+            <!-- Kode Referral -->
             <div class="mb-6">
                 <label class="block text-sm font-semibold text-slate-800 mb-2">Kode Referral <span class="text-slate-400 font-normal">(opsional)</span></label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <i class="fa-solid fa-gift text-amber-500"></i>
+                        <i class="fa-solid fa-user-tag text-[#2563EB]"></i>
                     </div>
-                    <input type="text" value="ZXG7B4DU" readonly class="w-full pl-11 pr-4 py-3.5 bg-[#fffaf0] border border-amber-400 text-amber-700 font-bold rounded-2xl text-sm outline-none">
+                    <input type="text" value="ZXG7B4DU" readonly class="w-full pl-11 pr-4 py-3.5 bg-blue-50 border border-blue-200 text-blue-700 font-bold rounded-2xl text-sm outline-none">
                 </div>
             </div>
 
-            <div class="bg-[#fffdf2] border border-amber-300 rounded-2xl p-4 mb-4 bg-grid relative shadow-sm">
-                <div class="absolute top-3 right-3 text-amber-500 cursor-pointer hover:text-amber-600 transition-transform active:rotate-180">
+            <!-- Box Verifikasi Matematika -->
+            <div class="bg-blue-50/50 border border-blue-200 rounded-2xl p-4 mb-4 relative shadow-sm">
+                <div class="absolute top-3 right-3 text-blue-500 cursor-pointer hover:text-blue-700 transition-transform active:rotate-180">
                     <i class="fa-solid fa-rotate-right"></i>
                 </div>
-                <p class="text-[10px] text-amber-600 font-bold tracking-widest text-center uppercase mb-2">Verifikasi</p>
+                <p class="text-[10px] text-[#2563EB] font-bold tracking-widest text-center uppercase mb-2">Verifikasi Keamanan</p>
                 <div class="flex justify-center items-center gap-3 text-2xl font-bold text-slate-800 tracking-wider">
                     <span>6</span> <span>+</span> <span>4</span> <span>=</span> <span>?</span>
                 </div>
             </div>
 
+            <!-- Input Verifikasi -->
             <div class="flex justify-center mb-8">
-                <input type="number" id="captcha" placeholder="?" class="w-20 text-center py-3 bg-white border border-amber-300 rounded-xl text-lg font-bold text-slate-800 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none shadow-sm">
+                <input type="number" id="captcha" placeholder="?" class="w-20 text-center py-3 bg-white border border-blue-300 rounded-xl text-lg font-bold text-[#2563EB] focus:border-[#2563EB] focus:ring-2 focus:ring-blue-500/20 outline-none shadow-sm transition-all">
             </div>
 
-            <button id="btnDaftar" class="w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-white font-bold text-base py-4 rounded-2xl shadow-[0_4px_15px_rgba(245,158,11,0.3)] transition-all active:scale-[0.98]">
-                Daftar Sekarang
+            <!-- Tombol Daftar -->
+            <button id="btnDaftar" class="w-full bg-[#2563EB] hover:bg-blue-700 text-white font-bold text-base py-4 rounded-2xl shadow-lg shadow-blue-600/20 transition-all active:scale-[0.98]">
+                Daftar & Lanjutkan
             </button>
 
+            <!-- Link Masuk -->
             <p class="text-center text-sm text-slate-500 mt-5">
-                Sudah punya akun? <a href="#" class="text-amber-600 font-bold hover:underline">Masuk</a>
+                Sudah punya akun keanggotaan? <a href="#" class="text-[#2563EB] font-bold hover:underline">Masuk</a>
             </p>
 
-            <div class="flex justify-between gap-2 mt-10">
-                <div class="bg-[#1e293b] rounded-2xl p-3 flex flex-col items-center justify-center text-center gap-1.5 w-1/3 shadow-sm">
-                    <i class="fa-solid fa-lock text-emerald-400 text-lg"></i>
-                    <div>
-                        <p class="text-white text-[10px] font-bold">SSL 256-bit</p>
-                        <p class="text-slate-400 text-[9px]">Enkripsi</p>
-                    </div>
-                </div>
-                <div class="bg-[#1e293b] rounded-2xl p-3 flex flex-col items-center justify-center text-center gap-1.5 w-1/3 shadow-sm">
-                    <i class="fa-solid fa-shield-halved text-blue-400 text-lg"></i>
-                    <div>
-                        <p class="text-white text-[10px] font-bold">Data Aman</p>
-                        <p class="text-slate-400 text-[9px]">Terenkripsi</p>
-                    </div>
-                </div>
-                <div class="bg-[#1e293b] rounded-2xl p-3 flex flex-col items-center justify-center text-center gap-1.5 w-1/3 shadow-sm">
-                    <i class="fa-solid fa-certificate text-amber-400 text-lg"></i>
-                    <div>
-                        <p class="text-white text-[10px] font-bold">Terverifikasi</p>
-                        <p class="text-slate-400 text-[9px]">Resmi</p>
-                    </div>
-                </div>
+            <!-- Mitra Nusantara Badges (Matching Main Dashboard) -->
+            <div class="bg-[#2563EB] text-white rounded-2xl p-4 shadow-md border border-blue-600 mt-10">  
+                <div class="grid grid-cols-3 items-center">  
+                    <div class="flex flex-col items-center gap-1.5 border-r border-white/20 px-1">  
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">  
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"></path>  
+                        </svg>  
+                        <span class="text-[10px] font-bold tracking-tight text-center">Aman Terpercaya</span>  
+                    </div>  
+                    <div class="flex flex-col items-center gap-1.5 border-r border-white/20 px-1">  
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">  
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>  
+                        </svg>  
+                        <span class="text-[10px] font-bold tracking-tight text-center">Diawasi OJK</span>  
+                    </div>  
+                    <div class="flex flex-col items-center gap-1.5 px-1">  
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">  
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 3.03v.568c0 .334.148.65.405.864l.468.388c.233.193.553.26.846.178l.496-.14a2.25 2.25 0 012.285 1.08l.2.35a2.25 2.25 0 01-.444 2.75l-.326.272a2.25 2.25 0 00-.732 1.342l-.195.976a2.25 2.25 0 01-2.234 1.805h-.19a2.25 2.25 0 00-2.25 2.25v.65a2.25 2.25 0 01-1.07 1.916l-.105.063a2.25 2.25 0 00-1.07 1.916v.415m0 3.12v.568A9.003 9.003 0 013 12c0-1.268.26-2.475.729-3.579m15.355 5.079a9.002 9.002 0 01-15.355-5.08M12 21.75a8.96 8.96 0 005.12-1.592.5.5 0 00.163-.506l-.21-.84a2.25 2.25 0 00-2.223-1.696H15a2.25 2.25 0 00-2.25-2.25v-.141c0-.422-.16-.828-.45-1.134l-.474-.474a2.25 2.25 0 00-3.182 0l-.549.549a2.25 2.25 0 01-1.378.634l-.392.03a2.25 2.25 0 00-1.748 1.176l-.41.821a.5.5 0 00.121.572A8.96 8.96 0 0012 21.75zM15 11.25a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>  
+                        </svg>  
+                        <span class="text-[10px] font-bold tracking-tight text-center">Data Terenkripsi</span>  
+                    </div>  
+                </div>  
             </div>
 
-            <div class="mt-10 text-center border-t border-slate-100 pt-6">
-                <h4 class="font-bold text-slate-800 text-sm mb-3">PT Bursa Emas Indonesia</h4>
-                <div class="flex justify-center items-center gap-2 mb-2">
-                    <div class="bg-white border border-slate-200 rounded-full w-10 h-10 flex items-center justify-center shadow-sm">
-                        <i class="fa-solid fa-building-columns text-blue-800 text-lg"></i>
-                    </div>
-                    <div class="text-left leading-tight">
-                        <p class="text-[10px] text-slate-500 font-semibold">Diawasi oleh Otoritas Jasa Keuangan (OJK)</p>
-                        <p class="text-[9px] text-slate-400">No. Reg: S-14/MS.72/2024</p>
-                    </div>
-                </div>
-                <p class="text-[10px] text-slate-400 mt-6">&copy; 2026 Bursa Emas Indonesia. Semua hak cipta dilindungi</p>
+            <!-- Footer OJK -->
+            <div class="mt-8 text-center border-t border-slate-100 pt-6">
+                <p class="text-[11px] text-slate-500 font-medium">Program Kemitraan Resmi Terdaftar</p>
+                <p class="text-[10px] text-slate-400 mt-1">No. Registrasi: AEP-4300/2024</p>
+                <p class="text-[10px] text-slate-400 mt-6">&copy; 2026 Mitra Nusantara. Hak Cipta Dilindungi.</p>
             </div>
 
         </div>
     </div>
 
+    <!-- SCRIPT LOGIC PENDAFTARAN -->
     <script>
         // Fitur Tampil/Sembunyikan Kata Sandi
         function togglePassword(inputId) {
@@ -164,7 +179,7 @@
 
             // Validasi Input Kosong
             if(!phone || !pass1 || !pass2 || !captcha) {
-                alert('Peringatan: Harap isi semua kolom pendaftaran!');
+                alert('Peringatan: Harap lengkapi semua kolom pendaftaran Anda!');
                 return;
             }
 
@@ -176,20 +191,19 @@
 
             // Validasi Matematika (6+4=10)
             if(parseInt(captcha) !== 10) {
-                alert('Peringatan: Jawaban verifikasi salah! Coba lagi.');
+                alert('Peringatan: Jawaban verifikasi keamanan salah! Silakan coba lagi.');
                 return;
             }
 
-            // Simpan User ID (Nomor HP) ke Local Storage browser
+            // Simpan User ID (Nomor HP) ke Local Storage browser untuk simulasi masuk akun
             localStorage.setItem('user_hp', phone);
             localStorage.setItem('is_logged_in', 'true');
             
-            alert('Pendaftaran Berhasil!\nSistem akan mengarahkan Anda ke Dashboard.');
+            alert('Pendaftaran Berhasil!\nSelamat datang di Mitra Nusantara. Anda akan diarahkan ke Dashboard Keanggotaan.');
 
-            // Arahkan ke file produk.html yang bertindak sebagai dashboard
-            // Pastikan file tersebut ada di folder yang sama
+            // Arahkan ke file dashboard (produk.html)
             window.location.href = 'produk.html';
         });
     </script>
 </body>
-</html>
+                    </html>
