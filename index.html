@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Wedding Of Ahmad & Siti</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
+}
+
+body::-webkit-scrollbar{
+    width:8px;
+}
+
+body::-webkit-scrollbar-thumb{
+    background:#d4af37;
+}
+
+:root{
+    --gold:#d4af37;
+}
+
+section{
+    padding:80px 20px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+}
+
+.title{
+    font-family:'Cinzel',serif;
+    color:var(--gold);
+    font-size:40px;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.card{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(212,175,55,.25);
+    border-radius:20px;
+    padding:30px;
+    backdrop-filter:blur(10px);
+}
+
+.btn{
+    background:linear-gradient(45deg,#a67c00,#ffd700);
+    color:#000;
+    border:none;
+    padding:14px 35px;
+    border-radius:50px;
+    font-weight:600;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-block;
+}
+
+.center{
+    text-align:center;
+}
+
+/* HERO */
+
+.hero{
+    height:100vh;
+
+    background:
+    linear-gradient(
+    rgba(0,0,0,.55),
+    rgba(0,0,0,.75)
+    ),
+    url('cover.jpg');
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.hero h1{
+    font-family:'Cinzel',serif;
+    color:var(--gold);
+    font-size:60px;
+}
+
+.hero p{
+    margin:10px 0;
+}
+
+.guest-box{
+    margin-top:25px;
+    padding:15px;
+    border:1px solid rgba(212,175,55,.3);
+    border-radius:15px;
+}
+
+#guestName{
+    color:var(--gold);
+    font-size:24px;
+}
+
+/* ANIMASI */
+
+.fade{
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s;
+}
+
+.fade.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* BUNGA */
+
+.flower{
+    position:fixed;
+    top:-20px;
+    font-size:18px;
+    color:gold;
+    z-index:9999;
+    pointer-events:none;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-20px)
+        rotate(0deg);
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(110vh)
+        rotate(360deg);
+        opacity:0;
+    }
+}
+
+audio{
+    display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="musik" loop>
+    <source src="musik.mp3" type="audio/mpeg">
+</audio>
+
+<section class="hero">
+
+<div>
+
+<p>The Wedding Of</p>
+
+<h1>Ahmad & Siti</h1>
+
+<p>20 Desember 2026</p>
+
+<div class="guest-box">
+    <small>Kepada Yth.</small>
+
+    <h3 id="guestName">
+        Tamu Undangan
+    </h3>
+
+    <small>
+        Mohon maaf apabila ada kesalahan penulisan nama
+    </small>
+</div>
+
+<br>
+
+<button class="btn"
+onclick="bukaUndangan()">
+Buka Undangan
+</button>
+
+</div>
+
+</section>
+
+<div id="undangan"
+style="display:none;">
+
+<!-- PEMBUKA -->
+<section class="fade">
+    <div class="container center">
+
+        <h2 class="title">
+            Assalamu'alaikum Warahmatullahi Wabarakatuh
+        </h2>
+
+        <div class="card">
+
+            <p>
+                Dengan memohon rahmat dan ridho Allah SWT,
+                kami bermaksud mengundang
+                Bapak/Ibu/Saudara/i untuk hadir
+                pada acara pernikahan kami.
+            </p>
+
+            <br>
+
+            <h3 style="color:var(--gold)">
+                "Dan di antara tanda-tanda kekuasaan-Nya
+                ialah Dia menciptakan pasangan-pasangan
+                untukmu agar kamu merasa tenteram kepadanya."
+            </h3>
+
+            <br>
+
+            <p>QS. Ar-Rum : 21</p>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- MEMPELAI -->
+<section class="fade">
+
+    <div class="container">
+
+        <h2 class="title">
+            Mempelai
+        </h2>
+
+        <div class="card center">
+
+            <img src="foto1.jpg"
+            style="
+            width:150px;
+            height:150px;
+            border-radius:50%;
+            object-fit:cover;
+            border:4px solid gold;">
+
+            <h2 style="color:var(--gold)">
+                Ahmad Ramadhan
+            </h2>
+
+            <p>
+                Putra dari Bapak Abdullah
+                & Ibu Aisyah
+            </p>
+
+            <br><br>
+
+            <h1 style="color:gold;">
+                &
+            </h1>
+
+            <br><br>
+
+            <img src="foto2.jpg"
+            style="
+            width:150px;
+            height:150px;
+            border-radius:50%;
+            object-fit:cover;
+            border:4px solid gold;">
+
+            <h2 style="color:var(--gold)">
+                Siti Nurhaliza
+            </h2>
+
+            <p>
+                Putri dari Bapak Hasan
+                & Ibu Fatimah
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- COUNTDOWN -->
+<section class="fade">
+
+    <div class="container center">
+
+        <h2 class="title">
+            Hitung Mundur Acara
+        </h2>
+
+        <div id="countdown"
+        style="
+        font-size:32px;
+        color:gold;
+        font-weight:bold;">
+            Loading...
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ACARA -->
+<section class="fade">
+
+    <div class="container">
+
+        <h2 class="title">
+            Detail Acara
+        </h2>
+
+        <div class="card center">
+
+            <h3 style="color:gold">
+                Akad & Resepsi
+            </h3>
+
+            <br>
+
+            <p>
+                Minggu,
+                20 Desember 2026
+            </p>
+
+            <p>
+                Pukul 09:00 WIB
+            </p>
+
+            <br>
+
+            <p>
+                Gedung Serbaguna Palembang
+            </p>
+
+            <br>
+
+            <a href="https://maps.google.com"
+               class="btn"
+               target="_blank">
+
+               📍 Buka Maps
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- GALERI -->
+<section class="fade">
+
+    <div class="container">
+
+        <h2 class="title">
+            Galeri Foto
+        </h2>
+
+        <div style="
+        display:grid;
+        grid-template-columns:
+        repeat(auto-fit,minmax(200px,1fr));
+        gap:15px;">
+
+            <img src="foto1.jpg"
+            style="width:100%;
+            border-radius:15px;">
+
+            <img src="foto2.jpg"
+            style="width:100%;
+            border-radius:15px;">
+
+            <img src="foto3.jpg"
+            style="width:100%;
+            border-radius:15px;">
+
+            <img src="foto4.jpg"
+            style="width:100%;
+            border-radius:15px;">
+
+            <img src="foto5.jpg"
+            style="width:100%;
+            border-radius:15px;">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- RSVP -->
+<section class="fade">
+
+    <div class="container center">
+
+        <h2 class="title">
+            RSVP
+        </h2>
+
+        <div class="card">
+
+            <p>
+                Kehadiran dan doa restu Anda
+                merupakan kebahagiaan bagi kami.
+            </p>
+
+            <br>
+
+            <a href="https://wa.me/6281234567890"
+               target="_blank"
+               class="btn">
+
+               💬 Konfirmasi Kehadiran
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- WEDDING GIFT -->
+<section class="fade">
+
+    <div class="container center">
+
+        <h2 class="title">
+            Wedding Gift
+        </h2>
+
+        <div class="card">
+
+            <p>BCA</p>
+
+            <h2 style="color:gold">
+                1234567890
+            </h2>
+
+            <p>
+                a.n Ahmad Ramadhan
+            </p>
+
+            <br>
+
+            <p>DANA</p>
+
+            <h2 style="color:gold">
+                081234567890
+            </h2>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PENUTUP -->
+<section class="fade">
+
+    <div class="container center">
+
+        <div class="card">
+
+            <h2 style="color:gold">
+                Terima Kasih
+            </h2>
+
+            <br>
+
+            <p>
+                Merupakan suatu kehormatan
+                dan kebahagiaan bagi kami
+                apabila Bapak/Ibu/Saudara/i
+                berkenan hadir dan memberikan
+                doa restu.
+            </p>
+
+            <br>
+
+            <h3>
+                Ahmad & Siti
+            </h3>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer style="
+padding:40px;
+text-align:center;
+border-top:1px solid rgba(255,255,255,.1);">
+
+© 2026 The Wedding Of Ahmad & Siti
+
+</footer>
+
+</div>
+
+<script>
+
+// ============================
+// BUKA UNDANGAN + MUSIK
+// ============================
+
+function bukaUndangan(){
+
+    document.getElementById("undangan")
+        .style.display = "block";
+
+    document.getElementById("undangan")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+    const musik =
+        document.getElementById("musik");
+
+    musik.volume = 0.3; // 30%
+
+    musik.play().catch(()=>{
+        console.log("Browser memblokir autoplay.");
+    });
+
+}
+
+
+// ============================
+// NAMA TAMU DARI URL
+// Contoh:
+// ?to=Budi%20Santoso
+// ============================
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const guest =
+    params.get("to");
+
+if(guest){
+
+    document.getElementById(
+        "guestName"
+    ).textContent =
+        decodeURIComponent(guest);
+
+}
+
+
+// ============================
+// COUNTDOWN
+// ============================
+
+const targetDate =
+new Date(
+"December 20, 2026 09:00:00"
+).getTime();
+
+setInterval(function(){
+
+    const now =
+        new Date().getTime();
+
+    const distance =
+        targetDate - now;
+
+    if(distance < 0){
+
+        document.getElementById(
+            "countdown"
+        ).innerHTML =
+        "Acara Sedang Berlangsung";
+
+        return;
+    }
+
+    const days =
+    Math.floor(
+        distance /
+        (1000*60*60*24)
+    );
+
+    const hours =
+    Math.floor(
+        (distance %
+        (1000*60*60*24))
+        /(1000*60*60)
+    );
+
+    const minutes =
+    Math.floor(
+        (distance %
+        (1000*60*60))
+        /(1000*60)
+    );
+
+    const seconds =
+    Math.floor(
+        (distance %
+        (1000*60))
+        /1000
+    );
+
+    document.getElementById(
+        "countdown"
+    ).innerHTML =
+
+    days + " Hari " +
+    hours + " Jam " +
+    minutes + " Menit " +
+    seconds + " Detik";
+
+},1000);
+
+
+// ============================
+// ANIMASI SCROLL
+// ============================
+
+const observer =
+new IntersectionObserver(
+(entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target
+            .classList
+            .add("show");
+
+        }
+
+    });
+
+});
+
+document
+.querySelectorAll(".fade")
+.forEach(el=>{
+
+    observer.observe(el);
+
+});
+
+
+// ============================
+// BUNGA JATUH
+// ============================
+
+function createFlower(){
+
+    const flower =
+    document.createElement(
+        "div"
+    );
+
+    flower.classList.add(
+        "flower"
+    );
+
+    flower.innerHTML = "❀";
+
+    flower.style.left =
+        Math.random()*100
+        + "vw";
+
+    flower.style.fontSize =
+        (Math.random()*20+15)
+        + "px";
+
+    flower.style.animationDuration =
+        (Math.random()*5+5)
+        + "s";
+
+    document.body
+        .appendChild(
+            flower
+        );
+
+    setTimeout(()=>{
+
+        flower.remove();
+
+    },10000);
+
+}
+
+setInterval(
+    createFlower,
+    600
+);
+
+</script>
+
+</body>
+</html>
