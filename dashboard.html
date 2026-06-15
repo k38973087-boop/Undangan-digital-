@@ -7,264 +7,166 @@
   <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
   <style>
-    /* --- RESET & BASE STYLE --- */
+    /* --- RESET & BASE FONT --- */
+    * { box-sizing: border-box; }
     body { 
       margin: 0; 
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-      background: #f4f7fa; 
-      padding-bottom: 100px; 
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+      background: #f8f9fa; 
+      padding-bottom: 90px; 
       color: #333; 
-      overflow-x: hidden; 
-      animation: fadeIn 0.5s ease-out;
+      -webkit-font-smoothing: antialiased;
     }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* --- CUSTOM ALERT SYSTEM --- */
+    /* --- ALERT NOTIFICATION --- */
     #customAlert {
-      display: none;
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255, 61, 0, 0.95);
-      color: white;
-      padding: 12px 25px;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: bold;
-      z-index: 10000;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      background: #dc3545; color: white; padding: 12px 24px; border-radius: 8px;
+      font-size: 13px; font-weight: bold; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
-    /* --- TOP HEADER BANNER --- */
+    /* --- TOP HEADER (BLUE BACKGROUND) --- */
     .top-banner { 
-      background: #1565C0;
-      border-bottom-left-radius: 30px;
-      border-bottom-right-radius: 30px;
-      padding: 30px 20px 40px 20px;
+      background: #115ebb;
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+      padding: 35px 20px 45px 20px;
       color: white;
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
     }
+    .top-banner .left-info h1 { font-size: 20px; margin: 0; font-weight: 700; letter-spacing: 0.5px; }
+    .top-banner .left-info p { font-size: 13px; margin: 6px 0 0 0; color: #d0e2f5; }
     
-    .top-banner .left-info h1 { font-size: 22px; margin: 0; font-weight: 700; }
-    .top-banner .left-info p { font-size: 13px; margin: 5px 0 0 0; opacity: 0.8; }
-
     .top-banner .right-balance { text-align: right; }
-    .top-banner .right-balance p { font-size: 11px; margin: 0; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.9; }
-    .top-banner .right-balance .balance-row { display: flex; align-items: center; justify-content: flex-end; gap: 5px; margin-top: 5px; }
-    .top-banner .right-balance h2 { font-size: 22px; margin: 0; font-weight: 700; }
-    .top-banner .right-balance .eye-icon { font-size: 16px; cursor: pointer; opacity: 0.8; }
+    .top-banner .right-balance p { font-size: 11px; margin: 0; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; color: #d0e2f5; }
+    .top-banner .right-balance .balance-row { display: flex; align-items: center; justify-content: flex-end; gap: 6px; margin-top: 4px; }
+    .top-banner .right-balance h2 { font-size: 20px; margin: 0; font-weight: 700; }
+    .top-banner .right-balance .eye-icon { font-size: 14px; cursor: pointer; color: #d0e2f5; }
 
     /* --- FILTER CATEGORY TABS --- */
+    .category-wrapper { padding: 0 15px; margin-top: -20px; }
     .category-container {
-      overflow-x: auto;
-      white-space: nowrap;
-      padding: 15px 20px;
-      margin-top: -15px;
+      background: #f1f3f5;
+      border-radius: 12px;
       display: flex;
-      gap: 10px;
+      padding: 6px;
+      gap: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+      overflow-x: auto;
     }
     .category-container::-webkit-scrollbar { display: none; }
-    
     .tab-btn {
-      background: white;
-      color: #666;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      cursor: pointer;
+      flex: 1; min-width: 80px; text-align: center;
+      background: transparent; color: #6c757d; border: none;
+      padding: 10px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: 0.3s;
     }
-    .tab-btn.active {
-      background: #00E676;
-      color: white;
-      background-image: linear-gradient(135deg, #0091EA, #00b0ff);
-    }
+    .tab-btn.active { background: #007bff; color: white; box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3); }
 
-    /* --- SUMMARY INVESTMENT PORTFOLIO CARD --- */
+    /* --- SUMMARY INVESTMENT CARD --- */
     .summary-card {
-      background: #0D47A1;
-      margin: 0 20px 20px 20px;
-      border-radius: 16px;
-      padding: 20px;
+      background: #0d4a96;
+      margin: 20px 15px;
+      border-radius: 12px;
+      padding: 20px 0;
       color: white;
       display: flex;
-      box-shadow: 0 8px 20px rgba(13, 71, 161, 0.2);
+      box-shadow: 0 6px 15px rgba(13, 74, 150, 0.15);
     }
-    .summary-box { flex: 1; text-align: center; }
-    .summary-box:first-child { border-right: 1px solid rgba(255, 255, 255, 0.15); }
-    .summary-box p { margin: 0; font-size: 12px; opacity: 0.8; display: flex; align-items: center; justify-content: center; gap: 5px; }
-    .summary-box h3 { margin: 8px 0 0 0; font-size: 18px; font-weight: 700; }
-    .summary-box h3.profit-text { color: #00E676; }
+    .summary-box { flex: 1; text-align: center; position: relative; }
+    .summary-box:first-child::after {
+      content: ''; position: absolute; right: 0; top: 10%; height: 80%; width: 1px; background: rgba(255,255,255,0.2);
+    }
+    .summary-box p { margin: 0; font-size: 12px; color: #d0e2f5; display: flex; align-items: center; justify-content: center; gap: 6px; font-weight: 500;}
+    .summary-box h3 { margin: 8px 0 0 0; font-size: 17px; font-weight: 700; }
+    .summary-box h3.profit-text { color: #20c997; }
 
-    /* --- SECTION TITLE --- */
-    .section { padding: 0 20px; }
-    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-    .section-header h3 { font-size: 15px; font-weight: 700; color: #444; margin: 0; }
-    .btn-back { background: #1565C0; color: #fff; font-size: 11px; padding: 6px 12px; border-radius: 20px; cursor: pointer; display: none; font-weight: 600; }
-
-    /* --- PRODUCT CARDS GRID & ITEMS --- */
+    /* --- PRODUCT LIST CONTAINER --- */
+    .section { padding: 0 15px 20px 15px; }
     .reels-grid { display: flex; flex-direction: column; gap: 15px; }
     
+    /* --- INDIVIDUAL PRODUCT CARD --- */
     .reels-item { 
-      background: white; 
-      border-radius: 16px; 
-      padding: 18px; 
-      box-shadow: 0 4px 15px rgba(0,0,0,0.04); 
-      display: flex; 
-      flex-direction: column; 
-      cursor: pointer;
-      position: relative;
-      border: 1px solid rgba(0,0,0,0.02);
+      background: white; border-radius: 16px; padding: 20px; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; flex-direction: column; 
+      cursor: pointer; border: 1px solid #edf2f7; transition: transform 0.2s;
     }
-    .reels-item.locked {
-      opacity: 0.6;
-      pointer-events: none;
-      filter: grayscale(0.8);
-    }
+    .reels-item.locked { opacity: 0.6; pointer-events: none; filter: grayscale(0.8); }
 
-    /* Card Layout Top Section */
-    .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
+    /* Header Card */
+    .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
     .card-meta { display: flex; gap: 12px; align-items: center; }
     
-    /* Dynamic Image Replacement Placeholder */
-    .brand-logo-container {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: #f0f4f8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      border: 1px solid #e1e8ed;
-    }
-    .brand-logo-container img { width: 80%; height: 80%; object-fit: contain; }
+    .brand-logo { width: 40px; height: 40px; object-fit: contain; }
+    .brand-logo-fallback { font-size: 30px; font-weight: 900; color: #115ebb; font-style: italic; line-height: 1; }
 
     .brand-details { display: flex; flex-direction: column; gap: 4px; }
-    .badge-level { 
-      background: #E3F2FD; 
-      color: #1E88E5; 
-      font-size: 10px; 
-      padding: 3px 10px; 
-      border-radius: 12px; 
-      font-weight: 700; 
-      width: fit-content;
-    }
-    .video-title { font-size: 16px; font-weight: 700; color: #222; margin: 0; }
-    .card-subtitle { font-size: 12px; color: #888; margin: 0; }
+    .badge-level { background: #e6f0fa; color: #0056b3; font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 600; width: fit-content; }
+    .video-title { font-size: 16px; font-weight: 700; color: #1e293b; margin: 0; }
+    .card-subtitle { font-size: 12px; color: #64748b; margin: 0; }
 
-    /* Inline Mini Vector Chart Graphic */
-    .mini-chart { width: 65px; height: 35px; }
-
-    /* Card Layout Row Parameters */
-    .card-params { 
-      display: grid; 
-      grid-template-columns: repeat(3, 1fr); 
-      gap: 10px; 
-      background: #f8fafc; 
-      padding: 10px; 
-      border-radius: 12px;
-      margin-bottom: 15px;
+    /* Green Chart Box */
+    .chart-box {
+      width: 60px; height: 40px; border-radius: 8px; border: 1px solid #bbf7d0; background: #f0fdf4;
+      display: flex; align-items: center; justify-content: center; padding: 5px;
     }
-    .param-box { display: flex; align-items: center; gap: 8px; }
+    .mini-chart { width: 100%; height: 100%; }
+
+    /* Parameters Row (Modal, Durasi, Komisi) */
+    .card-params { display: flex; justify-content: space-between; margin-bottom: 20px; }
+    .param-box { display: flex; align-items: center; gap: 10px; }
     .param-icon {
-      width: 28px;
-      height: 28px;
-      background: #E8EAF6;
-      color: #3F51B5;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: bold;
+      width: 32px; height: 32px; background: #f1f5f9; color: #64748b;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold;
     }
     .param-info { display: flex; flex-direction: column; }
-    .param-info span:first-child { font-size: 10px; color: #888; }
-    .param-info span:last-child { font-size: 12px; font-weight: 700; color: #333; }
+    .param-info span:first-child { font-size: 11px; color: #64748b; }
+    .param-info span:last-child { font-size: 13px; font-weight: 700; color: #1e293b; margin-top: 2px;}
 
-    /* Card Layout Footer Row */
+    /* Footer Card (Total Profit & Button) */
     .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px dashed #e2e8f0;
-      padding-top: 12px;
+      display: flex; justify-content: space-between; align-items: center; 
+      border-top: 1px solid #f1f5f9; padding-top: 15px;
     }
-    .total-profit-box { display: flex; flex-direction: column; gap: 2px; }
-    .total-profit-box span:first-child { font-size: 11px; color: #888; }
-    .total-profit-box span:last-child { font-size: 15px; font-weight: 700; color: #00C853; }
+    .total-profit-box { display: flex; flex-direction: column; gap: 4px; }
+    .total-profit-box span:first-child { font-size: 12px; color: #64748b; }
+    .total-profit-box span:last-child { font-size: 16px; font-weight: 700; color: #10b981; }
 
-    .btn-invest {
-      background: #1565C0;
-      color: white;
-      border: none;
-      padding: 8px 20px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(21, 101, 192, 0.2);
-    }
+    .btn-invest { background: #007bff; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
 
-    /* Accordion Detail Style */
-    .accordion-toggle {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-      color: #666;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid #f1f5f9;
-    }
+    /* Accordion Detail */
+    .accordion-toggle { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600; color: #475569; margin-top: 15px; padding-top: 15px; border-top: 1px solid #f1f5f9; }
 
-    /* --- BOTTOM NAVIGATION BAR --- */
+    /* --- SOLID BLUE BOTTOM NAVIGATION --- */
     .bottom-nav { 
-      position: fixed; 
-      bottom: 0; 
-      width: 100%; 
-      display: flex; 
-      justify-content: space-around; 
-      background: white; 
-      padding: 10px 0 15px 0; 
-      border-top: 1px solid #edf2f7; 
-      z-index: 1000; 
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
+      position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-around; align-items: center;
+      background: #007bff; padding: 10px 0; z-index: 1000; box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     }
-    .bottom-nav a { text-decoration: none; color: #a0aec0; font-size: 11px; text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; font-weight: 500; }
-    .bottom-nav a .nav-icon { font-size: 20px; }
-    .bottom-nav a.active { color: #1565C0; font-weight: 700; }
+    .bottom-nav a { text-decoration: none; color: rgba(255,255,255,0.7); font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 4px; font-weight: 500; width: 60px; }
+    .bottom-nav a .nav-icon { font-size: 20px; display: flex; align-items: center; justify-content: center; }
     
-    /* Navigation Marker Line indicator */
-    .bottom-nav a.active::after {
-      content: '';
-      width: 20px;
-      height: 3px;
-      background: #1565C0;
-      border-radius: 2px;
-      margin-top: 2px;
+    /* Active State (White Box) */
+    .bottom-nav a.active { color: white; font-weight: 700; }
+    .bottom-nav a.active .active-box {
+      background: white; color: #007bff; width: 40px; height: 40px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 2px;
     }
+    .bottom-nav a.active .nav-icon { font-size: 22px; }
   </style>
 </head>
 <body>
 
-  <div id="customAlert">Gagal! Level Anda tidak cukup.</div>
+  <div id="customAlert">Pesan Error</div>
 
-  <!-- TOP HEADER BANNER (SALDO TERSEDIA) -->
+  <!-- HEADER SALDO -->
   <div class="top-banner">
     <div class="left-info">
       <h1>Produk Investasi</h1>
       <p>Pilih Produk investasi Anda</p>
     </div>
     <div class="right-balance">
-      <p>Saldo Tersedia</p>
+      <p>SALDO TERSEDIA</p>
       <div class="balance-row">
         <h2 id="userBalanceText">Rp 0</h2>
         <span class="eye-icon" onclick="toggleBalanceVisibility()">👁️</span>
@@ -272,15 +174,17 @@
     </div>
   </div>
 
-  <!-- HORIZONTAL FILTER TABS CATEGORIES -->
-  <div class="category-container">
-    <button class="tab-btn active" onclick="filterCategory('semua')">Semua</button>
-    <button class="tab-btn" onclick="filterCategory('dasar')">Mitra Dasar</button>
-    <button class="tab-btn" onclick="filterCategory('plus')">Mitra Plus</button>
-    <button class="tab-btn" onclick="filterCategory('premium')">Mitra Premium</button>
+  <!-- FILTER KATEGORI -->
+  <div class="category-wrapper">
+    <div class="category-container">
+      <button class="tab-btn active" onclick="filterCategory(this)">Semua</button>
+      <button class="tab-btn" onclick="filterCategory(this)">Mitra Dasar</button>
+      <button class="tab-btn" onclick="filterCategory(this)">Mitra Plus</button>
+      <button class="tab-btn" onclick="filterCategory(this)">Mitra Premium</button>
+    </div>
   </div>
 
-  <!-- INVESTMENT ACCUMULATION SUMMARY PORTFOLIO CARD -->
+  <!-- SUMMARY KARTU -->
   <div class="summary-card">
     <div class="summary-box">
       <p>📈 Total Investasi</p>
@@ -292,77 +196,94 @@
     </div>
   </div>
 
-  <!-- MAIN LIST TASK / INVESTMENT PRODUCTS SECTION -->
+  <!-- DAFTAR PRODUK (RENDERED VIA JS) -->
   <div class="section">
-    <div class="section-header">
-      <h3 id="sectionTitle">TUGAS KEMITRAAN</h3>
-      <span class="btn-back" id="btnBack" onclick="renderLevelCards()">Kembali</span>
-    </div>
-    
     <div class="reels-grid" id="taskContainer">
-      <!-- Dynamic Javascript Content Grid Loader -->
+      <!-- Konten digenerate dari JavaScript -->
     </div>
   </div>
 
-  <!-- FIXED BOTTOM NAVIGATION SYSTEM -->
+  <!-- BLUE BOTTOM NAVIGATION -->
   <div class="bottom-nav">
-    <a href="dashboard.html" class="active"><span class="nav-icon">🏠</span>Beranda</a>
-    <a href="cara.html"><span class="nav-icon">📈</span>Investasi</a>
-    <a href="tim.html"><span class="nav-icon">💬</span>Forum</a>
-    <a href="tentang.html"><span class="nav-icon">📋</span>Riwayat</a>
-    <a href="pribadi.html"><span class="nav-icon">👤</span>Akun</a>
+    <a href="dashboard.html">
+      <span class="nav-icon">🏠</span>
+      <span>Beranda</span>
+    </a>
+    <a href="misi.html" class="active">
+      <div class="active-box"><span class="nav-icon">📈</span></div>
+      <span>Investasi</span>
+    </a>
+    <a href="forum.html">
+      <span class="nav-icon">💬</span>
+      <span>Forum</span>
+    </a>
+    <a href="riwayat.html">
+      <span class="nav-icon">🧾</span>
+      <span>Riwayat</span>
+    </a>
+    <a href="pribadi.html">
+      <span class="nav-icon">👤</span>
+      <span>Akun</span>
+    </a>
   </div>
 
   <script>
-    // --- FIREBASE CONFIGURATION CONFIG & INITIALIZATION ---
+    // --- FIREBASE INISIALISASI ---
     const firebaseConfig = { databaseURL: "https://admin-panel-5c204-default-rtdb.firebaseio.com/" };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
-    const userPhone = localStorage.getItem('n15_user');
+    
+    // Gunakan penyimpanan lokal yang disepakati
+    const userPhone = localStorage.getItem('nusantara_user') || localStorage.getItem('n15_user'); 
 
-    // --- EMBEDDED GRAPHIC PATH SVG DICTIONARY VECTOR (Kustom Line Chart di Sebelah Kanan) ---
+    // Chart Vector Kustom Hijau
     const chartSVG = `
       <svg class="mini-chart" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M5 30 Q 25 12, 50 22 T 95 10" stroke="#00E676" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M5 25 Q 25 10, 45 20 T 95 15" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       </svg>
     `;
 
-    // --- CENTRAL CONFIGURATION DICTIONARY MODEL & DATA ASLI ---
+    // Data Produk Investasi (Mirip dengan gambar referensi)
     const configKemitraan = {
-      "Gratis": { nama: "Saham Valvora", deskripsi: "Return stabil & terpercaya", modal: 0, durasi: "24h", komisi: 500, jumlah: 3, poinPerTugas: 500, link: "https://youtu.be/h2uLMiKdyFU?si=pi99QpYPyvAdEqb7" },
-      "A1":     { nama: "Saham Zentra", deskripsi: "Ekspansi modal berkala", modal: 50000, durasi: "25h", komisi: 1000, jumlah: 4, poinPerTugas: 1000, link: "https://youtu.be/tckIuiIFgLo?si=TJwiRFu3NTDsr4LQ" },
-      "A2":     { nama: "Saham Apex Nova", deskripsi: "Portofolio tingkat tinggi", modal: 150000, durasi: "24h", komisi: 2000, jumlah: 5, poinPerTugas: 2000, link: "https://youtu.be/PTeKpK9Ou00?si=LImLaPmpoKcgFx8d" },
-      "A3":     { nama: "Saham Orion High", deskripsi: "Imbal hasil super kuartal", modal: 500000, durasi: "48h", komisi: 4000, jumlah: 6, poinPerTugas: 4000, link: "https://youtu.be/h2uLMiKdyFU?si=pi99QpYPyvAdEqb7" },
-      "A4":     { nama: "Saham Vertex Corp", deskripsi: "Investasi institusi elit", modal: 1200000, durasi: "36h", komisi: 8000, jumlah: 8, poinPerTugas: 8000, link: "https://youtu.be/h2uLMiKdyFU?si=pi99QpYPyvAdEqb7" },
-      "A5":     { nama: "Saham Alpha Prime", deskripsi: "Maksimal profit eksekutif", modal: 3000000, durasi: "12h", komisi: 15000, jumlah: 10, poinPerTugas: 15000, link: "https://youtu.be/h2uLMiKdyFU?si=pi99QpYPyvAdEqb7" }
+      "Gratis": { 
+        nama: "Saham Valvora", badge: "Mitra Dasar", deskripsi: "Return stabil & terpercaya", logoTxt: "V", 
+        modal: 50000, durasi: "25h", komisi: 18000, estimasiProfit: 450000,
+        jumlahTugas: 3, poinPerTugas: 500, link: "https://youtu.be/h2uLMiKdyFU" 
+      },
+      "A1": { 
+        nama: "Saham Zentra", badge: "Mitra Dasar", deskripsi: "Return stabil & terpercaya", logoTxt: "Z", 
+        modal: 150000, durasi: "24h", komisi: 35000, estimasiProfit: 950000,
+        jumlahTugas: 4, poinPerTugas: 1000, link: "https://youtu.be/tckIuiIFgLo" 
+      },
+      "A2": { 
+        nama: "Saham Apex", badge: "Mitra Plus", deskripsi: "Pertumbuhan ekuitas aktif", logoTxt: "A", 
+        modal: 500000, durasi: "48h", komisi: 120000, estimasiProfit: 3500000,
+        jumlahTugas: 5, poinPerTugas: 2000, link: "https://youtu.be/PTeKpK9Ou00" 
+      }
     };
 
     let isBalanceHidden = false;
     let rawBalanceValue = 0;
 
-    // --- FETCH LIVE FIREBASE REALTIME REFRESH DATA USER ---
+    // Ambil Data Saldo User Realtime
     if (userPhone) {
       db.ref('users/' + userPhone).on('value', (snapshot) => {
         const userData = snapshot.val() || {};
         rawBalanceValue = userData.points || userData.balance || 0;
         updateBalanceDisplay();
         
-        // Atur akumulasi profil ringkasan berdasarkan level pengguna saat ini
+        // Asumsi ringkasan berdasarkan level untuk demo visual
         const userLevel = userData.level || "Gratis";
         if(configKemitraan[userLevel]) {
           document.getElementById('totalInvestmentText').innerText = "Rp " + configKemitraan[userLevel].modal.toLocaleString('id-ID');
-          document.getElementById('dailyProfitText').innerText = "Rp " + (configKemitraan[userLevel].komisi * configKemitraan[userLevel].jumlah).toLocaleString('id-ID');
+          document.getElementById('dailyProfitText').innerText = "Rp " + configKemitraan[userLevel].komisi.toLocaleString('id-ID');
         }
       });
     }
 
     function updateBalanceDisplay() {
       const balanceElement = document.getElementById('userBalanceText');
-      if (isBalanceHidden) {
-        balanceElement.innerText = "••••••";
-      } else {
-        balanceElement.innerText = "Rp " + rawBalanceValue.toLocaleString('id-ID');
-      }
+      balanceElement.innerText = isBalanceHidden ? "••••••" : "Rp " + rawBalanceValue.toLocaleString('id-ID');
     }
 
     function toggleBalanceVisibility() {
@@ -370,38 +291,30 @@
       updateBalanceDisplay();
     }
 
-    function filterCategory(cat) {
+    function filterCategory(btnElement) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      
-      // Filter fungsional bisa dikembangkan di sini jika membagi array level
-      renderLevelCards(); 
+      btnElement.classList.add('active');
     }
 
-    // --- 1. RENDER UTAMA: DAFTAR KARTU LEVEL INVESTASI (MOCKUP PREMIUM AS IMAGE ALTERNATIVE) ---
+    // Render Produk Utama
     function renderLevelCards() {
-      document.getElementById('btnBack').style.display = "none";
-      document.getElementById('sectionTitle').innerText = "TUGAS KEMITRAAN";
-      
       let html = "";
       Object.keys(configKemitraan).forEach(level => {
         const item = configKemitraan[level];
-        const estimatedTotalProfit = item.komisi * item.jumlah * 10; // Kalkulasi total profit proyeksi estimasi
 
         html += `
           <div class="reels-item" onclick="showTasksByLevel('${level}')">
-            <div class="card-top">
+            
+            <div class="card-header">
               <div class="card-meta">
-                <div class="brand-logo-container">
-                  <span style="font-size: 20px; font-weight: bold; color: #1565C0;">${level[0]}</span>
-                </div>
+                <div class="brand-logo-fallback">${item.logoTxt}</div>
                 <div class="brand-details">
-                  <span class="badge-level">Mitra ${level === 'Gratis' ? 'Dasar' : level}</span>
+                  <span class="badge-level">${item.badge}</span>
                   <h4 class="video-title">${item.nama}</h4>
                   <p class="card-subtitle">${item.deskripsi}</p>
                 </div>
               </div>
-              ${chartSVG}
+              <div class="chart-box">${chartSVG}</div>
             </div>
 
             <div class="card-params">
@@ -413,7 +326,7 @@
                 </div>
               </div>
               <div class="param-box">
-                <div class="param-icon">🕒</div>
+                <div class="param-icon">📅</div>
                 <div class="param-info">
                   <span>Durasi</span>
                   <span>${item.durasi}</span>
@@ -431,7 +344,7 @@
             <div class="card-footer">
               <div class="total-profit-box">
                 <span>Total Profit</span>
-                <span>Rp ${estimatedTotalProfit.toLocaleString('id-ID')}</span>
+                <span>Rp ${item.estimasiProfit.toLocaleString('id-ID')}</span>
               </div>
               <button class="btn-invest">Investasi</button>
             </div>
@@ -446,45 +359,34 @@
       document.getElementById('taskContainer').innerHTML = html;
     }
 
-    // --- 2. RENDER SUB-MENU: DAFTAR INDIVIDU SUB-TUGAS SETELAH CARD DIKLIK ---
+    // Render Sub-Tugas (Tampil saat kartu diklik)
     function showTasksByLevel(level) {
-      if (!userPhone) { alert("Silakan login."); return; }
+      if (!userPhone) { showAlert("Silakan login terlebih dahulu."); return; }
 
       db.ref('users/' + userPhone).once('value').then((snapshot) => {
         const userData = snapshot.val() || {};
         const completedTasks = userData.completed_tasks || {};
         const now = Date.now();
         const delay24jam = 24 * 60 * 60 * 1000;
-
-        document.getElementById('btnBack').style.display = "block";
-        document.getElementById('sectionTitle').innerText = "TUGAS - " + level.toUpperCase();
         
         const settings = configKemitraan[level];
-        let html = "";
+        let html = `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                      <h4 style="margin:0; font-size:16px;">Tugas - ${settings.nama}</h4>
+                      <button onclick="renderLevelCards()" style="background:#f1f5f9; border:none; padding:6px 12px; border-radius:6px; font-weight:bold; cursor:pointer;">Kembali</button>
+                    </div>`;
         
-        for (let i = 1; i <= settings.jumlah; i++) {
+        for (let i = 1; i <= settings.jumlahTugas; i++) {
           const taskId = `${level}_task_${i}`;
-          const lastDone = completedTasks[taskId] || 0;
-          const isLocked = (now - lastDone) < delay24jam;
-
-          const lockClass = isLocked ? "locked" : "";
-          const labelText = isLocked ? "🔒 Terkunci (24 Jam)" : "🚀 Ambil Tugas Sekarang";
-          const borderStyle = isLocked ? "border-left: 4px solid #94a3b8;" : "border-left: 4px solid #00E676;";
-
+          const isLocked = (now - (completedTasks[taskId] || 0)) < delay24jam;
+          
           html += `
-            <div class="reels-item ${lockClass}" style="${borderStyle}" onclick="prosesTugas('${level}', ${settings.poinPerTugas}, '${settings.link}', ${i})">
-              <div class="card-top" style="margin-bottom: 0;">
-                <div class="card-meta">
-                  <div class="brand-logo-container" style="background: ${isLocked ? '#e2e8f0' : '#E8F5E9'}">
-                    <span style="font-size: 16px;">🎬</span>
-                  </div>
-                  <div class="brand-details">
-                    <h4 class="video-title" style="font-size: 14px;">Konten Kontrak Tugas #${i}</h4>
-                    <p class="card-subtitle" style="color: #00C853; font-weight: bold;">+ Rp ${settings.poinPerTugas.toLocaleString('id-ID')}</p>
-                  </div>
-                </div>
-                <span style="font-size: 11px; font-weight: 700; color: ${isLocked ? '#888' : '#1565C0'}">${labelText}</span>
+            <div class="reels-item ${isLocked ? 'locked' : ''}" style="margin-bottom:10px; padding:15px; flex-direction:row; justify-content:space-between; align-items:center;" 
+                 onclick="prosesTugas('${level}', ${settings.poinPerTugas}, '${settings.link}', ${i})">
+              <div>
+                <h4 style="margin:0 0 4px 0; font-size:14px;">Kontrak Tugas #${i}</h4>
+                <span style="font-size:12px; color:#10b981; font-weight:bold;">+ Rp ${settings.poinPerTugas.toLocaleString('id-ID')}</span>
               </div>
+              <span style="font-size:12px; font-weight:bold; color: ${isLocked ? '#94a3b8' : '#007bff'}">${isLocked ? '🔒 Terkunci' : '▶ Kerjakan'}</span>
             </div>
           `;
         }
@@ -492,7 +394,7 @@
       });
     }
 
-    // --- 3. LOGIKA PROCESS DATA & UPDATE DATA KE FIREBASE DATABASE ---
+    // Proses Logika Reward
     function prosesTugas(taskLevel, poin, link, taskIndex) {
       const taskId = `${taskLevel}_task_${taskIndex}`;
       const now = Date.now();
@@ -503,14 +405,36 @@
         const completedTasks = userData.completed_tasks || {};
         const levelOrder = ["Gratis", "A1", "A2", "A3", "A4", "A5"];
         
-        // Validasi tingkatan level hak akses user
         if (levelOrder.indexOf(userLevel) < levelOrder.indexOf(taskLevel)) {
-          showCustomAlert("Gagal! Level Kontrak Kemitraan Anda tidak mencukupi.");
-          return;
+          return showAlert("Level Kemitraan Anda tidak mencukupi untuk tugas ini.");
         }
 
-        // Validasi batasan waktu tunggu pengerjaan tugas
-        const lastDone = completedTasks[taskId] || 0;
-        if ((now - lastDone) < (24 * 60 * 60 * 1000)) {
-          showCustomAlert("Tugas ini masih dalam masa tunggu 24 Jam!");
-          return
+        if ((now - (completedTasks[taskId] || 0)) < (24 * 60 * 60 * 1000)) {
+          return showAlert("Tugas masih dalam masa jeda 24 Jam!");
+        }
+
+        const updates = {};
+        updates['points'] = (userData.points || 0) + poin;
+        updates['completed_tasks/' + taskId] = now;
+
+        db.ref('users/' + userPhone).update(updates).then(() => {
+          db.ref('activity_logs/' + userPhone).push({
+            tipe: "Poin Tugas", nominal: poin, keterangan: "Selesai " + taskId, timestamp: now
+          });
+          window.location.replace(link);
+        });
+      });
+    }
+
+    function showAlert(msg) {
+      const alertBox = document.getElementById('customAlert');
+      alertBox.innerText = msg;
+      alertBox.style.display = "block";
+      setTimeout(() => { alertBox.style.display = "none"; }, 3000);
+    }
+    
+    // Panggil render pertama kali
+    renderLevelCards();
+  </script>
+</body>
+  </html>
