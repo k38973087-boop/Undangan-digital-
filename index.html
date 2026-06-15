@@ -2,16 +2,22 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>The Wedding Of Ahmad & Siti</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+rel="stylesheet">
 
 <style>
 
 :root{
     --gold:#D4AF37;
-    --black:#080808;
+    --black:#090909;
 }
 
 *{
@@ -31,38 +37,66 @@ body{
     overflow-x:hidden;
 }
 
-/* Splash / Amplop */
+/* Scrollbar */
+
+body::-webkit-scrollbar{
+    width:8px;
+}
+
+body::-webkit-scrollbar-thumb{
+    background:var(--gold);
+}
+
+/* Amplop */
 
 #splash{
     position:fixed;
     inset:0;
-    background:#000;
     z-index:99999;
+
+    background:#000;
+
     display:flex;
     justify-content:center;
     align-items:center;
-    text-align:center;
+
     padding:20px;
 }
 
 .envelope{
-    width:320px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(212,175,55,.35);
-    border-radius:24px;
+
+    width:100%;
+    max-width:360px;
+
+    text-align:center;
+
     padding:35px;
-    backdrop-filter:blur(12px);
-    box-shadow:0 0 40px rgba(212,175,55,.15);
+
+    border-radius:25px;
+
+    background:
+    rgba(255,255,255,.05);
+
+    border:
+    1px solid
+    rgba(212,175,55,.25);
+
+    backdrop-filter:
+    blur(15px);
+
+    box-shadow:
+    0 0 40px
+    rgba(212,175,55,.15);
 }
 
 .envelope h1{
-    color:var(--gold);
     font-family:'Cinzel',serif;
+    color:var(--gold);
     margin:15px 0;
 }
 
-.guest{
-    margin:20px 0;
+.guest-box{
+    margin:25px 0;
 }
 
 #guestName{
@@ -72,86 +106,176 @@ body{
 
 .btn{
     border:none;
-    cursor:pointer;
-    padding:14px 30px;
+
+    padding:14px 35px;
+
     border-radius:50px;
-    background:linear-gradient(45deg,#8b6a00,#ffd700);
-    color:#000;
-    font-weight:600;
-}
-
-/* Hero */
-
-.hero{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
 
     background:
     linear-gradient(
-    rgba(0,0,0,.55),
-    rgba(0,0,0,.75)
-    ),
-    url('cover.jpg');
+    45deg,
+    #9f7c00,
+    #ffd700);
+
+    color:#000;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+/* HERO */
+
+.hero{
+
+    position:relative;
+
+    width:100%;
+
+    height:100vh;
+
+    overflow:hidden;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+/* Slideshow Background */
+
+.hero-slide{
+
+    position:absolute;
+
+    inset:0;
 
     background-size:cover;
+
     background-position:center;
-    background-attachment:fixed;
+
+    opacity:0;
+
+    animation:
+    heroSlider
+    24s infinite;
 }
 
-.hero h1{
-    font-size:60px;
-    color:var(--gold);
-    font-family:'Cinzel',serif;
+/* Foto 1 */
+
+.hero-slide:nth-child(1){
+
+    background-image:
+    url('cover1.jpg');
+
+    animation-delay:0s;
 }
 
-.hero p{
-    margin-top:12px;
+/* Foto 2 */
+
+.hero-slide:nth-child(2){
+
+    background-image:
+    url('cover2.jpg');
+
+    animation-delay:8s;
 }
 
-/* Musik */
+/* Foto 3 */
 
-.music-btn{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    border:none;
-    background:var(--gold);
-    color:#000;
-    cursor:pointer;
-    z-index:999;
+.hero-slide:nth-child(3){
+
+    background-image:
+    url('cover3.jpg');
+
+    animation-delay:16s;
 }
 
-/* Bunga */
+/* Efek Zoom Lembut */
 
-.flower{
-    position:fixed;
-    top:-20px;
-    color:gold;
-    pointer-events:none;
-    animation:fall linear infinite;
-    z-index:9999;
-}
+@keyframes heroSlider{
 
-@keyframes fall{
-    from{
-        transform:
-        translateY(-20px)
-        rotate(0deg);
+    0%{
+        opacity:0;
+        transform:scale(1.15);
+    }
+
+    10%{
         opacity:1;
     }
 
-    to{
-        transform:
-        translateY(110vh)
-        rotate(360deg);
+    30%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    40%{
         opacity:0;
     }
+
+    100%{
+        opacity:0;
+    }
+
+}
+
+.overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    rgba(0,0,0,.45);
+}
+
+/* Konten Hero */
+
+.hero-content{
+
+    position:relative;
+
+    z-index:10;
+
+    padding:20px;
+}
+
+.hero-content h1{
+
+    font-family:
+    'Cinzel',serif;
+
+    color:var(--gold);
+
+    font-size:60px;
+}
+
+.hero-content p{
+    margin:10px 0;
+}
+
+/* Responsive HP */
+
+@media(max-width:768px){
+
+    .hero-content h1{
+        font-size:42px;
+    }
+
+    .envelope{
+        padding:25px;
+    }
+
 }
 
 audio{
@@ -163,170 +287,339 @@ audio{
 
 <body>
 
-<!-- Musik -->
 <audio id="musik" loop>
-    <source src="musik.mp3" type="audio/mpeg">
+    <source
+    src="musik.mp3"
+    type="audio/mpeg">
 </audio>
 
-<!-- Amplop -->
+<!-- Amplop Digital -->
+
 <div id="splash">
 
     <div class="envelope">
 
-        <small>Undangan Pernikahan</small>
-
-        <h1>Ahmad & Siti</h1>
-
-        <div class="guest">
-            <p>Kepada Yth.</p>
-
-            <h3 id="guestName">
-                Tamu Undangan
-            </h3>
-        </div>
-
-        <button class="btn"
-        onclick="openInvitation()">
-            Buka Undangan
-        </button>
-
-    </div>
-
-</div>
-
-<!-- Tombol Musik -->
-<button class="music-btn"
-onclick="toggleMusic()">
-🎵
-</button>
-
-<!-- Hero -->
-<section class="hero">
-
-    <div>
-
-        <p>The Wedding Of</p>
+        <small>
+            The Wedding Of
+        </small>
 
         <h1>
             Ahmad & Siti
         </h1>
 
+        <div class="guest-box">
+
+            <p>
+                Kepada Yth.
+            </p>
+
+            <h3 id="guestName">
+                Tamu Undangan
+            </h3>
+
+            <small>
+                Mohon maaf apabila
+                ada kesalahan nama
+            </small>
+
+        </div>
+
+        <br>
+
+        <button class="btn"
+        onclick="openInvitation()">
+
+            Buka Undangan
+
+        </button>
+
+    </div>
+
+    </div>
+    <!-- Tombol Musik -->
+<button id="musicBtn"
+style="
+position:fixed;
+right:20px;
+bottom:20px;
+width:55px;
+height:55px;
+border:none;
+border-radius:50%;
+background:#D4AF37;
+color:#000;
+font-size:22px;
+cursor:pointer;
+z-index:9999;">
+🎵
+</button>
+
+<!-- Hero Premium -->
+
+<section class="hero">
+
+    <!-- Background Slide -->
+    <div class="hero-slide"></div>
+
+    <div class="hero-slide"></div>
+
+    <div class="hero-slide"></div>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Isi Hero -->
+
+    <div class="hero-content">
+
         <p>
+            The Wedding Of
+        </p>
+
+        <h1>
+            Ahmad
+            &
+            Siti
+        </h1>
+
+        <p>
+            Minggu,
             20 Desember 2026
         </p>
+
+        <br>
+
+        <div style="
+        border:1px solid
+        rgba(212,175,55,.3);
+
+        padding:15px;
+
+        border-radius:20px;
+
+        display:inline-block;">
+
+            <small>
+                Kepada Yth.
+            </small>
+
+            <h3 id="guestName">
+                Tamu Undangan
+            </h3>
+
+        </div>
 
     </div>
 
 </section>
 
-<!-- Isi undangan dimulai di sini -->
-<div id="content">
 
-    <!-- PEMBUKA -->
-<section style="padding:80px 20px; text-align:center;">
+<!-- Isi Undangan -->
 
-    <h2 style="
+<div id="content"
+style="display:none;">
+
+
+<section
+style="
+padding:80px 20px;
+text-align:center;">
+
+    <h2
+    style="
     color:#D4AF37;
-    font-size:40px;
-    font-family:Cinzel,serif;">
+    font-family:
+    Cinzel,serif;
+    font-size:40px;">
+
         Assalamu'alaikum
+        Warahmatullahi
+        Wabarakatuh
+
     </h2>
 
-    <div style="
+    <br>
+
+    <div
+    style="
     max-width:800px;
-    margin:30px auto;
-    padding:30px;
-    border:1px solid rgba(212,175,55,.3);
+    margin:auto;
+
+    padding:35px;
+
     border-radius:20px;
-    background:rgba(255,255,255,.03);">
+
+    background:
+    rgba(255,255,255,.05);
+
+    border:
+    1px solid
+    rgba(212,175,55,.2);">
 
         <p>
-            Dengan memohon rahmat dan ridho Allah SWT,
-            kami mengundang Bapak/Ibu/Saudara/i
-            untuk menghadiri acara pernikahan kami.
+
+            Dengan memohon
+            rahmat dan ridho
+            Allah SWT,
+            kami mengundang
+            Bapak/Ibu/
+            Saudara/i
+            untuk menghadiri
+            acara pernikahan
+            kami.
+
         </p>
 
         <br>
 
-        <h3 style="color:#D4AF37;">
-            "Dan di antara tanda-tanda kekuasaan-Nya
-            ialah Dia menciptakan pasangan-pasangan
-            untukmu agar kamu merasa tenteram."
+        <h3
+        style="
+        color:#D4AF37;">
+
+            "Dan di antara
+            tanda-tanda
+            kebesaran-Nya
+            ialah Dia
+            menciptakan
+            pasangan untukmu
+            agar kamu merasa
+            tenteram."
+
         </h3>
 
         <br>
 
-        <p>QS. Ar-Rum : 21</p>
+        <small>
+            QS. Ar-Rum: 21
+        </small>
 
     </div>
 
-</section>
+    </section>
+    <!-- MEMPELAI -->
 
+<section
+style="
+padding:80px 20px;">
 
-<!-- MEMPELAI -->
-<section style="padding:80px 20px;">
-
-    <h2 style="
+    <h2
+    style="
     text-align:center;
     color:#D4AF37;
-    font-size:40px;
+    font-size:42px;
     font-family:Cinzel,serif;">
+
         Mempelai
+
     </h2>
 
-    <div style="
+    <br><br>
+
+    <div
+    style="
     display:grid;
     grid-template-columns:
-    repeat(auto-fit,minmax(300px,1fr));
-    gap:20px;
+    repeat(auto-fit,
+    minmax(280px,1fr));
+
+    gap:25px;
+
     max-width:1000px;
     margin:auto;">
 
-        <div style="
-        text-align:center;
-        padding:30px;
-        border:1px solid rgba(212,175,55,.3);
-        border-radius:20px;">
+        <!-- Pria -->
 
-            <img src="foto1.jpg"
+        <div
+        style="
+        background:
+        rgba(255,255,255,.05);
+
+        border:
+        1px solid
+        rgba(212,175,55,.2);
+
+        padding:30px;
+
+        border-radius:25px;
+
+        text-align:center;">
+
+            <img
+            src="foto1.jpg"
+
             style="
             width:180px;
             height:180px;
-            border-radius:50%;
-            object-fit:cover;
-            border:4px solid gold;">
 
-            <h2 style="color:#D4AF37;">
+            object-fit:cover;
+
+            border-radius:50%;
+
+            border:
+            4px solid gold;">
+
+            <br><br>
+
+            <h2
+            style="
+            color:#D4AF37;">
+
                 Ahmad Ramadhan
+
             </h2>
 
             <p>
-                Putra Bapak Abdullah
+                Putra dari
+                Bapak Abdullah
                 & Ibu Aisyah
             </p>
 
         </div>
 
-        <div style="
-        text-align:center;
-        padding:30px;
-        border:1px solid rgba(212,175,55,.3);
-        border-radius:20px;">
+        <!-- Wanita -->
 
-            <img src="foto2.jpg"
+        <div
+        style="
+        background:
+        rgba(255,255,255,.05);
+
+        border:
+        1px solid
+        rgba(212,175,55,.2);
+
+        padding:30px;
+
+        border-radius:25px;
+
+        text-align:center;">
+
+            <img
+            src="foto2.jpg"
+
             style="
             width:180px;
             height:180px;
-            border-radius:50%;
-            object-fit:cover;
-            border:4px solid gold;">
 
-            <h2 style="color:#D4AF37;">
+            object-fit:cover;
+
+            border-radius:50%;
+
+            border:
+            4px solid gold;">
+
+            <br><br>
+
+            <h2
+            style="
+            color:#D4AF37;">
+
                 Siti Nurhaliza
+
             </h2>
 
             <p>
-                Putri Bapak Hasan
+                Putri dari
+                Bapak Hasan
                 & Ibu Fatimah
             </p>
 
@@ -338,65 +631,135 @@ onclick="toggleMusic()">
 
 
 <!-- COUNTDOWN -->
-<section style="
+
+<section
+style="
 padding:80px 20px;
 text-align:center;">
 
-    <h2 style="
+    <h2
+    style="
     color:#D4AF37;
     font-size:40px;
     font-family:Cinzel,serif;">
-        Countdown Acara
+
+        Hitung Mundur Acara
+
     </h2>
+
+    <br>
 
     <h1 id="countdown"
     style="
     color:gold;
-    margin-top:20px;">
+    font-size:32px;">
+
         Loading...
+
     </h1>
 
 </section>
 
 
-<!-- GALERI -->
-<section style="padding:80px 20px;">
+<!-- SLIDER FOTO -->
 
-    <h2 style="
+<section
+style="
+padding:80px 20px;">
+
+    <h2
+    style="
     text-align:center;
     color:#D4AF37;
     font-size:40px;
     font-family:Cinzel,serif;">
+
         Galeri Foto
+
     </h2>
 
-    <div style="
-    display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
+    <br>
+
+    <div
+    style="
+    display:flex;
+
+    overflow-x:auto;
+
     gap:15px;
-    max-width:1000px;
-    margin:auto;">
 
-        <img src="foto1.jpg"
-        style="width:100%;
-        border-radius:20px;">
+    scroll-snap-type:
+    x mandatory;
 
-        <img src="foto2.jpg"
-        style="width:100%;
-        border-radius:20px;">
+    padding:10px;">
 
-        <img src="foto3.jpg"
-        style="width:100%;
-        border-radius:20px;">
+        <img
+        src="foto1.jpg"
 
-        <img src="foto4.jpg"
-        style="width:100%;
-        border-radius:20px;">
+        style="
+        width:260px;
+        height:380px;
 
-        <img src="foto5.jpg"
-        style="width:100%;
-        border-radius:20px;">
+        object-fit:cover;
+
+        border-radius:25px;
+
+        flex:none;
+
+        scroll-snap-align:
+        center;">
+
+        <img
+        src="foto2.jpg"
+
+        style="
+        width:260px;
+        height:380px;
+
+        object-fit:cover;
+
+        border-radius:25px;
+
+        flex:none;">
+
+        <img
+        src="foto3.jpg"
+
+        style="
+        width:260px;
+        height:380px;
+
+        object-fit:cover;
+
+        border-radius:25px;
+
+        flex:none;">
+
+        <img
+        src="foto4.jpg"
+
+        style="
+        width:260px;
+        height:380px;
+
+        object-fit:cover;
+
+        border-radius:25px;
+
+        flex:none;">
+
+        <img
+        src="foto5.jpg"
+
+        style="
+        width:260px;
+        height:380px;
+
+        object-fit:cover;
+
+        border-radius:25px;
+
+        flex:none;">
 
     </div>
 
@@ -404,22 +767,31 @@ text-align:center;">
 
 
 <!-- LOKASI -->
-<section style="
+
+<section
+style="
 padding:80px 20px;
 text-align:center;">
 
-    <h2 style="
+    <h2
+    style="
     color:#D4AF37;
     font-size:40px;
     font-family:Cinzel,serif;">
+
         Lokasi Acara
+
     </h2>
 
-    <a href="https://maps.google.com"
-       target="_blank"
-       class="btn">
+    <br>
 
-       📍 Buka Google Maps
+    <a
+    href="https://maps.google.com"
+    target="_blank"
+
+    class="btn">
+
+        📍 Buka Maps
 
     </a>
 
@@ -427,22 +799,31 @@ text-align:center;">
 
 
 <!-- RSVP -->
-<section style="
+
+<section
+style="
 padding:80px 20px;
 text-align:center;">
 
-    <h2 style="
+    <h2
+    style="
     color:#D4AF37;
     font-size:40px;
     font-family:Cinzel,serif;">
+
         RSVP
+
     </h2>
 
-    <a href="https://wa.me/6281234567890"
-       target="_blank"
-       class="btn">
+    <br>
 
-       💬 Konfirmasi Kehadiran
+    <a
+    href="https://wa.me/6281234567890"
+    target="_blank"
+
+    class="btn">
+
+        💬 Konfirmasi Kehadiran
 
     </a>
 
@@ -450,28 +831,49 @@ text-align:center;">
 
 
 <!-- WEDDING GIFT -->
-<section style="
+
+<section
+style="
 padding:80px 20px;
 text-align:center;">
 
-    <h2 style="
+    <h2
+    style="
     color:#D4AF37;
     font-size:40px;
     font-family:Cinzel,serif;">
+
         Wedding Gift
+
     </h2>
 
-    <div style="
-    max-width:500px;
+    <br>
+
+    <div
+    style="
+    max-width:450px;
+
     margin:auto;
+
     padding:30px;
-    border:1px solid rgba(212,175,55,.3);
-    border-radius:20px;">
+
+    border-radius:25px;
+
+    background:
+    rgba(255,255,255,.05);
+
+    border:
+    1px solid
+    rgba(212,175,55,.2);">
 
         <p>BCA</p>
 
-        <h2 style="color:gold;">
+        <h2
+        style="
+        color:gold;">
+
             1234567890
+
         </h2>
 
         <p>
@@ -480,120 +882,151 @@ text-align:center;">
 
         <br>
 
-        <p>DANA</p>
+        <button
+        onclick="
+        navigator.clipboard
+        .writeText(
+        '1234567890')"
 
-        <h2 style="color:gold;">
-            081234567890
-        </h2>
+        class="btn">
+
+            Salin Rekening
+
+        </button>
 
     </div>
 
 </section>
+    <!-- PENUTUP -->
 
-
-<!-- PENUTUP -->
-<section style="
+<section
+style="
 padding:100px 20px;
 text-align:center;">
 
-    <h2 style="
+    <h2
+    style="
     color:#D4AF37;
-    font-family:Cinzel,serif;">
+    font-family:Cinzel,serif;
+    font-size:40px;">
+
         Terima Kasih
+
     </h2>
 
     <br>
 
     <p>
         Merupakan suatu kehormatan
-        bagi kami apabila Bapak/Ibu
-        berkenan hadir dan memberikan
-        doa restu.
+        dan kebahagiaan bagi kami
+        apabila Bapak/Ibu/Saudara/i
+        berkenan hadir dan
+        memberikan doa restu.
     </p>
 
     <br>
 
-    <h3>Ahmad & Siti</h3>
+    <h3>
+        Ahmad & Siti
+    </h3>
 
-    </section>
+</section>
 
-    </div>
+</div>
 
 <script>
 
-// =======================
-// BUKA UNDANGAN
-// =======================
+/* =========================
+   BUKA UNDANGAN
+========================= */
 
 function openInvitation(){
 
-    // Hilangkan amplop
-    document.getElementById("splash")
-        .style.display = "none";
+    document.getElementById(
+        "splash"
+    ).style.display = "none";
 
-    // Putar musik
+    document.getElementById(
+        "content"
+    ).style.display = "block";
+
     const musik =
-        document.getElementById("musik");
+    document.getElementById(
+        "musik"
+    );
 
-    musik.volume = 0.3; // volume 30%
+    musik.volume = 0.3;
 
     musik.play().catch(()=>{
         console.log(
-        "Autoplay diblokir browser");
+        "Autoplay diblokir");
     });
 
 }
 
 
-// =======================
-// PLAY / PAUSE MUSIK
-// =======================
+/* =========================
+   TOMBOL MUSIK
+========================= */
 
-function toggleMusic(){
+const musicBtn =
+document.getElementById(
+    "musicBtn"
+);
+
+musicBtn.onclick = function(){
 
     const musik =
-        document.getElementById("musik");
+    document.getElementById(
+        "musik"
+    );
 
     if(musik.paused){
 
         musik.play();
 
+        musicBtn.innerHTML =
+        "⏸️";
+
     }else{
 
         musik.pause();
 
+        musicBtn.innerHTML =
+        "🎵";
+
     }
 
-}
+};
 
 
-// =======================
-// NAMA TAMU DARI URL
-// Contoh:
-// ?to=Budi%20Santoso
-// =======================
+/* =========================
+   NAMA TAMU DARI URL
+========================= */
 
 const params =
-    new URLSearchParams(
-        window.location.search
-    );
+new URLSearchParams(
+window.location.search
+);
 
 const guest =
-    params.get("to");
+params.get("to");
 
 if(guest){
 
-    document.getElementById(
-        "guestName"
-    ).textContent =
-        decodeURIComponent(guest);
+document.getElementById(
+"guestName"
+).textContent =
+decodeURIComponent(
+guest
+);
 
 }
 
 
-// =======================
-// COUNTDOWN ACARA
-// =======================
+/* =========================
+   COUNTDOWN
+========================= */
 
 const targetDate =
 new Date(
@@ -602,113 +1035,116 @@ new Date(
 
 setInterval(function(){
 
-    const now =
-        new Date().getTime();
+const now =
+new Date().getTime();
 
-    const distance =
-        targetDate - now;
+const distance =
+targetDate - now;
 
-    if(distance < 0){
+if(distance < 0){
 
-        document.getElementById(
-            "countdown"
-        ).innerHTML =
-        "Acara Sedang Berlangsung";
+document.getElementById(
+"countdown"
+).innerHTML =
+"Acara Sedang Berlangsung";
 
-        return;
-    }
+return;
 
-    const days =
-    Math.floor(
-        distance /
-        (1000*60*60*24)
-    );
+}
 
-    const hours =
-    Math.floor(
-        (distance %
-        (1000*60*60*24))
-        /(1000*60*60)
-    );
+const days =
+Math.floor(
+distance /
+(1000*60*60*24)
+);
 
-    const minutes =
-    Math.floor(
-        (distance %
-        (1000*60*60))
-        /(1000*60)
-    );
+const hours =
+Math.floor(
+(distance %
+(1000*60*60*24))
+/
+(1000*60*60)
+);
 
-    const seconds =
-    Math.floor(
-        (distance %
-        (1000*60))
-        /1000
-    );
+const minutes =
+Math.floor(
+(distance %
+(1000*60*60))
+/
+(1000*60)
+);
 
-    document.getElementById(
-        "countdown"
-    ).innerHTML =
+const seconds =
+Math.floor(
+(distance %
+(1000*60))
+/
+1000
+);
 
-    days + " Hari " +
-    hours + " Jam " +
-    minutes + " Menit " +
-    seconds + " Detik";
+document.getElementById(
+"countdown"
+).innerHTML =
+
+days + " Hari " +
+hours + " Jam " +
+minutes + " Menit " +
+seconds + " Detik";
 
 },1000);
 
 
-// =======================
-// BUNGA JATUH
-// =======================
+/* =========================
+   BUNGA JATUH
+========================= */
 
 function createFlower(){
 
-    const flower =
-    document.createElement(
-        "div"
-    );
+const flower =
+document.createElement(
+"div"
+);
 
-    flower.classList.add(
-        "flower"
-    );
+flower.classList.add(
+"flower"
+);
 
-    const icons =
-    ["❀","✿","❁","🌸"];
+const icons =
+["🌸","❀","✿"];
 
-    flower.innerHTML =
-        icons[
-            Math.floor(
-                Math.random()
-                * icons.length
-            )
-        ];
+flower.innerHTML =
+icons[
+Math.floor(
+Math.random() *
+icons.length
+)
+];
 
-    flower.style.left =
-        Math.random()*100
-        + "vw";
+flower.style.left =
+Math.random() *
+100 + "vw";
 
-    flower.style.fontSize =
-        (Math.random()*20+15)
-        + "px";
+flower.style.fontSize =
+(Math.random()*20+15)
++ "px";
 
-    flower.style.animationDuration =
-        (Math.random()*6+6)
-        + "s";
+flower.style.animationDuration =
+(Math.random()*5+5)
++ "s";
 
-    document.body
-        .appendChild(
-            flower
-        );
+document.body.appendChild(
+flower
+);
 
-    setTimeout(()=>{
-        flower.remove();
-    },12000);
+setTimeout(()=>{
+flower.remove();
+},10000);
 
 }
 
 setInterval(
-    createFlower,
-    700
+createFlower,
+800
 );
 
 </script>
