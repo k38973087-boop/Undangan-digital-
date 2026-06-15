@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitra Nusantara - Beranda</title>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background:#f2f5f8; padding-bottom: 90px; color: #333; }
+        
+        /* Header Area */
+        .header { background: #0057d9; padding: 25px 20px 60px; color: white; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; }
+        .header-title h1 { font-size: 20px; display: flex; align-items: center; gap: 8px; }
+        .header-title p { font-size: 12px; color: #d0e2f5; margin-top: 4px; }
+        
+        /* Balance Cards Container */
+        .balance-container { margin: -40px 15px 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .balance-card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .balance-card.main { grid-column: span 2; background: linear-gradient(135deg, #0057d9, #1688ff); color: white; }
+        .balance-card p { font-size: 11px; margin-bottom: 5px; color: #777; }
+        .balance-card.main p { color: #d0e2f5; }
+        .balance-card h3 { font-size: 18px; color: #333; }
+        .balance-card.main h3 { font-size: 24px; color: white; }
+        
+        /* Global Stats */
+        .global-stats { background: white; margin: 15px; padding: 15px; border-radius: 12px; display: flex; justify-content: space-between; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .stat-item h4 { font-size: 14px; color: #0057d9; margin-bottom: 2px; }
+        .stat-item p { font-size: 10px; color: #777; }
+
+        /* Action Menu */
+        .action-menu { display: flex; justify-content: space-around; margin: 20px 15px; }
+        .action-btn { text-align: center; text-decoration: none; color: #333; }
+        .action-icon { width: 50px; height: 50px; background: white; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #0057d9; margin: 0 auto 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .action-btn span { font-size: 12px; font-weight: 600; }
+
+        /* Banners */
+        .banners { display: flex; overflow-x: auto; padding: 0 15px; gap: 10px; margin-bottom: 20px; }
+        .banners::-webkit-scrollbar { display: none; }
+        .banner-item { min-width: 250px; height: 120px; background: linear-gradient(45deg, #1688ff, #00c853); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+        .banner-item.b2 { background: linear-gradient(45deg, #0057d9, #8e44ad); }
+
+        /* General Section Wrapper */
+        .section { background: white; margin: 15px; padding: 20px; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .section-header h3 { font-size: 15px; color: #333; }
+        .section-header a { font-size: 12px; color: #0057d9; text-decoration: none; font-weight: 600; }
+
+        /* Empty State */
+        .empty-state { text-align: center; padding: 20px 0; color: #999; font-size: 13px; }
+
+        /* Features List */
+        .feature-item { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 15px; }
+        .feature-icon { width: 40px; height: 40px; background: #e6f0fa; color: #0057d9; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .feature-text h4 { font-size: 14px; margin-bottom: 4px; }
+        .feature-text p { font-size: 12px; color: #777; line-height: 1.4; }
+
+        /* Referral Card */
+        .ref-card { background: #f8fbff; border: 1px solid #dbeafe; border-radius: 12px; padding: 15px; }
+        .ref-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; }
+        .btn-primary { display: block; width: 100%; text-align: center; background: #0057d9; color: white; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 15px; }
+
+        /* Bottom Nav */
+        .nav { position: fixed; bottom: 0; width: 100%; background: white; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; }
+        .nav a { color: #aaa; text-decoration: none; text-align: center; font-size: 11px; width: 20%; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .nav i { font-size: 20px; }
+        .nav .active { color: #0057d9; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-top">
+        <div class="header-title">
+            <h1><i class="fas fa-shield-alt"></i> Mitra Nusantara</h1>
+            <p>Dashboard Mitra Capital</p>
+        </div>
+        <div>
+            <i class="fas fa-bell" style="font-size: 20px;"></i>
+        </div>
+    </div>
+</div>
+
+<div class="balance-container">
+    <div class="balance-card main">
+        <p>Saldo Utama (Total saldo Anda)</p>
+        <h3 id="saldoUtama">Rp 0</h3>
+    </div>
+    <div class="balance-card">
+        <p>Saldo Penarikan</p>
+        <h3 id="saldoPenarikan">Rp 0</h3>
+    </div>
+    <div class="balance-card">
+        <p>Mitra Dasar</p>
+        <h3>Rp 0</h3>
+    </div>
+    <div class="balance-card">
+        <p>Mitra Plus</p>
+        <h3>Rp 0</h3>
+    </div>
+</div>
+
+<div class="global-stats">
+    <div class="stat-item">
+        <h4>12.458+</h4>
+        <p>Investor Aktif</p>
+    </div>
+    <div class="stat-item" style="border-left: 1px solid #eee; border-right: 1px solid #eee; padding: 0 10px;">
+        <h4>2.134</h4>
+        <p>Transaksi</p>
+    </div>
+    <div class="stat-item">
+        <h4>Rp 24,8M+</h4>
+        <p>Total Profit</p>
+    </div>
+</div>
+
+<div class="action-menu">
+    <a href="#" class="action-btn">
+        <div class="action-icon"><i class="fas fa-wallet"></i></div>
+        <span>Top Up</span>
+    </a>
+    <a href="#" class="action-btn">
+        <div class="action-icon"><i class="fas fa-money-bill-wave"></i></div>
+        <span>Withdraw</span>
+    </a>
+    <a href="riwayat.html" class="action-btn">
+        <div class="action-icon"><i class="fas fa-history"></i></div>
+        <span>History</span>
+    </a>
+</div>
+
+<div class="banners">
+    <div class="banner-item">Banner Promo 1</div>
+    <div class="banner-item b2">Banner Promo 2</div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <h3>Riwayat Profit Terbaru</h3>
+        <a href="riwayat.html">LIHAT SEMUA &rarr;</a>
+    </div>
+    <div class="empty-state">
+        <i class="fas fa-box-open" style="font-size: 30px; margin-bottom: 10px; color: #ddd;"></i>
+        <p>Belum ada profit saat ini</p>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <h3>Mengapa Memilih Kami?</h3>
+    </div>
+    <div class="feature-item">
+        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="feature-text">
+            <h4>Keuntungan Harian</h4>
+            <p>Dapatkan keuntungan konsisten setiap hari dari investasi Anda tanpa perlu menunggu lama.</p>
+        </div>
+    </div>
+    <div class="feature-item">
+        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+        <div class="feature-text">
+            <h4>Penarikan Cepat</h4>
+            <p>Proses penarikan dana yang mudah dan cepat, langsung ke rekening bank Anda.</p>
+        </div>
+    </div>
+    <div class="feature-item">
+        <div class="feature-icon"><i class="fas fa-users"></i></div>
+        <div class="feature-text">
+            <h4>Bonus Referral</h4>
+            <p>Ajak teman dan dapatkan bonus unlimited dari setiap referral yang berhasil bergabung.</p>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <h3>Visi & Misi Kami</h3>
+    </div>
+    <div class="feature-text" style="margin-bottom: 15px;">
+        <h4 style="color: #0057d9; margin-bottom: 5px;">Visi</h4>
+        <p>Menjadi platform investasi terdepan di Indonesia yang memberikan akses mudah, aman, dan menguntungkan bagi semua kalangan.</p>
+    </div>
+    <div class="feature-text">
+        <h4 style="color: #0057d9; margin-bottom: 5px;">Misi</h4>
+        <p>Memberikan edukasi finansial, produk investasi berkualitas, dan layanan pelanggan terbaik secara transparan.</p>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-header">
+        <h3>Komisi Referral</h3>
+        <a href="#">LIHAT DETAIL &rarr;</a>
+    </div>
+    <div class="ref-card">
+        <div class="ref-row">
+            <span style="font-weight: bold; color: #0057d9;">Level 1</span>
+            <span style="background: #00c853; color: white; padding: 2px 8px; border-radius: 12px; font-size: 11px;">Komisi 32%</span>
+        </div>
+        <div class="ref-row" style="margin-top: 15px;">
+            <span>Total Referral</span>
+            <b>0 Orang</b>
+        </div>
+        <div class="ref-row">
+            <span>Total Komisi</span>
+            <b style="color: #00c853;">Rp 0</b>
+        </div>
+        <a href="#" class="btn-primary"><i class="fas fa-share-alt"></i> Ajak Teman Sekarang</a>
+    </div>
+</div>
+
+<div class="nav">
+    <a href="beranda.html" class="active">
+        <i class="fas fa-home"></i><span>Beranda</span>
+    </a>
+    <a href="investasi.html">
+        <i class="fas fa-chart-line"></i><span>Investasi</span>
+    </a>
+    <a href="forum.html">
+        <i class="fas fa-comments"></i><span>Forum</span>
+    </a>
+    <a href="riwayat.html">
+        <i class="fas fa-receipt"></i><span>Riwayat</span>
+    </a>
+    <a href="akun.html">
+        <i class="fas fa-user"></i><span>Akun</span>
+    </a>
+</div>
+
+<script>
+    // Inisialisasi Firebase
+    const firebaseConfig = { databaseURL: "https://admin-panel-5c204-default-rtdb.firebaseio.com/" };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    
+    // Ambil nomor HP user yang login
+    const userPhone = localStorage.getItem('n15_user');
+
+    if (userPhone) {
+        db.ref('users/' + userPhone).on('value', (snapshot) => {
+            const data = snapshot.val();
+            if (data && data.points !== undefined) {
+                const formattedSaldo = "Rp " + data.points.toLocaleString('id-ID');
+                document.getElementById('saldoUtama').innerText = formattedSaldo;
+                // Opsional: Jika Anda punya logika pemisahan saldo penarikan, bisa ditaruh di sini.
+                // Untuk sementara kita samakan atau biarkan Rp 0 jika belum ada data.
+                document.getElementById('saldoPenarikan').innerText = formattedSaldo; 
+            }
+        });
+    }
+</script>
+
+</body>
+                  </html>
