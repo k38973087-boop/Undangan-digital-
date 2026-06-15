@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar - PT Bursa Emas Indonesia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Background pattern untuk kotak verifikasi */
+        .bg-grid {
+            background-image: linear-gradient(to right, #fde68a33 1px, transparent 1px),
+                              linear-gradient(to bottom, #fde68a33 1px, transparent 1px);
+            background-size: 10px 10px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <div class="max-w-md mx-auto bg-white min-h-screen shadow-sm relative pb-10">
+        
+        <div class="bg-slate-50 border-b border-slate-100 px-5 py-4 text-center">
+            <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2">Diawasi & Terdaftar</p>
+            <div class="flex justify-center items-center gap-4 text-slate-800 font-bold text-sm">
+                <span class="flex items-center gap-1"><i class="fa-solid fa-building-columns text-blue-600"></i> OJK</span>
+                <span class="flex items-center gap-1"><i class="fa-solid fa-building-columns text-blue-600"></i> BI</span>
+                <span class="flex items-center gap-1"><i class="fa-solid fa-chart-line text-blue-600"></i> Bappebti</span>
+            </div>
+            <p class="text-[10px] text-slate-400 mt-2">No. Reg OJK: S-14/MS.72/2024</p>
+        </div>
+
+        <div class="px-5 py-6">
+            
+            <div class="mb-5">
+                <label class="block text-sm font-semibold text-slate-800 mb-2">Nomor HP</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-phone text-slate-400"></i>
+                    </div>
+                    <input type="tel" id="phone" placeholder="Masukkan nomor HP" class="w-full pl-11 pr-4 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all">
+                </div>
+            </div>
+
+            <div class="mb-5">
+                <label class="block text-sm font-semibold text-slate-800 mb-2">Kata Sandi</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-lock text-slate-400"></i>
+                    </div>
+                    <input type="password" id="pass1" placeholder="Masukkan kata sandi" class="w-full pl-11 pr-10 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all">
+                    <div class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer">
+                        <i class="fa-solid fa-eye text-slate-400 hover:text-slate-600" onclick="togglePassword('pass1')"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-5">
+                <label class="block text-sm font-semibold text-slate-800 mb-2">Konfirmasi Kata Sandi</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-lock text-slate-400"></i>
+                    </div>
+                    <input type="password" id="pass2" placeholder="Ulangi kata sandi" class="w-full pl-11 pr-10 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all">
+                    <div class="absolute inset-y-0 right-0 pr-4 flex items-center cursor-pointer">
+                        <i class="fa-solid fa-eye text-slate-400 hover:text-slate-600" onclick="togglePassword('pass2')"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-sm font-semibold text-slate-800 mb-2">Kode Referral <span class="text-slate-400 font-normal">(opsional)</span></label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-gift text-amber-500"></i>
+                    </div>
+                    <input type="text" value="ZXG7B4DU" readonly class="w-full pl-11 pr-4 py-3.5 bg-[#fffaf0] border border-amber-400 text-amber-700 font-bold rounded-2xl text-sm outline-none">
+                </div>
+            </div>
+
+            <div class="bg-[#fffdf2] border border-amber-300 rounded-2xl p-4 mb-4 bg-grid relative shadow-sm">
+                <div class="absolute top-3 right-3 text-amber-500 cursor-pointer hover:text-amber-600 transition-transform active:rotate-180">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </div>
+                <p class="text-[10px] text-amber-600 font-bold tracking-widest text-center uppercase mb-2">Verifikasi</p>
+                <div class="flex justify-center items-center gap-3 text-2xl font-bold text-slate-800 tracking-wider">
+                    <span>6</span> <span>+</span> <span>4</span> <span>=</span> <span>?</span>
+                </div>
+            </div>
+
+            <div class="flex justify-center mb-8">
+                <input type="number" id="captcha" placeholder="?" class="w-20 text-center py-3 bg-white border border-amber-300 rounded-xl text-lg font-bold text-slate-800 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 outline-none shadow-sm">
+            </div>
+
+            <button id="btnDaftar" class="w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-white font-bold text-base py-4 rounded-2xl shadow-[0_4px_15px_rgba(245,158,11,0.3)] transition-all active:scale-[0.98]">
+                Daftar Sekarang
+            </button>
+
+            <p class="text-center text-sm text-slate-500 mt-5">
+                Sudah punya akun? <a href="#" class="text-amber-600 font-bold hover:underline">Masuk</a>
+            </p>
+
+            <div class="flex justify-between gap-2 mt-10">
+                <div class="bg-[#1e293b] rounded-2xl p-3 flex flex-col items-center justify-center text-center gap-1.5 w-1/3 shadow-sm">
+                    <i class="fa-solid fa-lock text-emerald-400 text-lg"></i>
+                    <div>
+                        <p class="text-white text-[10px] font-bold">SSL 256-bit</p>
+                        <p class="text-slate-400 text-[9px]">Enkripsi</p>
+                    </div>
+                </div>
+                <div class="bg-[#1e293b] rounded-2xl p-3 flex flex-col items-center justify-center text-center gap-1.5 w-1/3 shadow-sm">
+                    <i class="fa-solid fa-shield-halved text-blue-400 text-lg"></i>
+                    <div>
+                        <p class="text-white text-[10px] font-bold">Data Aman</p>
+                        <p class="text-slate-400 text-[9px]">Terenkripsi</p>
+                    </div>
+                </div>
+                <div class="bg-[#1e293b] rounded-2xl p-3 flex flex-col items-center justify-center text-center gap-1.5 w-1/3 shadow-sm">
+                    <i class="fa-solid fa-certificate text-amber-400 text-lg"></i>
+                    <div>
+                        <p class="text-white text-[10px] font-bold">Terverifikasi</p>
+                        <p class="text-slate-400 text-[9px]">Resmi</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 text-center border-t border-slate-100 pt-6">
+                <h4 class="font-bold text-slate-800 text-sm mb-3">PT Bursa Emas Indonesia</h4>
+                <div class="flex justify-center items-center gap-2 mb-2">
+                    <div class="bg-white border border-slate-200 rounded-full w-10 h-10 flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-building-columns text-blue-800 text-lg"></i>
+                    </div>
+                    <div class="text-left leading-tight">
+                        <p class="text-[10px] text-slate-500 font-semibold">Diawasi oleh Otoritas Jasa Keuangan (OJK)</p>
+                        <p class="text-[9px] text-slate-400">No. Reg: S-14/MS.72/2024</p>
+                    </div>
+                </div>
+                <p class="text-[10px] text-slate-400 mt-6">&copy; 2026 Bursa Emas Indonesia. Semua hak cipta dilindungi</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Fitur Tampil/Sembunyikan Kata Sandi
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            if (input.type === "password") {
+                input.type = "text";
+            } else {
+                input.type = "password";
+            }
+        }
+
+        // Logic Form Pendaftaran & Redirect
+        document.getElementById('btnDaftar').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const phone = document.getElementById('phone').value;
+            const pass1 = document.getElementById('pass1').value;
+            const pass2 = document.getElementById('pass2').value;
+            const captcha = document.getElementById('captcha').value;
+
+            // Validasi Input Kosong
+            if(!phone || !pass1 || !pass2 || !captcha) {
+                alert('Peringatan: Harap isi semua kolom pendaftaran!');
+                return;
+            }
+
+            // Validasi Kata Sandi Sama
+            if(pass1 !== pass2) {
+                alert('Peringatan: Konfirmasi kata sandi tidak cocok!');
+                return;
+            }
+
+            // Validasi Matematika (6+4=10)
+            if(parseInt(captcha) !== 10) {
+                alert('Peringatan: Jawaban verifikasi salah! Coba lagi.');
+                return;
+            }
+
+            // Simpan User ID (Nomor HP) ke Local Storage browser
+            localStorage.setItem('user_hp', phone);
+            localStorage.setItem('is_logged_in', 'true');
+            
+            alert('Pendaftaran Berhasil!\nSistem akan mengarahkan Anda ke Dashboard.');
+
+            // Arahkan ke file produk.html yang bertindak sebagai dashboard
+            // Pastikan file tersebut ada di folder yang sama
+            window.location.href = 'produk.html';
+        });
+    </script>
+</body>
+</html>
