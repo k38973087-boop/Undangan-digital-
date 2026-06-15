@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mitra Nusantara</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f2f5f8;
+    padding-bottom:90px;
+}
+
+.header{
+    background:linear-gradient(135deg,#0057d9,#1688ff);
+    color:white;
+    padding:30px 20px 50px;
+    border-bottom-left-radius:35px;
+    border-bottom-right-radius:35px;
+}
+
+.header-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+}
+
+.header h1{
+    font-size:30px;
+}
+
+.balance{
+    text-align:right;
+}
+
+.balance h2{
+    font-size:30px;
+}
+
+.tabs{
+    display:flex;
+    gap:10px;
+    overflow:auto;
+    padding:15px;
+}
+
+.tab{
+    background:#e9edf2;
+    padding:12px 18px;
+    border-radius:15px;
+    white-space:nowrap;
+    font-weight:bold;
+}
+
+.active{
+    background:#1a8cff;
+    color:white;
+}
+
+.stats{
+    margin:15px;
+    background:linear-gradient(135deg,#0057d9,#1577ff);
+    border-radius:20px;
+    color:white;
+    display:flex;
+    justify-content:space-around;
+    padding:25px;
+}
+
+.stats h2{
+    margin-top:10px;
+}
+
+.card{
+    background:white;
+    margin:15px;
+    border-radius:25px;
+    padding:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.top{
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.logo{
+    width:70px;
+    height:70px;
+    border-radius:15px;
+    object-fit:cover;
+}
+
+.info{
+    flex:1;
+}
+
+.badge{
+    background:#eef3ff;
+    color:#2c6bff;
+    padding:5px 12px;
+    border-radius:20px;
+    display:inline-block;
+    font-size:12px;
+}
+
+.info h2{
+    margin-top:10px;
+}
+
+.info p{
+    color:#777;
+}
+
+.price{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    margin-top:20px;
+    text-align:center;
+}
+
+.price h3{
+    margin-top:10px;
+}
+
+.bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:20px;
+}
+
+.btn{
+    background:#1565ff;
+    color:white;
+    padding:12px 25px;
+    border-radius:15px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:linear-gradient(135deg,#0057d9,#19a9ff);
+    display:flex;
+    justify-content:space-around;
+    padding:12px;
+    color:white;
+}
+
+.nav div{
+    text-align:center;
+    font-size:12px;
+}
+
+.nav i{
+    font-size:22px;
+    margin-bottom:5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="header-top">
+        <div>
+            <h1>Mitra Nusantara</h1>
+            <p>Program Kemitraan & Uang Jaminan</p>
+        </div>
+
+        <div class="balance">
+            <small>SALDO TERSEDIA</small>
+            <h2>Rp 0</h2>
+        </div>
+    </div>
+</div>
+
+<div class="tabs">
+    <div class="tab active">Semua</div>
+    <div class="tab">Mitra Dasar</div>
+    <div class="tab">Mitra Plus</div>
+    <div class="tab">Mitra Premium</div>
+</div>
+
+<div class="stats">
+    <div>
+        <p>Total Kemitraan</p>
+        <h2>Rp 0</h2>
+    </div>
+
+    <div>
+        <p>Status Member</p>
+        <h2>Aktif</h2>
+    </div>
+</div>
+
+<!-- Paket -->
+<div class="card">
+    <div class="top">
+        <img src="images/logo1.png" class="logo">
+
+        <div class="info">
+            <span class="badge">Mitra Dasar</span>
+            <h2>Paket 1 Juta</h2>
+            <p>Uang jaminan keanggotaan</p>
+        </div>
+    </div>
+
+    <div class="price">
+        <div>
+            <small>Nominal</small>
+            <h3>Rp1.000.000</h3>
+        </div>
+
+        <div>
+            <small>Masa Aktif</small>
+            <h3>Seumur Hidup</h3>
+        </div>
+
+        <div>
+            <small>Status</small>
+            <h3>Aktif</h3>
+        </div>
+    </div>
+
+    <div class="bottom">
+        <div>
+            <small>Kategori</small>
+            <h2>Mitra</h2>
+        </div>
+
+        <a class="btn"
+        href="https://wa.me/6283862596697?text=Saya ingin bergabung Paket 1 Juta">
+        Gabung
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="top">
+        <img src="images/logo2.png" class="logo">
+
+        <div class="info">
+            <span class="badge">Mitra Premium</span>
+            <h2>Paket 5 Juta</h2>
+            <p>Uang jaminan keanggotaan</p>
+        </div>
+    </div>
+
+    <div class="price">
+        <div>
+            <small>Nominal</small>
+            <h3>Rp5.000.000</h3>
+        </div>
+
+        <div>
+            <small>Masa Aktif</small>
+            <h3>Seumur Hidup</h3>
+        </div>
+
+        <div>
+            <small>Status</small>
+            <h3>Aktif</h3>
+        </div>
+    </div>
+
+    <div class="bottom">
+        <a class="btn"
+        href="https://wa.me/6283862596697?text=Saya ingin bergabung Paket 5 Juta">
+        Gabung
+        </a>
+    </div>
+</div>
+
+<div class="nav">
+    <div><i class="fas fa-home"></i><br>Beranda</div>
+    <div><i class="fas fa-chart-line"></i><br>Paket</div>
+    <div><i class="fas fa-history"></i><br>Riwayat</div>
+    <div><i class="fas fa-user"></i><br>Akun</div>
+</div>
+
+</body>
+  </html>
