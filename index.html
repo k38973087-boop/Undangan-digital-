@@ -3,103 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mitra Nusantara - Investasi Terpercaya</title>
-
-  <!-- Meta Tags untuk Preview Gambar saat link dibagikan -->
-  <meta property="og:title" content="Mitra Nusantara - Investasi Mitra Capital">
-  <meta property="og:description" content="Platform investasi aman dan terpercaya dengan return harian yang stabil. Bergabung sekarang!">
-  <!-- Ganti link di bawah dengan link foto/logo Anda yang sudah di-upload ke imgbb.com -->
-  <meta property="logo1.png" content="https://i.ibb.co/L0S7xYy/logo1.png"> 
+  <title>Mitra Nusantara - Portal Resmi</title>
+  
+  <!-- Meta Tags untuk Preview -->
+  <meta property="og:title" content="Mitra Nusantara - Portal Investasi">
+  <meta property="og:description" content="Akses portal investasi Mitra Nusantara yang aman dan terpercaya.">
+  <meta property="og:image" content="logo1.png"> 
   <meta property="og:url" content="https://k38973087-boop.github.io/Undangan-digital-/">
-  <meta property="og:type" content="website">
-
+  
   <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
   <style>
-    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #fafafa; display: flex; flex-direction: column; align-items: center; }
-    .header { background: radial-gradient(circle at 30% 107%, #002b80 0%, #0057d9 90%); padding: 60px 20px; text-align: left; width: 100%; box-sizing: border-box; color: white; }
-    .header h1 { margin: 0; font-size: 28px; font-weight: 800; }
-    .container { background: white; width: 90%; border-radius: 12px; padding: 30px 20px; margin-top: -30px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 1px solid #dbdbdb; }
-    .logo { text-align: center; font-size: 32px; font-weight: bold; margin-bottom: 30px; letter-spacing: -1px; }
-    .logo span { color: #8e8e8e; font-weight: 300; }
-    .input-group { background: #fafafa; border: 1px solid #dbdbdb; border-radius: 5px; padding: 10px; margin-bottom: 10px; display: flex; align-items: center; }
-    .input-group input { border: none; background: transparent; width: 100%; margin-left: 10px; outline: none; }
-    .btn-reg { background: #0057d9; color: white; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; min-height: 45px; }
-    .loader { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 0.8s linear infinite; display: none; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .auth-switch { text-align: center; margin-top: 20px; font-size: 14px; color: #0057d9; font-weight: 600; cursor: pointer; }
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .card { background: white; width: 350px; padding: 40px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .logo { text-align: center; font-weight: bold; font-size: 24px; margin-bottom: 20px; color: #0057d9; }
+    .input-group { margin-bottom: 15px; }
+    input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+    button { width: 100%; padding: 12px; background: #0057d9; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
     .hidden { display: none; }
+    .switch { text-align: center; margin-top: 15px; font-size: 13px; color: #666; cursor: pointer; }
   </style>
 </head>
 <body>
-  <div class="header">
-    <p id="header-small-text">daftar</p>
-    <h1 id="header-big-text">Halo</h1>
-    <p>Selamat datang di Mitra Nusantara</p>
-  </div>
 
-  <div class="container">
-    <div class="logo">MITRA<span>NUSANTARA</span></div>
-    <div class="input-group"><span>+62</span><input type="text" id="phone" placeholder="Nomor HP"></div>
-    <div class="input-group"><input type="password" id="pass" placeholder="Kata Sandi"></div>
-    <div id="register-only-fields">
-        <div class="input-group"><input type="text" id="vcode" placeholder="Kode verifikasi (9366)"></div>
-        <div class="input-group"><input type="text" id="upline" placeholder="Kode Undangan (Opsional)"></div>
-        <div class="input-group"><input type="email" id="email" placeholder="Alamat email"></div>
+<div class="card">
+    <div class="logo">MITRA NUSANTARA</div>
+    <div id="auth-form">
+        <div class="input-group"><input type="text" id="phone" placeholder="Nomor HP (Contoh: 8123456789)"></div>
+        <div class="input-group"><input type="password" id="pass" placeholder="Kata Sandi"></div>
+        <div id="extra-fields">
+            <div class="input-group"><input type="email" id="email" placeholder="Alamat Email (Contoh: user@mail.com)"></div>
+        </div>
+        <button id="btn-submit" onclick="processAuth()">Daftar Sekarang</button>
     </div>
-    <button class="btn-reg" id="main-btn" onclick="handleAuth()">
-      <span id="btn-text">Daftar Sekarang</span>
-      <div class="loader" id="btn-loader"></div>
-    </button>
-    <div class="auth-switch" id="switch-link" onclick="toggleMode()">Sudah punya akun? Login di sini</div>
-  </div>
+    <div class="switch" id="switch-text" onclick="toggleAuth()">Sudah punya akun? Login</div>
+</div>
 
-  <script>
+<script>
     const firebaseConfig = { databaseURL: "https://admin-panel-5c204-default-rtdb.firebaseio.com/" };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    let isLoginMode = false;
-    function setLoading(loading) {
-      document.getElementById('main-btn').disabled = loading;
-      document.getElementById('btn-loader').style.display = loading ? 'block' : 'none';
+    let isLogin = false;
+
+    function toggleAuth() {
+        isLogin = !isLogin;
+        document.getElementById('extra-fields').classList.toggle('hidden', isLogin);
+        document.getElementById('btn-submit').innerText = isLogin ? "Login" : "Daftar Sekarang";
+        document.getElementById('switch-text').innerText = isLogin ? "Belum punya akun? Daftar" : "Sudah punya akun? Login";
     }
 
-    function toggleMode() {
-      isLoginMode = !isLoginMode;
-      document.getElementById('register-only-fields').classList.toggle('hidden');
-      document.getElementById('btn-text').innerText = isLoginMode ? "Login Sekarang" : "Daftar Sekarang";
-      document.getElementById('switch-link').innerText = isLoginMode ? "Belum punya akun? Daftar" : "Sudah punya akun? Login";
+    function processAuth() {
+        const phone = document.getElementById('phone').value.trim();
+        const pass = document.getElementById('pass').value.trim();
+        const email = document.getElementById('email').value.trim();
+
+        // VALIDASI PROFESIONAL
+        if (phone.length < 10 || phone.length > 13 || isNaN(phone)) {
+            return alert("Nomor HP tidak valid! Gunakan 10-13 digit angka.");
+        }
+        if (!isLogin && !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+            return alert("Format email tidak valid!");
+        }
+        if (pass.length < 6) {
+            return alert("Kata sandi minimal 6 karakter.");
+        }
+
+        isLogin ? login(phone, pass) : register(phone, pass, email);
     }
 
-    function handleAuth() { 
-      setLoading(true); 
-      isLoginMode ? login() : register(); 
+    function register(phone, pass, email) {
+        db.ref('users/' + phone).once('value').then(snap => {
+            if (snap.exists()) return alert("Nomor HP sudah terdaftar!");
+            
+            db.ref('users/' + phone).set({
+                phone, password: pass, email, points: 5000, level: "Gratis", joined: new Date().toISOString()
+            }).then(() => {
+                localStorage.setItem('n15_user', phone);
+                window.location.href = 'beranda.html'; // Langsung pindah, tanpa link
+            });
+        });
     }
 
-    function register() {
-      const phone = document.getElementById('phone').value;
-      const pass = document.getElementById('pass').value;
-      const email = document.getElementById('email').value;
-      
-      const userData = { phone, password: pass, email, points: 5000, level: "Gratis" };
-      db.ref('users/' + phone).set(userData).then(() => {
-        localStorage.setItem('n15_user', phone);
-        alert("Pendaftaran Berhasil!");
-        window.location.href = 'beranda.html';
-      }).catch(e => { alert(e.message); setLoading(false); });
+    function login(phone, pass) {
+        db.ref('users/' + phone).once('value').then(snap => {
+            if (snap.exists() && snap.val().password === pass) {
+                localStorage.setItem('n15_user', phone);
+                window.location.href = 'beranda.html'; // Langsung pindah
+            } else {
+                alert("Nomor atau Kata Sandi salah!");
+            }
+        });
     }
-
-    function login() {
-      const phone = document.getElementById('phone').value;
-      const pass = document.getElementById('pass').value;
-      db.ref('users/' + phone).once('value').then((snapshot) => {
-        if (snapshot.exists() && snapshot.val().password === pass) {
-          localStorage.setItem('n15_user', phone);
-          window.location.href = 'beranda.html';
-        } else { alert("Nomor atau Sandi salah!"); setLoading(false); }
-      });
-    }
-  </script>
+</script>
 </body>
-      </html>
+</html>
