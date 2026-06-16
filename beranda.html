@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitra Nusantara - Beranda</title>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #f2f5f8; padding-bottom: 90px; color: #333; }
+        
+        /* Header Area - Dark Blue */
+        .header-container { background: #002b80; padding: 25px 20px 80px; color: white; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; }
+        .user-info { display: flex; align-items: center; gap: 12px; }
+        .logo-circle { width: 50px; height: 50px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #002b80; font-weight: bold; font-size: 24px; border: 2px solid #e2e8f0; }
+        .header-texts h1 { font-size: 18px; font-weight: bold; letter-spacing: 0.5px; }
+        .header-texts p { font-size: 12px; color: #a5c0ff; margin-top: 2px; }
+        
+        .header-actions { display: flex; align-items: center; gap: 18px; }
+        .notification { position: relative; font-size: 22px; }
+        .badge-red { position: absolute; top: -5px; right: -5px; background: #ff3b30; color: white; font-size: 10px; font-weight: bold; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .profile-icon { font-size: 22px; }
+
+        /* Main Blue Card */
+        .main-card { background: #3b82f6; margin: -50px 20px 20px; border-radius: 20px; padding: 20px; color: white; box-shadow: 0 10px 20px rgba(0, 43, 128, 0.15); }
+        
+        /* Saldo Row */
+        .saldo-row { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .saldo-col { flex: 1; }
+        .saldo-col.left { border-right: 1px solid rgba(255,255,255,0.2); padding-right: 15px; }
+        .saldo-col.right { padding-left: 15px; }
+        .saldo-title { font-size: 11px; color: #dbeafe; margin-bottom: 5px; display: flex; align-items: center; gap: 5px; }
+        .saldo-amount { font-size: 20px; font-weight: bold; margin-bottom: 3px; }
+        .saldo-desc { font-size: 10px; color: #bfdbfe; }
+
+        .divider { border-top: 1px solid rgba(255,255,255,0.2); margin: 0 0 20px 0; }
+
+        /* Mitra Boxes */
+        .mitra-row { display: flex; gap: 15px; margin-bottom: 20px; }
+        .mitra-box { background: rgba(255,255,255,0.15); flex: 1; padding: 12px 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .mitra-texts p { font-size: 11px; color: #dbeafe; margin-bottom: 2px; }
+        .mitra-texts h4 { font-size: 14px; font-weight: bold; }
+        .mitra-icon { width: 28px; height: 28px; background: rgba(255,255,255,0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+
+        /* Diawasi Box */
+        .diawasi-box { background: white; color: #333; padding: 12px 15px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; }
+        .diawasi-left { display: flex; align-items: center; gap: 10px; }
+        .diawasi-left i { color: #10b981; font-size: 16px; }
+        .diawasi-texts h5 { font-size: 12px; color: #111; font-weight: 700; }
+        .diawasi-texts p { font-size: 10px; color: #777; }
+        .diawasi-logos { display: flex; align-items: center; gap: 8px; font-size: 10px; font-weight: bold; color: #b91c1c; }
+        .diawasi-logos span.bappebti { color: #0284c7; }
+
+        /* Global Stats Bar */
+        .stats-bar { background: #0f172a; margin: 0 20px 20px; padding: 15px; border-radius: 16px; display: flex; justify-content: space-around; color: white; align-items: center; }
+        .stat-item { text-align: center; flex: 1; }
+        .stat-item.mid { border-left: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1); }
+        .stat-value { font-size: 14px; font-weight: bold; margin-bottom: 3px; display: flex; justify-content: center; align-items: center; gap: 5px; }
+        .stat-label { font-size: 10px; color: #cbd5e1; }
+
+        /* Action Menu */
+        .action-menu { background: white; margin: 0 20px 20px; padding: 20px; border-radius: 16px; display: flex; justify-content: space-around; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .action-btn { text-align: center; text-decoration: none; color: #333; }
+        .action-icon { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: white; margin: 0 auto 8px; }
+        .action-icon.blue { background: #3b82f6; }
+        .action-icon.green { background: #10b981; }
+        .action-icon.purple { background: #a855f7; }
+        .action-icon.orange { background: #f97316; }
+        .action-btn span { font-size: 11px; font-weight: 600; }
+
+        /* Bottom Nav - Sinkron dengan Investasi */
+        .nav { position: fixed; bottom: 0; width: 100%; background: white; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; }
+        .nav a { color: #aaa; text-decoration: none; text-align: center; font-size: 11px; width: 20%; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .nav i { font-size: 20px; }
+        .nav a.active { color: #0057d9; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="header-container">
+    <div class="header-top">
+        <div class="user-info">
+            <div class="logo-circle">M</div>
+            <div class="header-texts">
+                <h1>MITRA NUSANTARA</h1>
+                <p>Dashboard Mitra Capital</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <div class="notification">
+                <i class="fas fa-bell"></i>
+                <div class="badge-red">3</div>
+            </div>
+            <div class="profile-icon">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main-card">
+    <div class="saldo-row">
+        <div class="saldo-col left">
+            <div class="saldo-title">Saldo Utama <i class="fas fa-eye" style="font-size: 10px;"></i></div>
+            <div class="saldo-amount" id="saldoUtama">Rp 0</div>
+            <div class="saldo-desc">Total saldo Anda</div>
+        </div>
+        <div class="saldo-col right">
+            <div class="saldo-title">Saldo Penarikan</div>
+            <div class="saldo-amount" id="saldoPenarikan">Rp 0</div>
+            <div class="saldo-desc">Siap ditarik kapan saja</div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="mitra-row">
+        <div class="mitra-box">
+            <div class="mitra-texts">
+                <p>Mitra Dasar</p>
+                <h4>Rp 0</h4>
+            </div>
+            <div class="mitra-icon"><i class="fas fa-equals"></i></div>
+        </div>
+        <div class="mitra-box">
+            <div class="mitra-texts">
+                <p>Mitra Plus</p>
+                <h4>Rp 0</h4>
+            </div>
+            <div class="mitra-icon"><i class="fas fa-star"></i></div>
+        </div>
+    </div>
+
+    <div class="diawasi-box">
+        <div class="diawasi-left">
+            <i class="fas fa-check"></i>
+            <div class="diawasi-texts">
+                <h5>Diawasi & Terdaftar</h5>
+                <p>OJK & BAPPEBTI</p>
+            </div>
+        </div>
+        <div class="diawasi-logos">
+            <span>OJK</span> &bull; <span class="bappebti">BAPPEBTI</span>
+        </div>
+    </div>
+</div>
+
+<div class="stats-bar">
+    <div class="stat-item">
+        <div class="stat-value"><i class="fas fa-users" style="font-size: 12px;"></i> 12.458+</div>
+        <div class="stat-label">Investor Aktif</div>
+    </div>
+    <div class="stat-item mid">
+        <div class="stat-value"><i class="fas fa-exchange-alt" style="font-size: 12px;"></i> 2.134</div>
+        <div class="stat-label">Transaksi</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-value"><i class="fas fa-dollar-sign" style="font-size: 12px;"></i> Rp 24,8M+</div>
+        <div class="stat-label">Total Profit</div>
+    </div>
+</div>
+
+<div class="action-menu">
+    <a href="#" class="action-btn">
+        <div class="action-icon blue"><i class="fas fa-credit-card"></i></div>
+        <span>Top Up</span>
+    </a>
+    <a href="#" class="action-btn">
+        <div class="action-icon green"><i class="fas fa-download"></i></div>
+        <span>Withdraw</span>
+    </a>
+    <a href="riwayat.html" class="action-btn">
+        <div class="action-icon purple"><i class="fas fa-history"></i></div>
+        <span>History</span>
+    </a>
+    <a href="investasi.html" class="action-btn">
+        <div class="action-icon orange"><i class="fas fa-chevron-right"></i></div>
+        <span>Lihat Semua</span>
+    </a>
+</div>
+
+<!-- Navigation Bar - Sinkron Sempurna dengan Investasi -->
+<div class="nav">
+    <a href="beranda.html" class="active">
+        <i class="fas fa-home"></i><span>Beranda</span>
+    </a>
+    <a href="dashboard.html">
+        <i class="fas fa-chart-line"></i><span>Investasi</span>
+    </a>
+    <a href="forum.html">
+        <i class="fas fa-comments"></i><span>Forum</span>
+    </a>
+    <a href="riwayat.html">
+        <i class="fas fa-receipt"></i><span>Riwayat</span>
+    </a>
+    <a href="akun.html">
+        <i class="fas fa-user"></i><span>Akun</span>
+    </a>
+</div>
+
+<script>
+    // Inisialisasi Firebase
+    const firebaseConfig = { databaseURL: "https://admin-panel-5c204-default-rtdb.firebaseio.com/" };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    
+    // Ambil nomor HP user yang login
+    const userPhone = localStorage.getItem('n15_user');
+
+    if (userPhone) {
+        db.ref('users/' + userPhone).on('value', (snapshot) => {
+            const data = snapshot.val();
+            if (data && data.points !== undefined && data.points !== null) {
+                const formattedSaldo = "Rp " + data.points.toLocaleString('id-ID');
+                document.getElementById('saldoUtama').innerText = formattedSaldo;
+                document.getElementById('saldoPenarikan').innerText = formattedSaldo; 
+            }
+        });
+    }
+</script>
+
+</body>
+      </html>
