@@ -3,180 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daftar & Login MITRA NUSANTARA</title>
+  <title>Mitra Nusantara - Investasi Terpercaya</title>
+
+  <!-- Meta Tags untuk Preview Gambar saat link dibagikan -->
+  <meta property="og:title" content="Mitra Nusantara - Investasi Mitra Capital">
+  <meta property="og:description" content="Platform investasi aman dan terpercaya dengan return harian yang stabil. Bergabung sekarang!">
+  <!-- Ganti link di bawah dengan link foto/logo Anda yang sudah di-upload ke imgbb.com -->
+  <meta property="logo1.png" content="https://i.ibb.co/L0S7xYy/logo1.png"> 
+  <meta property="og:url" content="https://k38973087-boop.github.io/Undangan-digital-/">
+  <meta property="og:type" content="website">
+
   <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
   <style>
-    /* --- CSS DENGAN TEMA INSTAGRAM --- */
-    body { 
-      margin: 0; 
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-      background: #fafafa; 
-      color: #262626; 
-      display: flex; 
-      flex-direction: column; 
-      align-items: center; 
-    }
-
-    .header { 
-      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-      padding: 60px 20px; 
-      text-align: left; 
-      width: 100%; 
-      box-sizing: border-box; 
-      color: white;
-    }
-    
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #fafafa; display: flex; flex-direction: column; align-items: center; }
+    .header { background: radial-gradient(circle at 30% 107%, #002b80 0%, #0057d9 90%); padding: 60px 20px; text-align: left; width: 100%; box-sizing: border-box; color: white; }
     .header h1 { margin: 0; font-size: 28px; font-weight: 800; }
-    .header p { opacity: 0.9; font-size: 14px; }
-
-    .container { 
-      background: white; 
-      width: 90%; 
-      border-radius: 12px; 
-      padding: 30px 20px; 
-      margin-top: -30px; 
-      color: #333; 
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
-      box-sizing: border-box;
-      border: 1px solid #dbdbdb;
-    }
-
-    .logo { 
-      text-align: center; 
-      font-size: 32px; 
-      font-weight: bold; 
-      margin-bottom: 30px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      letter-spacing: -1px;
-    }
+    .container { background: white; width: 90%; border-radius: 12px; padding: 30px 20px; margin-top: -30px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 1px solid #dbdbdb; }
+    .logo { text-align: center; font-size: 32px; font-weight: bold; margin-bottom: 30px; letter-spacing: -1px; }
     .logo span { color: #8e8e8e; font-weight: 300; }
-
-    .input-group { 
-      background: #fafafa; 
-      border: 1px solid #dbdbdb; 
-      border-radius: 5px; 
-      padding: 10px; 
-      margin-bottom: 10px; 
-      display: flex; 
-      align-items: center; 
-    }
-    .input-group input { 
-      border: none; 
-      background: transparent; 
-      width: 100%; 
-      margin-left: 10px; 
-      outline: none; 
-      font-size: 14px; 
-      color: #262626;
-    }
-    .input-group span { color: #8e8e8e; font-weight: bold; font-size: 14px; }
-
-    .btn-reg { 
-      background: #0095f6; 
-      color: white; 
-      border: none; 
-      width: 100%; 
-      padding: 12px; 
-      border-radius: 8px; 
-      font-weight: bold; 
-      cursor: pointer; 
-      font-size: 14px; 
-      margin-top: 10px; 
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-      min-height: 45px;
-    }
-    .btn-reg:disabled { opacity: 0.7; cursor: not-allowed; }
-
-    /* --- ANIMASI LOADING INSTAGRAM STYLE --- */
-    .loader {
-      width: 18px;
-      height: 18px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: #fff;
-      animation: spin 0.8s linear infinite;
-      display: none;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .auth-switch { 
-      text-align: center; 
-      margin-top: 20px; 
-      font-size: 14px; 
-      color: #0095f6; 
-      font-weight: 600;
-      cursor: pointer; 
-      text-decoration: none; 
-    }
+    .input-group { background: #fafafa; border: 1px solid #dbdbdb; border-radius: 5px; padding: 10px; margin-bottom: 10px; display: flex; align-items: center; }
+    .input-group input { border: none; background: transparent; width: 100%; margin-left: 10px; outline: none; }
+    .btn-reg { background: #0057d9; color: white; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; min-height: 45px; }
+    .loader { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 0.8s linear infinite; display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .auth-switch { text-align: center; margin-top: 20px; font-size: 14px; color: #0057d9; font-weight: 600; cursor: pointer; }
     .hidden { display: none; }
-
-    /* --- CSS MODAL KUSTOM --- */
-    .custom-alert-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6); display: none;
-      justify-content: center; align-items: center; z-index: 2000;
-    }
-    .custom-alert-box {
-      background: white; padding: 25px; border-radius: 12px;
-      width: 80%; max-width: 300px; text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
-    .btn-alert-ok {
-      background: transparent; 
-      color: #0095f6; 
-      border-top: 1px solid #dbdbdb;
-      padding: 15px; 
-      font-weight: bold;
-      cursor: pointer; 
-      margin-top: 15px; 
-      width: 118%;
-      margin-left: -25px;
-      margin-bottom: -25px;
-      border-bottom-left-radius: 12px;
-      border-bottom-right-radius: 12px;
-      border-right: none; border-left: none; border-bottom: none;
-    }
   </style>
 </head>
 <body>
   <div class="header">
     <p id="header-small-text">daftar</p>
-    <h1 id="header-big-text">Halo </h1>
-    <p>Selamat datang di kedatangan Anda</p>
+    <h1 id="header-big-text">Halo</h1>
+    <p>Selamat datang di Mitra Nusantara</p>
   </div>
 
   <div class="container">
     <div class="logo">MITRA<span>NUSANTARA</span></div>
-    
-    <div class="input-group">
-      <span>+62</span>
-      <input type="text" id="phone" placeholder="Nomor HP">
-    </div>
-
-    <div class="input-group">
-      <input type="password" id="pass" placeholder="Kata Sandi">
-    </div>
-
+    <div class="input-group"><span>+62</span><input type="text" id="phone" placeholder="Nomor HP"></div>
+    <div class="input-group"><input type="password" id="pass" placeholder="Kata Sandi"></div>
     <div id="register-only-fields">
-        <div class="input-group">
-          <input type="text" id="vcode" placeholder="Kode verifikasi">
-          <span style="background: #efefef; padding: 2px 8px; border-radius: 4px; color: #262626; font-style: italic;">9366</span>
-        </div>
-        <div class="input-group">
-          <input type="text" id="upline" placeholder="Kode Undangan">
-        </div>
-        <div class="input-group">
-          <input type="email" id="email" placeholder="Alamat email">
-        </div>
+        <div class="input-group"><input type="text" id="vcode" placeholder="Kode verifikasi (9366)"></div>
+        <div class="input-group"><input type="text" id="upline" placeholder="Kode Undangan (Opsional)"></div>
+        <div class="input-group"><input type="email" id="email" placeholder="Alamat email"></div>
     </div>
-
     <button class="btn-reg" id="main-btn" onclick="handleAuth()">
       <span id="btn-text">Daftar Sekarang</span>
       <div class="loader" id="btn-loader"></div>
@@ -184,124 +54,52 @@
     <div class="auth-switch" id="switch-link" onclick="toggleMode()">Sudah punya akun? Login di sini</div>
   </div>
 
-  <div id="customAlert" class="custom-alert-overlay">
-    <div class="custom-alert-box">
-      <div id="alertIcon" style="font-size: 40px; margin-bottom: 10px;">⚠️</div>
-      <h3 id="alertTitle" style="margin: 0; font-size: 18px;">PERHATIAN</h3>
-      <p id="alertMessage" style="color: #666; margin: 10px 0; font-size: 14px;">Pesan di sini</p>
-      <button class="btn-alert-ok" onclick="closeAlert()">Oke</button>
-    </div>
-  </div>
-
   <script>
     const firebaseConfig = { databaseURL: "https://admin-panel-5c204-default-rtdb.firebaseio.com/" };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    let userIP = "Sedang memuat..."; 
-    fetch('https://api.ipify.org?format=json')
-      .then(response => response.json())
-      .then(data => { userIP = data.ip; })
-      .catch(err => { userIP = "Gagal mendeteksi"; });
-
     let isLoginMode = false;
-
     function setLoading(loading) {
-      const btn = document.getElementById('main-btn');
-      const loader = document.getElementById('btn-loader');
-      const text = document.getElementById('btn-text');
-      
-      if (loading) {
-        btn.disabled = true;
-        loader.style.display = 'block';
-        text.style.opacity = '0.5';
-      } else {
-        btn.disabled = false;
-        loader.style.display = 'none';
-        text.style.opacity = '1';
-      }
-    }
-
-    function showAlert(title, msg, isSuccess = false) {
-      setLoading(false); 
-      document.getElementById('alertTitle').innerText = title;
-      document.getElementById('alertMessage').innerText = msg;
-      document.getElementById('alertIcon').innerText = isSuccess ? "✅" : "⚠️";
-      document.getElementById('customAlert').style.display = 'flex';
-    }
-
-    function closeAlert() {
-      document.getElementById('customAlert').style.display = 'none';
-      if (document.getElementById('alertTitle').innerText.includes("BERHASIL")) {
-        window.location.href = 'dashboard.html';
-      }
+      document.getElementById('main-btn').disabled = loading;
+      document.getElementById('btn-loader').style.display = loading ? 'block' : 'none';
     }
 
     function toggleMode() {
       isLoginMode = !isLoginMode;
-      const regFields = document.getElementById('register-only-fields');
-      const mainBtnText = document.getElementById('btn-text');
-      const switchLink = document.getElementById('switch-link');
-      const headerSmall = document.getElementById('header-small-text');
-      const headerBig = document.getElementById('header-big-text');
-
-      if (isLoginMode) {
-        regFields.classList.add('hidden');
-        mainBtnText.innerText = "Login Sekarang";
-        switchLink.innerText = "Belum punya akun? Daftar di sini";
-        headerSmall.innerText = "masuk";
-        headerBig.innerText = "Selamat Datang Kembali";
-      } else {
-        regFields.classList.remove('hidden');
-        mainBtnText.innerText = "Daftar Sekarang";
-        switchLink.innerText = "Sudah punya akun? Login di sini";
-        headerSmall.innerText = "daftar";
-        headerBig.innerText = "Halo";
-      }
+      document.getElementById('register-only-fields').classList.toggle('hidden');
+      document.getElementById('btn-text').innerText = isLoginMode ? "Login Sekarang" : "Daftar Sekarang";
+      document.getElementById('switch-link').innerText = isLoginMode ? "Belum punya akun? Daftar" : "Sudah punya akun? Login";
     }
 
     function handleAuth() { 
       setLoading(true); 
-      if (isLoginMode) { login(); } else { register(); } 
+      isLoginMode ? login() : register(); 
     }
 
     function register() {
       const phone = document.getElementById('phone').value;
       const pass = document.getElementById('pass').value;
       const email = document.getElementById('email').value;
-      const uplineCode = document.getElementById('upline').value;
       
-      if(!phone || !pass || !email) {
-        return showAlert("GAGAL", "Data tidak lengkap!");
-      }
-
-      const myReffCode = "REF-" + Math.floor(100000 + Math.random() * 900000);
-      const userData = { phone, password: pass, email, reffCode: myReffCode, upline: uplineCode, balance: 5000, level: "Gratis", todayEarned: 0, ipAddress: userIP };
-      
+      const userData = { phone, password: pass, email, points: 5000, level: "Gratis" };
       db.ref('users/' + phone).set(userData).then(() => {
-        if(uplineCode) { db.ref('referrals/' + uplineCode).push({ downline: phone, date: new Date().toISOString() }); }
-        localStorage.setItem('nusantara_user', phone);
-        showAlert("BERHASIL", "Pendaftaran akun Anda sukses!", true);
-      }).catch(e => showAlert("GAGAL", e.message));
+        localStorage.setItem('n15_user', phone);
+        alert("Pendaftaran Berhasil!");
+        window.location.href = 'beranda.html';
+      }).catch(e => { alert(e.message); setLoading(false); });
     }
 
     function login() {
       const phone = document.getElementById('phone').value;
       const pass = document.getElementById('pass').value;
-      
-      if(!phone || !pass) {
-        return showAlert("GAGAL", "Masukkan Nomor HP dan Sandi!");
-      }
-
       db.ref('users/' + phone).once('value').then((snapshot) => {
-        if (snapshot.exists()) {
-          if (snapshot.val().password === pass) {
-            localStorage.setItem('nusantara_user', phone);
-            showAlert("BERHASIL", "Login Berhasil!", true);
-          } else { showAlert("GAGAL", "Sandi salah!"); }
-        } else { showAlert("GAGAL", "Akun tidak ditemukan!"); }
-      }).catch(e => showAlert("GAGAL", "Gagal menghubungkan ke server"));
+        if (snapshot.exists() && snapshot.val().password === pass) {
+          localStorage.setItem('n15_user', phone);
+          window.location.href = 'beranda.html';
+        } else { alert("Nomor atau Sandi salah!"); setLoading(false); }
+      });
     }
   </script>
 </body>
-    </html>
+      </html>
