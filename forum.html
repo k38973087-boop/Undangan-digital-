@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promo Mitra Nusantara</title>
+    <!-- FontAwesome untuk ikon panah Syarat & Ketentuan -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        body { 
+            background: #f2f5f8; 
+            padding: 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+        }
+
+        /* Container Card Utama Promo */
+        .promo-container { 
+            background: #0057d9; 
+            width: 100%;
+            max-width: 420px; 
+            padding: 25px 15px; 
+            border-radius: 24px; 
+            color: white; 
+            text-align: center; 
+            box-shadow: 0 8px 25px rgba(0, 87, 217, 0.3); 
+        }
+        
+        /* Headline Teks Atas */
+        .promo-headline { 
+            font-size: 15px; 
+            font-weight: 700; 
+            line-height: 1.5; 
+            margin-bottom: 20px; 
+            padding: 0 5px; 
+        }
+        .promo-headline span { 
+            color: #facc15; 
+        }
+        
+        /* Struktur Tabel Flexbox */
+        .promo-table { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+        }
+        
+        /* Header Tabel (Kuning) */
+        .table-header-row { 
+            display: flex; 
+            gap: 6px; 
+        }
+        .th-cell { 
+            background: #facc15; 
+            color: #002b80; 
+            font-size: 11px; 
+            font-weight: 800; 
+            padding: 10px 4px; 
+            border-radius: 10px; 
+            flex: 1; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        
+        /* Baris Konten Isi Tabel */
+        .table-body-section { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 6px; 
+            margin-bottom: 6px; 
+        }
+        .table-main-row { 
+            display: flex; 
+            gap: 6px; 
+        }
+        
+        /* Kolom Samping Kiri (Pemenang & Periode) */
+        .td-side-block { 
+            background: #0046b0; 
+            border-radius: 14px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            font-size: 11px; 
+            font-weight: 700; 
+            padding: 10px; 
+            text-align: center; 
+            line-height: 1.4; 
+        }
+        .td-side-block.pemenang-col { 
+            width: 26%; 
+        }
+        .td-side-block.periode-col { 
+            width: 22%; 
+            font-weight: 600; 
+            color: #e2e8f0; 
+        }
+        
+        /* Kolom Kanan Berisi Baris Berlipat (Jumlah Pemenang & Hadiah) */
+        .td-right-group { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 6px; 
+        }
+        .td-sub-item { 
+            display: flex; 
+            gap: 6px; 
+            width: 100%; 
+        }
+        .cell-rank { 
+            background: #0046b0; 
+            padding: 12px 8px; 
+            border-radius: 12px; 
+            flex: 1.1; 
+            font-size: 11px; 
+            font-weight: 600; 
+            text-align: center; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .cell-prize { 
+            background: #0046b0; 
+            padding: 12px 8px; 
+            border-radius: 12px; 
+            flex: 0.9; 
+            font-size: 11px; 
+            font-weight: 700; 
+            text-align: center; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        
+        /* Bagian Syarat & Ketentuan Bawah */
+        .promo-snk { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 8px; 
+            margin-top: 20px; 
+            font-size: 13px; 
+            font-weight: 700; 
+            color: white; 
+            cursor: pointer; 
+            user-select: none;
+        }
+        .promo-snk i { 
+            font-size: 11px; 
+            color: #facc15; 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- KOMPONEN UTAMA PROMO -->
+    <div class="promo-container">
+        <div class="promo-headline">
+            Semakin sering kamu isi saldo <span>Mitra Nusantara</span>, semakin besar peluang kamu jadi <span>100 pemenang</span> setiap minggu.
+        </div>
+
+        <div class="promo-table">
+            <!-- Header Tabel -->
+            <div class="table-header-row">
+                <div class="th-cell" style="max-width: 26%;">Pemenang</div>
+                <div class="th-cell" style="max-width: 22%;">Periode</div>
+                <div class="th-cell">Jumlah Pemenang</div>
+                <div class="th-cell">Hadiah</div>
+            </div>
+
+            <!-- Bagian Pemenang Mingguan -->
+            <div class="table-body-section">
+                <div class="table-main-row">
+                    <div class="td-side-block pemenang-col">Pemenang Mingguan</div>
+                    <div class="td-side-block periode-col">1-30 Juni</div>
+                    <div class="td-right-group">
+                        <div class="td-sub-item">
+                            <div class="cell-rank">Peringkat 1-5</div>
+                            <div class="cell-prize">Rp500.000</div>
+                        </div>
+                        <div class="td-sub-item">
+                            <div class="cell-rank">Peringkat 6-35</div>
+                            <div class="cell-prize">Rp200.000</div>
+                        </div>
+                        <div class="td-sub-item">
+                            <div class="cell-rank">Peringkat 36-100</div>
+                            <div class="cell-prize">Rp50.000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bagian Pemenang Utama -->
+            <div class="table-body-section">
+                <div class="table-main-row">
+                    <div class="td-side-block pemenang-col">Pemenang Utama</div>
+                    <div class="td-side-block periode-col">1-30 Juni</div>
+                    <div class="td-right-group">
+                        <div class="td-sub-item">
+                            <div class="cell-rank">Peringkat 1</div>
+                            <div class="cell-prize">Rp1.500.000</div>
+                        </div>
+                        <div class="td-sub-item">
+                            <div class="cell-rank">Peringkat 2</div>
+                            <div class="cell-prize">Rp1.000.000</div>
+                        </div>
+                        <div class="td-sub-item">
+                            <div class="cell-rank">Peringkat 3</div>
+                            <div class="cell-prize">Rp750.000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tombol / Penanda Syarat & Ketentuan -->
+        <div class="promo-snk">
+            <i class="fas fa-caret-down"></i> Syarat & Ketentuan <i class="fas fa-caret-down"></i>
+        </div>
+    </div>
+
+</body>
+  </html>
