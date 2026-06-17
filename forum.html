@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promo Mitra Nusantara</title>
-    <!-- FontAwesome untuk ikon panah Syarat & Ketentuan -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -102,7 +101,7 @@
             color: #e2e8f0; 
         }
         
-        /* Kolom Kanan Berisi Baris Berlipat (Jumlah Pemenang & Hadiah) */
+        /* Kolom Kanan Berisi Baris Berlipat */
         .td-right-group { 
             flex: 1; 
             display: flex; 
@@ -145,7 +144,7 @@
             align-items: center; 
             justify-content: center; 
             gap: 8px; 
-            margin-top: 20px; 
+            margin-top: 18px; 
             font-size: 13px; 
             font-weight: 700; 
             color: white; 
@@ -156,18 +155,45 @@
             font-size: 11px; 
             color: #facc15; 
         }
+
+        /* DESAIN TOMBOL GABUNG WHATSAPP */
+        .btn-whatsapp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 14px;
+            border-radius: 14px;
+            margin-top: 18px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.2s ease;
+        }
+        .btn-whatsapp:hover {
+            background: #20ba5a;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
+        }
+        .btn-whatsapp:active {
+            transform: translateY(1px);
+        }
+        .btn-whatsapp i {
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- KOMPONEN UTAMA PROMO -->
     <div class="promo-container">
         <div class="promo-headline">
             Semakin sering kamu isi saldo <span>Mitra Nusantara</span>, semakin besar peluang kamu jadi <span>100 pemenang</span> setiap minggu.
         </div>
 
         <div class="promo-table">
-            <!-- Header Tabel -->
             <div class="table-header-row">
                 <div class="th-cell" style="max-width: 26%;">Pemenang</div>
                 <div class="th-cell" style="max-width: 22%;">Periode</div>
@@ -175,7 +201,6 @@
                 <div class="th-cell">Hadiah</div>
             </div>
 
-            <!-- Bagian Pemenang Mingguan -->
             <div class="table-body-section">
                 <div class="table-main-row">
                     <div class="td-side-block pemenang-col">Pemenang Mingguan</div>
@@ -197,7 +222,6 @@
                 </div>
             </div>
 
-            <!-- Bagian Pemenang Utama -->
             <div class="table-body-section">
                 <div class="table-main-row">
                     <div class="td-side-block pemenang-col">Pemenang Utama</div>
@@ -220,11 +244,14 @@
             </div>
         </div>
 
-        <!-- Tombol / Penanda Syarat & Ketentuan -->
         <div class="promo-snk">
             <i class="fas fa-caret-down"></i> Syarat & Ketentuan <i class="fas fa-caret-down"></i>
         </div>
+
+        <a href="https://wa.me/6283862596697?text=Halo%20Mitra%20Nusantara,%20saya%20ingin%20gabung%20ke%20program%20promo" target="_blank" class="btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> Gabung ke WhatsApp
+        </a>
     </div>
 
 </body>
-  </html>
+                                               </html>
