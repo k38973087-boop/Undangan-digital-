@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mitra Nusantara - Beranda</title>
-    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -72,6 +70,18 @@
         .action-icon.purple { background: #a855f7; }
         .action-icon.orange { background: #f97316; }
         .action-btn span { font-size: 11px; font-weight: 600; }
+
+        /* Bottom Footer Baru */
+        .custom-footer { background: #ffffff; padding: 35px 20px; margin: 20px 20px 0; border-radius: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .footer-head { font-size: 16px; font-weight: bold; color: #002b80; margin-bottom: 8px; }
+        .footer-desc { font-size: 12px; color: #64748b; line-height: 1.6; margin-bottom: 20px; }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 15px; margin-bottom: 25px; border-top: 1px solid #f1f5f9; padding-top: 20px; }
+        .footer-grid a { font-size: 12px; color: #334155; text-decoration: none; font-weight: 600; transition: 0.2s; }
+        .footer-grid a:hover { color: #0057d9; }
+        .footer-contact { border-top: 1px solid #f1f5f9; padding-top: 20px; margin-bottom: 20px; }
+        .footer-contact h5 { font-size: 13px; color: #002b80; font-weight: bold; margin-bottom: 6px; }
+        .footer-contact p { font-size: 12px; color: #475569; line-height: 1.5; }
+        .footer-legal { border-top: 1px solid #f1f5f9; padding-top: 15px; font-size: 11px; color: #94a3b8; line-height: 1.6; }
 
         /* Bottom Nav - Sinkron dengan Investasi */
         .nav { position: fixed; bottom: 0; width: 100%; background: white; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; }
@@ -182,10 +192,41 @@
         <div class="action-icon orange"><i class="fas fa-chevron-right"></i></div>
         <span>Lihat Semua</span>
     </a>
- </div>
 </div>
 
-<!-- Navigation Bar - Ter-sinkronisasi Sempurna -->
+<div class="custom-footer">
+    <div class="footer-head">Siap Mengakselerasi Penghasilan Anda?</div>
+    <div class="footer-desc">Gabung sekarang dan nikmati ekosistem teknologi cerdas untuk melacak pertumbuhan pasif income Anda.</div>
+    
+    <div class="footer-head" style="font-size: 14px;">Tentang Kami</div>
+    <div class="footer-desc">Mitra Nusantara adalah penyedia solusi ekosistem teknologi keuangan modern yang berkomitmen membangun sinergi digital inklusif.</div>
+    
+    <div class="footer-grid">
+        <a href="#"><i class="fas fa-chevron-right" style="font-size: 10px; color: #3b82f6; margin-right: 5px;"></i> Cara Menjadi Mitra</a>
+        <a href="#"><i class="fas fa-chevron-right" style="font-size: 10px; color: #3b82f6; margin-right: 5px;"></i> Program Affiliate</a>
+        <a href="#"><i class="fas fa-chevron-right" style="font-size: 10px; color: #3b82f6; margin-right: 5px;"></i> Panduan Mitra</a>
+        <a href="#"><i class="fas fa-chevron-right" style="font-size: 10px; color: #3b82f6; margin-right: 5px;"></i> Skema Komisi</a>
+        <a href="#"><i class="fas fa-chevron-right" style="font-size: 10px; color: #3b82f6; margin-right: 5px;"></i> Syarat & Ketentuan</a>
+        <a href="#"><i class="fas fa-chevron-right" style="font-size: 10px; color: #3b82f6; margin-right: 5px;"></i> Kebijakan Privasi</a>
+        <a href="#"><i class="fas fa-chevron-right" style="font-size: 10px; color: #3b82f6; margin-right: 5px;"></i> Keamanan Data</a>
+        <a href="#"><i class="fas fa-chevron-right" style="font-size: 10px; color: #3b82f6; margin-right: 5px;"></i> Penggunaan Kuki</a>
+        <a href="#"><i class="fas fa-chevron-right" style="font-size: 10px; color: #3b82f6; margin-right: 5px;"></i> Kepatuhan Hukum</a>
+    </div>
+
+    <div class="footer-contact">
+        <h5>Hubungi Kami</h5>
+        <p>
+            <i class="fas fa-envelope" style="color: #64748b; margin-right: 5px;"></i> support@mitra-nusantara.com<br>
+            <i class="fas fa-clock" style="color: #64748b; margin-right: 5px;"></i> Senin - Jumat, 09:00 - 17:00 WIB
+        </p>
+    </div>
+
+    <div class="footer-legal">
+        <p>© 2026 Mitra Nusantara. Hak Cipta Dilindungi Undang-Undang.</p>
+        <p style="margin-top: 8px; font-style: italic; color: #94a3b8;">Platform ini hanya melayani program kemitraan performa afiliasi secara mandiri berlandaskan teknologi rujukan tepercaya.</p>
+    </div>
+</div>
+
 <div class="nav">
     <a href="beranda.html">
         <i class="fas fa-home"></i><span>Beranda</span>
@@ -203,7 +244,6 @@
         <i class="fas fa-user"></i><span>Akun</span>
     </a>
 </div>
-
 
 <script>
     // Inisialisasi Firebase
@@ -227,4 +267,4 @@
 </script>
 
 </body>
-      </html>
+                </html>
