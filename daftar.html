@@ -5,39 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portal Resmi - Mitra Nusantara</title>
 
+  <!-- Meta Tags untuk Preview Gambar saat link dibagikan -->
   <meta property="og:title" content="Mitra Nusantara - Platform Investasi Terpercaya">
   <meta property="og:description" content="Terdaftar dan diawasi oleh OJK. Gabung sekarang dan bangun aset digital Anda bersama Mitra Nusantara.">
   <meta property="og:image" content="https://i.ibb.co/L0S7xYy/logo-mitra.png"> 
   <meta property="og:url" content="https://k38973087-boop.github.io/Undangan-digital-/">
   <meta property="og:type" content="website">
 
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: #f4f6f9; color: #333; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px 0; }
     
-    /* OJK & Trust Banner */
-    .ojk-banner { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; width: 100%; max-width: 420px; padding: 15px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+    /* Background Premium Fintech - Menyesuaikan Skema Warna Logo */
+    body { 
+      background: linear-gradient(135deg, #02153b 0%, #002b80 60%, #0057d9 100%);
+      background-attachment: fixed;
+      color: #333; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      min-height: 100vh; 
+      padding: 20px 0; 
+    }
+    
+    /* OJK & Trust Banner (Dibuat semi-transparan mewah di atas background gelap) */
+    .ojk-banner { background: rgba(255, 255, 255, 0.95); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; width: 100%; max-width: 420px; padding: 15px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); backdrop-filter: blur(10px); }
     .ojk-info h4 { font-size: 13px; color: #002b80; font-weight: bold; }
     .ojk-info p { font-size: 11px; color: #64748b; margin-top: 2px; }
     .ojk-badge { background: #b91c1c; color: white; padding: 4px 8px; border-radius: 4px; font-weight: 800; font-size: 12px; letter-spacing: 0.5px; }
 
     /* Security Trust Badges Line */
-    .trust-line { display: flex; justify-content: space-around; width: 100%; max-width: 420px; font-size: 11px; color: #64748b; margin-bottom: 20px; font-weight: 500; }
+    .trust-line { display: flex; justify-content: space-around; width: 100%; max-width: 420px; font-size: 11px; color: #cbd5e1; margin-bottom: 20px; font-weight: 500; }
     .trust-line span { display: flex; align-items: center; gap: 5px; }
     .trust-line i { color: #10b981; }
 
     /* Main Container Card */
-    .portal-card { background: #ffffff; width: 100%; max-width: 420px; border-radius: 16px; padding: 30px 25px; box-shadow: 0 10px 25px rgba(0, 43, 128, 0.05); border: 1px solid #e2e8f0; text-align: center; }
+    .portal-card { background: #ffffff; width: 100%; max-width: 420px; border-radius: 20px; padding: 35px 25px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); text-align: center; }
     
-    /* Logo Brand Area */
+    /* Logo Brand Area - Menggunakan Aset Gambar Resmi Anda */
     .logo-container { display: flex; flex-direction: column; align-items: center; margin-bottom: 25px; }
-    .logo-graphic { width: 65px; height: 65px; background: linear-gradient(135deg, #002b80, #0057d9); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 28px; box-shadow: 0 6px 15px rgba(0, 87, 217, 0.2); margin-bottom: 12px; }
-    /* Anda juga bisa mengganti logo-graphic di atas dengan tag <img> jika sudah punya file logonya:
-       <img src="link_logo_anda.png" style="width:65px; height:65px; margin-bottom:12px;"> */
+    .brand-logo-img { height: 60px; max-width: 100%; object-fit: contain; margin-bottom: 15px; }
     .brand-title { font-size: 24px; font-weight: 800; color: #002b80; letter-spacing: -0.5px; }
     .brand-subtitle { font-size: 13px; color: #64748b; margin-top: 4px; }
 
@@ -69,16 +81,17 @@
     .hidden { display: none; }
 
     /* Security Badges Footer */
-    .security-footer { text-align: center; width: 100%; max-width: 420px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; }
-    .badge-grid { display: flex; justify-content: center; gap: 20px; font-size: 11px; color: #94a3b8; font-weight: bold; margin-bottom: 15px; }
-    .badge-grid span { display: flex; align-items: center; gap: 4px; border: 1px solid #e2e8f0; padding: 4px 8px; border-radius: 4px; background: white; }
-    .badge-grid i { color: #0057d9; }
+    .security-footer { text-align: center; width: 100%; max-width: 420px; margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .badge-grid { display: flex; justify-content: center; gap: 15px; font-size: 11px; color: #cbd5e1; font-weight: bold; margin-bottom: 15px; }
+    .badge-grid span { display: flex; align-items: center; gap: 4px; border: 1px solid rgba(255,255,255,0.15); padding: 5px 10px; border-radius: 6px; background: rgba(255,255,255,0.05); }
+    .badge-grid i { color: #3b82f6; }
     
-    .legal-text { font-size: 10px; color: #94a3b8; line-height: 1.5; margin-top: 10px; }
+    .legal-text { font-size: 11px; color: #94a3b8; line-height: 1.6; margin-top: 10px; }
   </style>
 </head>
 <body>
 
+  <!-- OJK Verification Header Banner -->
   <div class="ojk-banner">
     <div class="ojk-info">
       <h4>Terdaftar & Diawasi OJK</h4>
@@ -87,6 +100,7 @@
     <div class="ojk-badge">OJK</div>
   </div>
 
+  <!-- Trust Features -->
   <div class="trust-line">
     <span><i class="fas fa-shield-alt"></i> Aman Terpercaya</span>
     <span>|</span>
@@ -95,22 +109,25 @@
     <span><i class="fas fa-lock"></i> Data Terenkripsi</span>
   </div>
 
+  <!-- Main Portal Card -->
   <div class="portal-card">
     
+    <!-- Logo Resmi Mitra Nusantara -->
     <div class="logo-container">
-      <div class="logo-graphic">
-        <i class="fas fa-building-columns"></i>
-      </div>
+      <img src="1781556657113.jpg" alt="Logo Mitra Nusantara" class="brand-logo-img">
       <div class="brand-title">Mitra Nusantara</div>
       <div class="brand-subtitle" id="portal-desc">Buat akun Mitra Nusantara Anda sekarang</div>
     </div>
 
+    <!-- Tombol Navigasi Antara Login & Daftar (Tab Switcher) -->
     <div class="auth-tabs">
       <button class="tab-btn active" id="tab-register" onclick="switchMode('register')">Daftar Baru</button>
       <button class="tab-btn" id="tab-login" onclick="switchMode('login')">Masuk Akun</button>
     </div>
 
+    <!-- Form Container -->
     <div id="portal-form">
+      <!-- Phone Input -->
       <div class="form-group">
         <label for="phone">Nomor Telepon</label>
         <div class="input-wrapper">
@@ -119,6 +136,7 @@
         </div>
       </div>
 
+      <!-- Password Input -->
       <div class="form-group">
         <label for="pass">Kata Sandi</label>
         <div class="input-wrapper">
@@ -126,6 +144,7 @@
         </div>
       </div>
 
+      <!-- Confirm Password Input (Hanya untuk register) -->
       <div class="form-group" id="group-confirm">
         <label for="confirmPass">Konfirmasi Kata Sandi</label>
         <div class="input-wrapper">
@@ -133,6 +152,7 @@
         </div>
       </div>
 
+      <!-- Referral Input (Hanya untuk register) -->
       <div class="form-group" id="group-referral">
         <label for="upline">Kode Referral (Opsional)</label>
         <div class="input-wrapper">
@@ -140,6 +160,7 @@
         </div>
       </div>
 
+      <!-- Captcha Verification (Hanya untuk register) -->
       <div class="form-group" id="group-captcha">
         <label for="captcha-input">CAPTCHA Verification</label>
         <div class="captcha-container">
@@ -151,11 +172,13 @@
         </div>
       </div>
 
+      <!-- Submit Action Button -->
       <button class="btn-submit" id="btn-submit" onclick="handleSubmit()">Daftar Sekarang</button>
     </div>
 
   </div>
 
+  <!-- Compliance Footer Badges -->
   <div class="security-footer">
     <div class="badge-grid">
       <span><i class="fas fa-certificate"></i> SSL Secure</span>
@@ -171,15 +194,15 @@
   </div>
 
   <script>
-    // 1. Inisialisasi Layanan Database Firebase
+    // Inisialisasi Layanan Database Firebase Anda
     const firebaseConfig = { databaseURL: "https://admin-panel-5c204-default-rtdb.firebaseio.com/" };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    let currentMode = "register"; // Default mode halaman
+    let currentMode = "register"; 
     let currentCaptcha = "";
 
-    // 2. Logika Pembuat Kode Keamanan CAPTCHA Otomatis
+    // Pembuat Kode Keamanan CAPTCHA Otomatis
     function refreshCaptcha() {
       const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       let code = "";
@@ -191,20 +214,17 @@
       document.getElementById('captcha-input').value = "";
     }
 
-    // 3. Fungsi Switcher Mode (Tombol Login / Daftar Aktif)
+    // Fungsi Switcher Mode Form (Login / Daftar)
     function switchMode(mode) {
       currentMode = mode;
       
-      // Update status visual tombol tab
       document.getElementById('tab-register').classList.toggle('active', mode === 'register');
       document.getElementById('tab-login').classList.toggle('active', mode === 'login');
 
-      // Tampilkan atau sembunyikan input field secara dinamis
       document.getElementById('group-confirm').classList.toggle('hidden', mode === 'login');
       document.getElementById('group-referral').classList.toggle('hidden', mode === 'login');
       document.getElementById('group-captcha').classList.toggle('hidden', mode === 'login');
 
-      // Ubah teks deskripsi dan tombol utama
       if (mode === 'register') {
         document.getElementById('portal-desc').innerText = "Buat akun Mitra Nusantara Anda sekarang";
         document.getElementById('btn-submit').innerText = "Daftar Sekarang";
@@ -221,7 +241,6 @@
       refreshCaptcha();
     };
 
-    // 4. Router Utama Tombol Submit (Menentukan Login / Register)
     function handleSubmit() {
       if (currentMode === "register") {
         executeRegister();
@@ -230,7 +249,7 @@
       }
     }
 
-    // 5. Logika Registrasi Akun Baru
+    // Eksekusi Pendaftaran Akun Ke Firebase & Admin Panel
     function executeRegister() {
       const phone = document.getElementById('phone').value.trim();
       const pass = document.getElementById('pass').value.trim();
@@ -272,7 +291,7 @@
             phone: phone,
             password: pass,
             email: "-", 
-            points: 5000, // Saldo bonus registrasi
+            points: 5000, 
             level: "Gratis",
             upline: uplineCode || "-",
             joined: new Date().toISOString()
@@ -280,7 +299,7 @@
 
           db.ref('users/' + phone).set(dataPayload).then(() => {
             localStorage.setItem('n15_user', phone);
-            window.location.href = 'beranda.html'; // Pengalihan bersih langsung ke beranda
+            window.location.href = 'beranda.html'; 
           }).catch(error => {
             alert("Kesalahan Sistem: " + error.message);
             btn.disabled = false;
@@ -290,7 +309,7 @@
       });
     }
 
-    // 6. Logika Otentikasi Masuk (Login) Akun
+    // Eksekusi Login Akun
     function executeLogin() {
       const phone = document.getElementById('phone').value.trim();
       const pass = document.getElementById('pass').value.trim();
@@ -306,7 +325,7 @@
       db.ref('users/' + phone).once('value').then(snapshot => {
         if (snapshot.exists() && snapshot.val().password === pass) {
           localStorage.setItem('n15_user', phone);
-          window.location.href = 'beranda.html'; // Pindah langsung ke beranda
+          window.location.href = 'beranda.html'; 
         } else {
           alert("Gagal Masuk: Nomor telepon atau kata sandi Anda salah.");
           btn.disabled = false;
@@ -320,4 +339,4 @@
     }
   </script>
 </body>
-            </html>
+  </html>
