@@ -84,6 +84,63 @@
     .badge-grid i { color: #3b82f6; }
     
     .legal-text { font-size: 11px; color: #94a3b8; line-height: 1.6; margin-top: 10px; }
+
+    /* STYLE BARU: CUSTOM ALERT POP-UP (ANTI-LINK ATAS) */
+    .alert-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .alert-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .alert-box {
+      background: white;
+      width: 85%;
+      max-width: 320px;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      transform: scale(0.9);
+      transition: transform 0.2s ease;
+    }
+    .alert-overlay.show .alert-box {
+      transform: scale(1);
+    }
+    .alert-box h3 {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #1e293b;
+    }
+    .alert-box p {
+      font-size: 13px;
+      color: #64748b;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .alert-btn {
+      width: 100%;
+      padding: 12px;
+      background: #0057d9;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .alert-btn:active { background: #002b80; }
   </style>
 </head>
 <body>
@@ -177,6 +234,15 @@
     </div>
   </div>
 
+  <!-- HTML BARU: STRUKTUR POP-UP ALERT DIALOG ANTI-LINK -->
+  <div class="alert-overlay" id="customAlert">
+    <div class="alert-box">
+      <h3 id="alertTitle">Notifikasi</h3>
+      <p id="alertMessage">Pesan sistem.</p>
+      <button class="alert-btn" onclick="tutupAlert()">Oke</button>
+    </div>
+  </div>
+
   <script>
     // Inisialisasi Layanan Database Firebase Anda
     const firebaseConfig = { databaseURL: "https://admin-panel-5c204-default-rtdb.firebaseio.com/" };
@@ -185,6 +251,17 @@
 
     let currentMode = "register"; 
     let currentCaptcha = "";
+
+    // FUNGSI BARU: Pemanggil dan Penutup Custom Pop-Up Alert
+    function tampilkanAlert(judul, pesan) {
+      document.getElementById('alertTitle').innerText = judul;
+      document.getElementById('alertMessage').innerText = pesan;
+      document.getElementById('customAlert').classList.add('show');
+    }
+
+    function tutupAlert() {
+      document.getElementById('customAlert').classList.remove('show');
+    }
 
     // Pembuat Kode Keamanan CAPTCHA Otomatis
     function refreshCaptcha() {
@@ -233,7 +310,7 @@
       }
     }
 
-    // Eksekusi Pendaftaran Akun - Struktur data payload dijamin masuk & terbaca lengkap oleh Admin Panel
+    // Eksekusi Pendaftaran Akun
     function executeRegister() {
       const phone = document.getElementById('phone').value.trim();
       const pass = document.getElementById('pass').value.trim();
@@ -243,20 +320,23 @@
       const btn = document.getElementById('btn-submit');
 
       if (phone.length < 9 || phone.length > 13 || isNaN(phone) || !phone.startsWith('8')) {
-        return alert("Pendaftaran Gagal: Format nomor ponsel tidak sesuai.");
+        tampilkanAlert("Pendaftaran Gagal", "Format nomor ponsel tidak sesuai.");
+        return;
       }
 
       const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
       if (!passwordRegex.test(pass)) {
-        return alert("Pendaftaran Gagal: Kata sandi harus memiliki kombinasi huruf kapital, huruf kecil, dan angka.");
+        tampilkanAlert("Pendaftaran Gagal", "Kata sandi harus memiliki kombinasi huruf kapital, huruf kecil, dan angka.");
+        return;
       }
 
       if (pass !== confirmPass) {
-        return alert("Pendaftaran Gagal: Isian konfirmasi kata sandi tidak cocok.");
+        tampilkanAlert("Pendaftaran Gagal", "Isian konfirmasi kata sandi tidak cocok.");
+        return;
       }
 
       if (captchaInput !== currentCaptcha) {
-        alert("Pendaftaran Gagal: Kode keamanan tidak sesuai.");
+        tampilkanAlert("Pendaftaran Gagal", "Kode keamanan tidak sesuai.");
         refreshCaptcha();
         return;
       }
@@ -266,12 +346,11 @@
 
       db.ref('users/' + phone).once('value').then(snapshot => {
         if (snapshot.exists()) {
-          alert("Pendaftaran Gagal: Akun dengan nomor ini sudah tersedia di sistem.");
+          tampilkanAlert("Pendaftaran Gagal", "Akun dengan nomor ini sudah tersedia di sistem.");
           btn.disabled = false;
           btn.innerText = "Daftar Sekarang";
           refreshCaptcha();
         } else {
-          // Payload data lengkap diinisialisasi agar sinkron dengan Panel Admin & Dashboard Aplikasi Anda
           const dataPayload = {
             phone: phone,
             password: pass,
@@ -280,8 +359,6 @@
             level: "Gratis",
             upline: uplineCode || "-",
             joined: new Date().toISOString(),
-            
-            // Kolom wajib sinkronisasi nilai dashboard (Sesuai screenshot)
             saldo_utama: 0,
             saldo_penarikan: 0,
             mitra_dasar: 0,
@@ -290,13 +367,11 @@
             status: "aktif"
           };
 
-          // Menyimpan data langsung ke Firebase Realtime Database
           db.ref('users/' + phone).set(dataPayload).then(() => {
             localStorage.setItem('n15_user', phone);
             window.location.href = 'beranda.html'; 
           }).catch(error => {
-            // Error aman tanpa menampilkan link sistem eksternal
-            alert("Pendaftaran Gagal: Terjadi kendala komunikasi internal data.");
+            tampilkanAlert("Pendaftaran Gagal", "Terjadi kendala komunikasi internal data.");
             btn.disabled = false;
             btn.innerText = "Daftar Sekarang";
           });
@@ -311,7 +386,8 @@
       const btn = document.getElementById('btn-submit');
 
       if (!phone || !pass) {
-        return alert("Masuk Gagal: Mohon lengkapi seluruh kolom pengisian.");
+        tampilkanAlert("Masuk Gagal", "Mohon lengkapi seluruh kolom pengisian.");
+        return;
       }
 
       btn.disabled = true;
@@ -322,17 +398,16 @@
           localStorage.setItem('n15_user', phone);
           window.location.href = 'beranda.html'; 
         } else {
-          alert("Masuk Gagal: Nomor ponsel atau kata sandi tidak sesuai.");
+          tampilkanAlert("Masuk Gagal", "Nomor ponsel atau kata sandi tidak sesuai.");
           btn.disabled = false;
           btn.innerText = "Masuk Sekarang";
         }
       }).catch(error => {
-        // Error aman tanpa menampilkan link sistem eksternal
-        alert("Masuk Gagal: Gangguan pada koneksi data.");
+        tampilkanAlert("Masuk Gagal", "Gangguan pada koneksi data.");
         btn.disabled = false;
         btn.innerText = "Masuk Sekarang";
       });
     }
   </script>
 </body>
-             </html>
+</html>
