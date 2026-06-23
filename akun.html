@@ -9,159 +9,93 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background: #f2f5f8; padding-bottom: 110px; color: #333; }
+        body { background: #f2f5f8; padding-bottom: 90px; color: #333; }
         
-        /* Header Profile Area - Deep Blue */
-        .header-container { background: #002b80; padding: 40px 20px 80px; color: white; text-align: center; position: relative; }
+        /* Header Area - Dark Blue (Sinkron dengan Beranda) */
+        .header-container { background: #002b80; padding: 35px 20px 80px; color: white; text-align: center; }
         .profile-header-info { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-        .profile-avatar-large { width: 80px; height: 80px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #002b80; font-weight: bold; font-size: 32px; border: 3px solid rgba(255,255,255,0.3); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-        .profile-texts h2 { font-size: 20px; font-weight: bold; letter-spacing: 0.5px; margin-bottom: 4px; }
-        .profile-texts p { font-size: 13px; color: #a5c0ff; }
-        .status-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(16, 185, 129, 0.2); color: #10b981; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-top: 8px; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .logo-circle { width: 65px; height: 65px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #002b80; font-weight: bold; font-size: 28px; border: 2px solid #e2e8f0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .header-texts h2 { font-size: 18px; font-weight: bold; letter-spacing: 0.5px; }
+        .header-texts p { font-size: 12px; color: #a5c0ff; margin-top: 2px; }
 
-        /* Card Finansial / Investasi */
-        .main-card { background: #3b82f6; margin: -40px 20px 20px; border-radius: 20px; padding: 22px; color: white; box-shadow: 0 10px 20px rgba(0, 43, 128, 0.15); }
+        /* Main Blue Card (Sinkron dengan Beranda) */
+        .main-card { background: #3b82f6; margin: -50px 20px 20px; border-radius: 20px; padding: 20px; color: white; box-shadow: 0 10px 20px rgba(0, 43, 128, 0.15); }
         
-        /* Total Uang Kontrak Header Card */
-        .total-kontrak-box { text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); }
-        .kontrak-title { font-size: 12px; color: #dbeafe; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .kontrak-amount { font-size: 26px; font-weight: bold; letter-spacing: 0.5px; }
+        /* Total Uang Kontrak / Saldo Utama Box */
+        .total-kontrak-box { text-align: center; margin-bottom: 18px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .kontrak-title { font-size: 11px; color: #dbeafe; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .kontrak-amount { font-size: 24px; font-weight: bold; }
 
-        /* Paket Investasi Row */
-        .paket-row { display: flex; gap: 15px; }
-        .paket-col { flex: 1; background: rgba(255,255,255,0.12); padding: 14px 16px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255,255,255,0.05); }
-        .paket-texts p { font-size: 11px; color: #dbeafe; margin-bottom: 4px; font-weight: 500; }
-        .paket-texts h4 { font-size: 15px; font-weight: bold; }
-        .paket-icon { width: 32px; height: 32px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 13px; }
-        .paket-icon.dasar { background: rgba(245, 158, 11, 0.3); color: #fbbf24; }
-        .paket-icon.plus { background: rgba(16, 185, 129, 0.3); color: #34d399; }
+        /* Mitra Boxes Row (Sinkron dengan Beranda) */
+        .mitra-row { display: flex; gap: 15px; }
+        .mitra-box { background: rgba(255,255,255,0.15); flex: 1; padding: 12px 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .mitra-texts p { font-size: 11px; color: #dbeafe; margin-bottom: 2px; }
+        .mitra-texts h4 { font-size: 14px; font-weight: bold; }
+        .mitra-icon { width: 28px; height: 28px; background: rgba(255,255,255,0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; }
 
-        /* Menu Akun / Pilihan List */
-        .menu-section { background: white; margin: 0 20px 20px; border-radius: 18px; padding: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); border: 1px solid #eef2f6; }
-        .menu-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; text-decoration: none; color: #333; border-bottom: 1px solid #f1f5f9; transition: background 0.2s; }
+        /* Menu Pilihan List */
+        .menu-section { background: white; margin: 0 20px 20px; border-radius: 16px; padding: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .menu-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; text-decoration: none; color: #333; border-bottom: 1px solid #f1f5f9; }
         .menu-item:last-child { border-bottom: none; }
         .menu-item:active { background: #f8fafc; }
-        .menu-left { display: flex; align-items: center; gap: 14px; }
-        .menu-icon-wrapper { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
-        .menu-icon-wrapper.blue { background: #eff6ff; color: #3b82f6; }
-        .menu-icon-wrapper.green { background: #ecfdf5; color: #10b981; }
-        .menu-icon-wrapper.orange { background: #fff7ed; color: #f97316; }
-        .menu-icon-wrapper.purple { background: #faf5ff; color: #a855f7; }
-        .menu-icon-wrapper.red { background: #fef2f2; color: #ef4444; }
-        .menu-title { font-size: 13.5px; font-weight: 600; color: #1e293b; }
-        .menu-item i.fa-chevron-right { color: #94a3b8; font-size: 12px; }
+        .menu-left { display: flex; align-items: center; gap: 12px; }
+        .menu-icon-wrapper { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 15px; color: white; }
+        .menu-icon-wrapper.blue { background: #3b82f6; }
+        .menu-icon-wrapper.green { background: #10b981; }
+        .menu-icon-wrapper.orange { background: #f97316; }
+        .menu-icon-wrapper.purple { background: #a855f7; }
+        .menu-icon-wrapper.red { background: #ef4444; }
+        .menu-title { font-size: 13px; font-weight: 600; color: #334155; }
+        .menu-item i.fa-chevron-right { color: #cbd5e1; font-size: 12px; }
 
-        /* Penutup / Versi Aplikasi */
-        .app-version { text-align: center; color: #94a3b8; font-size: 11px; font-weight: 500; margin-top: 10px; }
+        .app-version { text-align: center; color: #94a3b8; font-size: 11px; margin-top: 10px; margin-bottom: 20px; }
 
-        /* BOTTOM NAVIGATION BAR (SINKRON DENGAN BERANDA) */
-        .nav { 
-            position: fixed; 
-            bottom: 0; 
-            left: 0;
-            right: 0;
-            width: 100%; 
-            background: #111827; 
-            border-top: 1px solid rgba(255,255,255,0.08);
-            display: flex; 
-            justify-content: space-around; 
-            padding: 10px 0 14px; 
-            z-index: 99999; 
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.3);
-        }
-        .nav a { 
-            color: #9ca3af; 
-            text-decoration: none; 
-            text-align: center; 
-            font-size: 11px; 
-            width: 20%; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            gap: 4px; 
-            position: relative;
-            font-weight: 500;
-        }
-        .nav i { 
-            font-size: 20px; 
-        }
-        
-        /* Navigasi Aktif untuk Menu Akun */
-        .nav a.active { 
-            color: #fbbf24; 
-            font-weight: 700; 
-        }
-        .nav a.active::after {
-            content: "";
-            width: 4px;
-            height: 4px;
-            background: #fbbf24;
-            border-radius: 50%;
-            position: absolute;
-            bottom: -8px;
-        }
-
-        /* Tombol Spesial Center (Forum) */
-        .nav a.highlight-center {
-            position: relative;
-            top: -14px;
-        }
-        .nav a.highlight-center .icon-container {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
-            margin-bottom: 2px;
-        }
-        .nav a.highlight-center i {
-            color: #111827;
-            font-size: 18px;
-        }
+        /* Bottom Nav - 100% Sinkron dengan Beranda */
+        .nav { position: fixed; bottom: 0; width: 100%; background: white; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; }
+        .nav a { color: #aaa; text-decoration: none; text-align: center; font-size: 11px; width: 20%; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .nav i { font-size: 20px; }
+        .nav a.active { color: #0057d9; font-weight: bold; }
     </style>
 </head>
 <body>
 
+<!-- Header Profile Area -->
 <div class="header-container">
     <div class="profile-header-info">
-        <div class="profile-avatar-large" id="avatarLetter">U</div>
-        <div class="profile-texts">
-            <h2 id="profileName">Memuat...</h2>
+        <div class="logo-circle" id="avatarLetter">M</div>
+        <div class="header-texts">
+            <h2 id="profileName">MEMUAT...</h2>
             <p id="profilePhone">08xxxxxx</p>
-        </div>
-        <div class="status-badge">
-            <i class="fas fa-shield-check"></i> Mitra Aktif
         </div>
     </div>
 </div>
 
+<!-- Tampilan Saldo & Paket Investasi -->
 <div class="main-card">
     <div class="total-kontrak-box">
-        <div class="kontrak-title">Total Uang Kontrak</div>
+        <div class="kontrak-title">Total Uang Kontrak <i class="fas fa-eye" style="font-size: 10px; margin-left: 3px;"></i></div>
         <div class="kontrak-amount" id="totalKontrak">Rp 0</div>
     </div>
 
-    <div class="paket-row">
-        <div class="paket-col">
-            <div class="paket-texts">
+    <div class="mitra-row">
+        <div class="mitra-box">
+            <div class="mitra-texts">
                 <p>Mitra Dasar</p>
                 <h4 id="mitraDasar">Rp 0</h4>
             </div>
-            <div class="paket-icon dasar"><i class="fas fa-wallet"></i></div>
+            <div class="mitra-icon"><i class="fas fa-equals"></i></div>
         </div>
-        <div class="paket-col">
-            <div class="paket-texts">
+        <div class="mitra-box">
+            <div class="mitra-texts">
                 <p>Mitra Plus</p>
                 <h4 id="mitraPlus">Rp 0</h4>
             </div>
-            <div class="paket-icon plus"><i class="fas fa-crown"></i></div>
+            <div class="mitra-icon"><i class="fas fa-star"></i></div>
         </div>
     </div>
 </div>
 
+<!-- Menu Pilihan Pilihan Akun -->
 <div class="menu-section">
     <a href="#" class="menu-item">
         <div class="menu-left">
@@ -204,9 +138,10 @@
 </div>
 
 <div class="app-version">
-    <p>Mitra Nusantara v2.1.0 Premium</p>
+    <p>© 2026 Mitra Nusantara. Hak Cipta Dilindungi.</p>
 </div>
 
+<!-- BOTTOM NAVIGATION BAR (SINKRON DENGAN BERANDA - MENU AKUN AKTIF) -->
 <div class="nav">
     <a href="beranda.html">
         <i class="fas fa-home"></i><span>Beranda</span>
@@ -214,11 +149,8 @@
     <a href="dashboard.html">
         <i class="fas fa-chart-line"></i><span>Investasi</span>
     </a>
-    <a href="forum.html" class="highlight-center">
-        <div class="icon-container">
-            <i class="fas fa-comments"></i>
-        </div>
-        <span>Forum</span>
+    <a href="forum.html">
+        <i class="fas fa-comments"></i><span>Forum</span>
     </a>
     <a href="riwayat.html">
         <i class="fas fa-receipt"></i><span>Riwayat</span>
@@ -229,52 +161,50 @@
 </div>
 
 <script>
-    // Konfigurasi Database Firebase Anda
+    // Inisialisasi Firebase (Menggunakan URL Database Anda)
     const firebaseConfig = { databaseURL: "https://admin-panel-5c204-default-rtdb.firebaseio.com/" };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
     
-    // Mengambil session nomor HP user yang login
+    // Ambil nomor HP user yang login
     const userPhone = localStorage.getItem('n15_user');
 
     if (userPhone) {
-        // Ambil data real-time khusus user ini
         db.ref('users/' + userPhone).on('value', (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                // 1. Sinkronisasi Data Profil Atas
+                // 1. Sinkronisasi Profil Atas
                 const namaUser = data.name || "Mitra Nusantara";
                 document.getElementById('profileName').innerText = namaUser.toUpperCase();
                 document.getElementById('profilePhone').innerText = userPhone;
                 document.getElementById('avatarLetter').innerText = namaUser.charAt(0).toUpperCase();
 
-                // 2. Sinkronisasi Tampilan Saldo & Paket Investasi
-                // Mengambil field (total_kontrak, mitra_dasar, mitra_plus) dari panel admin Anda
-                // Jika nama field di database Anda berbeda (misal: "saldo_dasar"), silakan sesuaikan variabel di bawah ini
-                const totalKontrakVal = data.total_kontrak || 0;
+                // 2. Sinkronisasi Saldo Utama dengan data.points (Sesuai Beranda)
+                if (data.points !== undefined && data.points !== null) {
+                    const formattedSaldo = "Rp " + data.points.toLocaleString('id-ID');
+                    document.getElementById('totalKontrak').innerText = formattedSaldo;
+                }
+
+                // 3. Sinkronisasi Nominal Paket Investasi dari Panel Admin
                 const mDasarVal = data.mitra_dasar || 0;
                 const mPlusVal = data.mitra_plus || 0;
-
-                // Mengubah format angka menjadi Rupiah (IDR) otomatis
-                document.getElementById('totalKontrak').innerText = "Rp " + totalKontrakVal.toLocaleString('id-ID');
                 document.getElementById('mitraDasar').innerText = "Rp " + mDasarVal.toLocaleString('id-ID');
                 document.getElementById('mitraPlus').innerText = "Rp " + mPlusVal.toLocaleString('id-ID');
             }
         });
     } else {
-        // Jika tidak ada session / belum login, kembalikan ke halaman login
         window.location.href = 'login.html';
     }
 
-    // Fungsi Keluar Akun (Logout)
+    // Fungsi Logout
     function prosesLogout(e) {
         e.preventDefault();
         if(confirm("Apakah Anda yakin ingin keluar dari aplikasi?")) {
-            localStorage.removeItem('n15_user'); // Hapus session login
-            window.location.href = 'login.html'; // Alihkan kembali ke halaman login
+            localStorage.removeItem('n15_user');
+            window.location.href = 'login.html';
         }
     }
 </script>
 
 </body>
-  </html>
+            </html>
