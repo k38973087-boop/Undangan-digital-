@@ -95,6 +95,8 @@
         .modal-footer-btns { display: flex; justify-content: flex-end; gap: 10px; margin-top: 25px; border-top: 1px solid #e2e8f0; padding-top: 15px; }
         .btn-close-modal { background: #64748b; color: white; padding: 10px 20px; border-radius: 6px; border: none; cursor: pointer; font-weight: bold; }
         .btn-save-modal { background: #0057d9; color: white; padding: 10px 20px; border-radius: 6px; border: none; cursor: pointer; font-weight: bold; }
+        .btn-danger-modal { background: #dc2626; color: white; width: 100%; padding: 12px; border-radius: 6px; border: none; cursor: pointer; font-weight: bold; font-size: 13px; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-danger-modal:hover { background: #991b1b; }
     </style>
 </head>
 <body>
@@ -103,9 +105,8 @@
         <div class="login-box">
             <i class="fas fa-user-shield"></i>
             <h2>Akses Kontrol Sistem</h2>
-            <p style="font-size: 11px; color: #64748b;">Gunakan kredensial pengelola resmi Mitra Nusantara.</p>
-            <input type="text" id="adminUser" class="login-input" placeholder="ID Admin" onkeypress="handleEnter(event)">
-            <input type="password" id="adminPassword" class="login-input" placeholder="Kata Sandi" onkeypress="handleEnter(event)">
+            <p style="font-size: 11px; color: #64748b;">Masukkan kunci sandi administrator resmi.</p>
+            <input type="password" id="adminPassword" class="login-input" placeholder="Masukkan Kata Sandi" onkeypress="handleEnter(event)">
             <button class="btn-login" onclick="verifyLogin()">Masuk Panel</button>
         </div>
     </div>
@@ -137,7 +138,7 @@
             <div class="top-bar">
                 <h1>Sistem Manajemen Pusat</h1>
                 <div style="font-size: 13px; font-weight: bold; color: #10b981;">
-                    <i class="fas fa-circle"></i> Terhubung Aman (AES-256)
+                    <i class="fas fa-circle"></i> Terhubung Aman (Realtime Live)
                 </div>
             </div>
 
@@ -165,7 +166,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Nomor HP</th>
+                            <th>Nomor HP / ID</th>
                             <th>Password / Email</th>
                             <th>Saldo Utama (Points)</th>
                             <th>Saldo Penarikan</th>
@@ -208,7 +209,7 @@
             <div class="modal-group" style="background: #f8fafc; padding: 10px; border-radius: 8px; border: 1px dashed #cbd5e1;">
                 <label style="color:#002b80;"><i class="fas fa-user-cog"></i> Pengaturan Akun Utama</label>
                 <div style="margin-bottom: 8px;">
-                    <label>Nomor Akun (HP)</label>
+                    <label>Nomor Akun (HP / ID)</label>
                     <input type="text" id="editPhone" class="modal-input">
                 </div>
                 <div>
@@ -254,6 +255,10 @@
                 </select>
             </div>
 
+            <button class="btn-danger-modal" onclick="deleteUserPermanently()">
+                <i class="fas fa-trash-alt"></i> Hapus Pengguna Secara Permanen
+            </button>
+
             <div class="modal-footer-btns">
                 <button class="btn-close-modal" onclick="closeEditModal()">Batal</button>
                 <button class="btn-save-modal" onclick="saveUserChanges()"><i class="fas fa-save"></i> Simpan Perubahan</button>
@@ -267,25 +272,22 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        // Menyimpan data user secara global agar tidak crash karena tanda petik pada HTML template
         window.usersCache = {};
 
-        // VALIDASI AKSES PANEL UTAMA (KUNCI SECURE)
+        // VALIDASI AKSES PANEL UTAMA (HANYA KATA SANDI)
         function verifyLogin() {
-            const user = document.getElementById('adminUser').value.trim();
             const pass = document.getElementById('adminPassword').value.trim();
             
-            if (user === "bayu12" && pass === "bayuu39@") {
+            if (pass === "bayuu39@") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('admin-content').style.display = 'flex';
                 sessionStorage.setItem('session_admin_auth', 'secure_verified');
                 loadData();
             } else {
-                alert("Akses Ditolak: Kombinasi User ID atau Sandi salah!");
+                alert("Akses Ditolak: Kata Sandi salah!");
             }
         }
 
-        // Fungsi pendukung Enter Key
         function handleEnter(e) {
             if (e.key === 'Enter') {
                 verifyLogin();
@@ -312,11 +314,12 @@
             document.getElementById('tab-' + tabId).classList.add('active');
         }
 
-        // AMBIL & SINKRONKAN SELURUH DATA DARI AKUN PENGGUNA
+        // LIVE STREAMING & REALTIME SINKRONISASI DATA DARI AKUN PENGGUNA (BERANDA, INVESTASI, DLL)
         function loadData() {
+            // Menggunakan .on('value') memastikan data tersinkron otomatis saat user beraktivitas
             db.ref('users').on('value', (snapshot) => {
                 const users = snapshot.val();
-                window.usersCache = users || {}; // Simpan ke objek global
+                window.usersCache = users || {}; 
                 const tbody = document.getElementById('userTableBody');
                 tbody.innerHTML = '';
                 let totalUsers = 0, totalSaldo = 0;
@@ -357,7 +360,7 @@
                 document.getElementById('totalSaldo').innerText = "Rp " + totalSaldo.toLocaleString('id-ID');
             });
 
-            // Sinkronisasi Transaksi Deposit & WD
+            // Sinkronisasi Transaksi Deposit & WD Realtime
             db.ref('transactions').on('value', (snapshot) => {
                 const transactions = snapshot.val();
                 const tbody = document.getElementById('transTableBody');
@@ -389,7 +392,7 @@
             });
         }
 
-        // MANAJEMEN POPUP MODAL CONTROL
+        // OPEN & CLOSE MODAL POPUP CONTROL
         function openEditModal(phone) {
             const u = window.usersCache[phone];
             if (!u) return;
@@ -412,7 +415,7 @@
             document.getElementById('editUserModal').classList.remove('show');
         }
 
-        // FUNGSI UTAMA: TAMBAH & KURANGI SALDO AKUN SECARA INSTAN
+        // PROSES MUTASI SALDO INSTAN
         function prosesMutasi(tipe) {
             const nominal = parseInt(document.getElementById('mutasiAmount').value);
             let current = parseInt(document.getElementById('currentPoints').value);
@@ -433,10 +436,10 @@
             }
 
             document.getElementById('currentPoints').value = current;
-            alert(`Simulasi saldo berhasil diproses. Klik 'Simpan Perubahan' di bawah untuk menerapkan.`);
+            alert(`Simulasi saldo berhasil diproses. Klik 'Simpan Perubahan' di bawah untuk menerapkan ke database.`);
         }
 
-        // FUNGSI UTAMA: SIMPAN PERUBAHAN DATA KE DATABASE (TERMASUK GANTI NOMOR AKUN & PASSWORD)
+        // SIMPAN PERUBAHAN DATA KE DATABASE
         function saveUserChanges() {
             const oldPhone = document.getElementById('targetOldPhone').value;
             const newPhone = document.getElementById('editPhone').value.trim();
@@ -456,7 +459,6 @@
             db.ref('users/' + oldPhone).once('value').then(snapshot => {
                 let currentPayload = snapshot.val() || {};
                 
-                // Perbarui data payload
                 currentPayload.phone = newPhone;
                 currentPayload.password = newPassword;
                 currentPayload.points = pointsValue;
@@ -468,7 +470,6 @@
                 currentPayload.status = statusValue;
 
                 if (oldPhone !== newPhone) {
-                    // Jika nomor diganti, buat node baru lalu hapus yang lama
                     db.ref('users/' + newPhone).set(currentPayload).then(() => {
                         db.ref('users/' + oldPhone).remove().then(() => {
                             alert("Sukses! Data & Nomor Akun Pengguna Berhasil Diperbarui.");
@@ -476,13 +477,29 @@
                         });
                     });
                 } else {
-                    // Jika nomor sama, langsung perbarui node tersebut
                     db.ref('users/' + oldPhone).set(currentPayload).then(() => {
                         alert("Sukses! Seluruh Perubahan Data Berhasil Disimpan.");
                         closeEditModal();
                     });
                 }
             });
+        }
+
+        // FUNGSI UTAMA BARU: HAPUS PENGGUNA SECARA PERMANEN DARI FIREBASE
+        function deleteUserPermanently() {
+            const targetPhone = document.getElementById('targetOldPhone').value;
+            if (!targetPhone) return;
+
+            const konfirmasi = confirm(`PERINGATAN KELOLA SISTEM:\nApakah Anda yakin ingin MENGHAPUS akun pengguna ${targetPhone} ini secara permanen dari database?\nSemua saldo dan riwayatnya akan hilang.`);
+            
+            if (konfirmasi) {
+                db.ref('users/' + targetPhone).remove().then(() => {
+                    alert(`Sukses! Akun Pengguna ${targetPhone} telah dihapus dari database.`);
+                    closeEditModal();
+                }).catch((error) => {
+                    alert("Gagal menghapus pengguna: " + error.message);
+                });
+            }
         }
 
         // Eksekusi Transaksi Manual (Deposit / WD)
