@@ -108,7 +108,7 @@
                 <span class="text-[11px] text-slate-300 block mt-1">Silakan lakukan aktivasi kontrak di bawah</span>
             </div>
             <div>
-                <a href="daftar.html" target="_blank" class="w-full inline-flex justify-center items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold p-4 rounded-2xl shadow-lg shadow-emerald-600/20 transition-all duration-200 active:scale-[0.98]">
+                <a href="daftar.html" target="_blank" class="w-full inline-flex justify-center items-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold p-4 rounded-2xl shadow-lg shadow-emerald-600/30 transition-all duration-300 transform hover:-translate-y-0.5 active:scale-[0.98] uppercase text-sm tracking-wider">
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.973 0c3.184.001 6.177 1.242 8.426 3.496 2.248 2.25 3.481 5.245 3.48 8.434-.004 6.623-5.34 11.97-11.914 11.97-1.996-.001-3.96-.502-5.707-1.458L0 24zm6.104-3.52c1.642.975 3.254 1.487 4.815 1.488 5.405 0 9.803-4.383 9.806-9.772.001-2.61-1.011-5.064-2.85-6.906C16.042 3.45 13.593 2.436 11.98 2.436c-5.408 0-9.809 4.384-9.813 9.776-.001 1.664.448 3.292 1.302 4.74l-.999 3.65 3.692-.968z"></path>
                     </svg>
@@ -118,128 +118,112 @@
         </div>
     </section>
 
-    <!-- BAGIAN YANG DIUBAH MENJADI LEBIH PROFESIONAL -->
-    <section class="max-w-6xl mx-auto px-4 pb-16">  
-        <div class="text-center max-w-2xl mx-auto mb-10">  
-            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">Kategori Program Kemitraan Resmi</h2>  
-            <p class="text-slate-500 mt-2 text-sm">Pilih tingkat penempatan modal berdasarkan standarisasi kontrak jaminan legalitas dan regulasi keanggotaan institusi Anda.</p>  
+    <section class="max-w-6xl mx-auto px-4 pb-20">  
+        <div class="text-center max-w-2xl mx-auto mb-14">  
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-950 tracking-tight">Kategori Program Kemitraan Resmi</h2>  
+            <p class="text-slate-500 mt-3 text-sm leading-relaxed">Pilih tingkat penempatan modal berdasarkan standarisasi kontrak jaminan legalitas dan regulasi keanggotaan institusi Anda.</p>  
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">  
-            <!-- Paket Dasar / Starter -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between hover:shadow-md transition-all duration-300">  
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">  
+            <div class="bg-white rounded-3xl p-6 shadow-xs border border-slate-200/60 flex flex-col justify-between hover:shadow-xl hover:border-blue-200 transition-all duration-300 group">  
                 <div>
-                    <span class="inline-block bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-semibold mb-4">Mitra Dasar</span>  
-                    <h3 class="text-lg font-bold text-slate-900 mb-1">Alokasi Modal Starter</h3>  
-                    <p class="text-xs text-slate-400 mb-4 italic">Simulasi instrumen penempatan awal keanggotaan</p>
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="inline-block bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-semibold">Mitra Dasar</span>  
+                        <div class="text-slate-300 group-hover:text-blue-500 transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-1">Alokasi Modal Starter</h3>  
+                    <p class="text-xs text-slate-400 mb-6 italic">Simulasi instrumen penempatan awal keanggotaan</p>
                     
-                    <div class="space-y-3 border-t border-slate-100 pt-4 mb-6 text-sm text-slate-600">
-                        <div class="flex justify-between">
-                            <span>Nilai Kontrak Terproteksi:</span>
-                            <span class="font-semibold text-slate-900">Rp 5.000.000 <span class="text-[10px] font-normal text-slate-400 italic">(Simulasi)</span></span>
+                    <div class="space-y-3.5 border-t border-slate-100 pt-5 mb-8 text-sm text-slate-600">
+                        <div class="flex flex-col gap-0.5">
+                            <span class="text-xs text-slate-400 font-medium">Nilai Kontrak Terproteksi:</span>
+                            <span class="font-bold text-slate-950 text-base">Rp 5.000.000 <span class="text-[11px] font-normal text-slate-400 italic">(Simulasi)</span></span>
                         </div>
-                        <div class="flex justify-between">
-                            <span>Fasilitas Dana Jaminan:</span>
-                            <span class="font-semibold text-emerald-600">Tersertifikasi</span>
+                        <div class="flex justify-between items-center bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                            <span class="text-xs font-medium">Fasilitas Dana Jaminan:</span>
+                            <span class="font-bold text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md">Tersertifikasi</span>
                         </div>
-                        <div class="flex justify-between">
-                            <span>Biaya Aktivasi Akun:</span>
-                            <span class="font-semibold text-slate-900">Dana Administrasi Sekali Bayar</span>
+                        <div class="flex flex-col gap-0.5">
+                            <span class="text-xs text-slate-400 font-medium">Biaya Aktivasi Akun:</span>
+                            <span class="font-medium text-slate-900 text-xs">Dana Administrasi Sekali Bayar</span>
                         </div>
-                        <div class="flex justify-between text-xs text-slate-400 pt-2 border-t border-dashed border-slate-200">
+                        <div class="flex justify-between text-xs text-slate-400 pt-3 border-t border-dashed border-slate-200">
                             <span>Jaminan Kemitraan:</span>
-                            <span>Kontrak Hukum Fisik & Digital</span>
+                            <span class="font-medium text-slate-700">Kontrak Hukum Fisik & Digital</span>
                         </div>
                     </div>
                 </div>
-                <a href="daftar.html" target="_blank" class="w-full inline-flex justify-center items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-all text-sm">  
+                <a href="daftar.html" target="_blank" class="w-full inline-flex justify-center items-center bg-slate-900 hover:bg-blue-600 text-white font-semibold py-3 rounded-xl transition-all duration-300 text-sm tracking-wide shadow-sm">  
                     Gabung Sekarang  
                 </a>  
             </div>  
 
-            <!-- Paket Plus / Eksekutif -->
-            <div class="bg-white rounded-3xl p-6 shadow-md border-2 border-blue-500 flex flex-col justify-between relative transform md:-translate-y-2">  
-                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-500 text-white text-[10px] uppercase font-bold tracking-widest px-4 py-1 rounded-full shadow-sm">Pilihan Terpopuler</div>
+            <div class="bg-white rounded-3xl p-6 shadow-lg border-2 border-blue-600 flex flex-col justify-between relative transform md:-translate-y-3 shadow-blue-900/5 hover:shadow-2xl hover:shadow-blue-900/10 transition-all duration-300">  
+                <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] uppercase font-extrabold tracking-widest px-4 py-1.5 rounded-full shadow-md border border-blue-400/30">Pilihan Terpopuler</div>
                 <div>
-                    <span class="inline-block bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-semibold mb-4 mt-1">Mitra Plus</span>  
-                    <h3 class="text-lg font-bold text-slate-900 mb-1">Alokasi Modal Eksekutif</h3>  
-                    <p class="text-xs text-slate-400 mb-4 italic">Penempatan instrumen portofolio tingkat menengah</p>
+                    <div class="flex justify-between items-start mb-4 mt-2">
+                        <span class="inline-block bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-bold">Mitra Plus</span>  
+                        <div class="text-blue-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-1">Alokasi Modal Eksekutif</h3>  
+                    <p class="text-xs text-slate-400 mb-6 italic">Penempatan instrumen portofolio tingkat menengah</p>
                     
-                    <div class="space-y-3 border-t border-slate-100 pt-4 mb-6 text-sm text-slate-600">
-                        <div class="flex justify-between">
-                            <span>Nilai Kontrak Terproteksi:</span>
-                            <span class="font-semibold text-slate-900">Rp 15.000.000 <span class="text-[10px] font-normal text-slate-400 italic">(Simulasi)</span></span>
+                    <div class="space-y-3.5 border-t border-slate-100 pt-5 mb-8 text-sm text-slate-600">
+                        <div class="flex flex-col gap-0.5">
+                            <span class="text-xs text-slate-400 font-medium">Nilai Kontrak Terproteksi:</span>
+                            <span class="font-extrabold text-blue-600 text-lg">Rp 15.000.000 <span class="text-[11px] font-normal text-slate-400 italic">(Simulasi)</span></span>
                         </div>
-                        <div class="flex justify-between">
-                            <span>Fasilitas Dana Jaminan:</span>
-                            <span class="font-semibold text-emerald-600">Tersertifikasi</span>
+                        <div class="flex justify-between items-center bg-blue-50/50 p-2.5 rounded-xl border border-blue-100/50">
+                            <span class="text-xs font-medium text-blue-9s00">Fasilitas Dana Jaminan:</span>
+                            <span class="font-bold text-xs bg-emerald-600 text-white px-2 py-0.5 rounded-md shadow-xs">Tersertifikasi</span>
                         </div>
-                        <div class="flex justify-between">
-                            <span>Biaya Aktivasi Akun:</span>
-                            <span class="font-semibold text-slate-900">Dana Administrasi Sekali Bayar</span>
+                        <div class="flex flex-col gap-0.5">
+                            <span class="text-xs text-slate-400 font-medium">Biaya Aktivasi Akun:</span>
+                            <span class="font-medium text-slate-900 text-xs">Dana Administrasi Sekali Bayar</span>
                         </div>
-                        <div class="flex justify-between text-xs text-slate-400 pt-2 border-t border-dashed border-slate-200">
+                        <div class="flex justify-between text-xs text-slate-400 pt-3 border-t border-dashed border-slate-200">
                             <span>Jaminan Kemitraan:</span>
-                            <span>Kontrak Hukum Fisik & Digital</span>
+                            <span class="font-semibold text-slate-800">Kontrak Hukum Fisik & Digital</span>
                         </div>
                     </div>
                 </div>
-                <a href="https://wa.me/6283862596697?text=Halo%20Mitra%20Nusantara,%20saya%20tertarik%20dengan%20Paket%20Kemitraan%20Plus" target="_blank" class="w-full inline-flex justify-center items-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-600/20 transition-all text-sm">  
+                <a href="https://wa.me/6283862596697?text=Halo%20Mitra%20Nusantara,%20saya%20tertarik%20dengan%20Paket%20Kemitraan%20Plus" target="_blank" class="w-full inline-flex justify-center items-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-xl shadow-blue-600/20 transition-all duration-300 text-sm tracking-wide">  
                     Gabung Sekarang  
                 </a>  
             </div>  
 
-            <!-- Paket Premium / Korporat -->
-            <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between hover:shadow-md transition-all duration-300">  
+            <div class="bg-white rounded-3xl p-6 shadow-xs border border-slate-200/60 flex flex-col justify-between hover:shadow-xl hover:border-purple-200 transition-all duration-300 group">  
                 <div>
-                    <span class="inline-block bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-xs font-semibold mb-4">Mitra Premium</span>  
-                    <h3 class="text-lg font-bold text-slate-900 mb-1">Alokasi Modal Korporat</h3>  
-                    <p class="text-xs text-slate-400 mb-4 italic">Maksimalisasi alokasi program berskala eksklusif</p>
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="inline-block bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-xs font-semibold">Mitra Premium</span>  
+                        <div class="text-slate-300 group-hover:text-purple-600 transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-1">Alokasi Modal Korporat</h3>  
+                    <p class="text-xs text-slate-400 mb-6 italic">Maksimalisasi alokasi program berskala eksklusif</p>
                     
-                    <div class="space-y-3 border-t border-slate-100 pt-4 mb-6 text-sm text-slate-600">
-                        <div class="flex justify-between">
-                            <span>Nilai Kontrak Terproteksi:</span>
-                            <span class="font-semibold text-slate-900">Rp 50.000.000 <span class="text-[10px] font-normal text-slate-400 italic">(Simulasi)</span></span>
+                    <div class="space-y-3.5 border-t border-slate-100 pt-5 mb-8 text-sm text-slate-600">
+                        <div class="flex flex-col gap-0.5">
+                            <span class="text-xs text-slate-400 font-medium">Nilai Kontrak Terproteksi:</span>
+                            <span class="font-bold text-slate-900 text-base">Rp 50.000.000 <span class="text-[11px] font-normal text-slate-400 italic">(Simulasi)</span></span>
                         </div>
-                        <div class="flex justify-between">
-                            <span>Fasilitas Dana Jaminan:</span>
-                            <span class="font-semibold text-emerald-600">Tersertifikasi</span>
+                        <div class="flex justify-between items-center bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                            <span class="text-xs font-medium">Fasilitas Dana Jaminan:</span>
+                            <span class="font-bold text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md">Tersertifikasi</span>
                         </div>
-                        <div class="flex justify-between">
-                            <span>Biaya Aktivasi Akun:</span>
-                            <span class="font-semibold text-slate-900">Dana Administrasi Sekali Bayar</span>
+                        <div class="flex flex-col gap-0.5">
+                            <span class="text-xs text-slate-400 font-medium">Biaya Aktivasi Akun:</span>
+                            <span class="font-medium text-slate-900 text-xs">Dana Administrasi Sekali Bayar</span>
                         </div>
-                        <div class="flex justify-between text-xs text-slate-400 pt-2 border-t border-dashed border-slate-200">
+                        <div class="flex justify-between text-xs text-slate-400 pt-3 border-t border-dashed border-slate-200">
                             <span>Jaminan Kemitraan:</span>
-                            <span>Kontrak Hukum Fisik & Digital</span>
+                            <span class="font-medium text-slate-700">Kontrak Hukum Fisik & Digital</span>
                         </div>
                     </div>
                 </div>
-                <a href="https://wa.me/6283862596697?text=Halo%20Mitra%20Nusantara,%20saya%20tertarik%20dengan%20Paket%20Kemitraan%20Premium" target="_blank" class="w-full inline-flex justify-center items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition-all text-sm">  
-                    Gabung Sekarang  
-                </a>  
-            </div>  
-        </div>
-    </section>  
-
-    <!-- KETENTUAN PENTING YANG DIUBAH MENJADI LEBIH AMAN & LEGAL -->
-    <section class="bg-white py-16 border-y border-slate-100">  
-        <div class="max-w-4xl mx-auto px-4">  
-            <div class="bg-slate-50 rounded-2xl p-6 md:p-8 border border-slate-200">
-                <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
-                    <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                    </svg>
-                    Regulasi & Ketentuan Hukum Transparansi Kemitraan
-                </h3>
-                <ul class="space-y-3 text-sm text-slate-600 list-inside list-disc leading-relaxed">
-                    <li><strong class="text-slate-900">Alokasi Nilai Kontrak & Jaminan Finansial:</strong> Seluruh nominal penempatan dana jaminan keanggotaan dikelola secara transparan dan berfungsi penuh sebagai penjamin keabsahan status hukum kemitraan resmi.</li>
-                    <li><strong class="text-slate-900">Biaya Manajemen & Validasi Digital:</strong> Dana aktivasi akun dialokasikan sebagai biaya pemeliharaan sistem infrastruktur fintech serta verifikasi validasi sistem administrasi digital awal.</li>
-                    <li><strong class="text-slate-900">Kepatuhan Regulasi Finansial (Keterbukaan Risiko):</strong> Platform mematuhi kebijakan transparansi ketat dan secara tegas tidak memberikan skema jaminan keuntungan tetap (fixed return) dengan persentase angka tertentu yang tidak pasti. Hasil portofolio didasarkan sepenuhnya pada akurasi kinerja portofolio riil ekosistem program.</li>
-                    <li><strong class="text-slate-900">Legalitas Kontrak Kemitraan:</strong> Hak, kewajiban, serta bentuk mitigasi risiko seluruh pihak diatur secara legal dan dilindungi berkekuatan hukum tertulis melalui dokumen kontrak resmi demi kenyamanan jangka panjang.</li>
-                </ul>
-            </div>
-        </div>  
-    </section>  
-
-    <!-- AKHIR FORM PENUTUP (MENYELESAI
+                <a href="https://wa.me/6283862596697?text=Halo%20Mitra%20Nusantara,%20saya%20tertarik%20dengan%20Paket%20Kemitraan%20Premium" target="_blank" class="w-full inline-flex justify-center items-center bg-slate-900 hover:bg-purple-700 text-white fon
