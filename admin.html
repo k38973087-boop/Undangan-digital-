@@ -104,8 +104,8 @@
             <i class="fas fa-user-shield"></i>
             <h2>Akses Kontrol Sistem</h2>
             <p style="font-size: 11px; color: #64748b;">Gunakan kredensial pengelola resmi Mitra Nusantara.</p>
-            <input type="text" id="adminUser" class="login-input" placeholder="ID Admin">
-            <input type="password" id="adminPassword" class="login-input" placeholder="Kata Sandi">
+            <input type="text" id="adminUser" class="login-input" placeholder="ID Admin" onkeypress="handleEnter(event)">
+            <input type="password" id="adminPassword" class="login-input" placeholder="Kata Sandi" onkeypress="handleEnter(event)">
             <button class="btn-login" onclick="verifyLogin()">Masuk Panel</button>
         </div>
     </div>
@@ -267,6 +267,9 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
+        // Menyimpan data user secara global agar tidak crash karena tanda petik pada HTML template
+        window.usersCache = {};
+
         // VALIDASI AKSES PANEL UTAMA (KUNCI SECURE)
         function verifyLogin() {
             const user = document.getElementById('adminUser').value.trim();
@@ -279,6 +282,13 @@
                 loadData();
             } else {
                 alert("Akses Ditolak: Kombinasi User ID atau Sandi salah!");
+            }
+        }
+
+        // Fungsi pendukung Enter Key
+        function handleEnter(e) {
+            if (e.key === 'Enter') {
+                verifyLogin();
             }
         }
 
@@ -306,6 +316,7 @@
         function loadData() {
             db.ref('users').on('value', (snapshot) => {
                 const users = snapshot.val();
+                window.usersCache = users || {}; // Simpan ke objek global
                 const tbody = document.getElementById('userTableBody');
                 tbody.innerHTML = '';
                 let totalUsers = 0, totalSaldo = 0;
@@ -334,7 +345,7 @@
                                 <td style="color:#f97316;">Rp ${parseInt(profit).toLocaleString('id-ID')}</td>
                                 <td><span style="color:${statusAcc === 'aktif' ? '#10b981' : '#ef4444'}; font-weight:bold;">${statusAcc.toUpperCase()}</span></td>
                                 <td>
-                                    <button class="btn btn-edit" onclick="openEditModal('${phone}', '${u.password}', ${saldoUtama}, ${penarikan}, ${mDasar}, ${mPlus}, ${profit}, '${statusAcc}')">
+                                    <button class="btn btn-edit" onclick="openEditModal('${phone}')">
                                         <i class="fas fa-edit"></i> Kelola
                                     </button>
                                 </td>
@@ -357,9 +368,4 @@
                     const transArray = Object.keys(transactions).map(key => ({ id: key, ...transactions[key] })).reverse();
                     transArray.forEach(trans => {
                         if(trans.status === 'pending') pendingCount++;
-                        let statusBadge = trans.status === 'pending' ? '⏳ Pending' : (trans.status === 'approved' ? '✅ Selesai' : '❌ Ditolak');
-                        tbody.innerHTML += `
-                            <tr>
-                                <td>${trans.userPhone}</td>
-                                <td><b>${trans.type.toUpperCase()}</b></td>
-                                <td>Rp ${parseInt(trans.amount).toLoca
+                        let statusBadge = trans.status === 'pending' ? '⏳ Pending' : 
