@@ -55,11 +55,78 @@
         .nav a { color: #aaa; text-decoration: none; text-align: center; font-size: 11px; width: 20%; display: flex; flex-direction: column; align-items: center; gap: 4px; }
         .nav i { font-size: 20px; }
         .nav a.active { color: #0057d9; font-weight: bold; }
+
+        /* STYLE UNTUK CUSTOM MODAL BOX (ANTI-LINK ATAS) */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-box {
+            background: white;
+            width: 85%;
+            max-width: 320px;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: scale(0.9);
+            transition: transform 0.2s ease;
+        }
+        .modal-overlay.show .modal-box {
+            transform: scale(1);
+        }
+        .modal-box h3 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+        .modal-box p {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        .modal-btn {
+            flex: 1;
+            padding: 11px;
+            border-radius: 10px;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-cancel {
+            background: #f1f5f9;
+            color: #475569;
+        }
+        .btn-cancel:active { background: #e2e8f0; }
+        .btn-confirm {
+            background: #ef4444;
+            color: white;
+        }
+        .btn-confirm:active { background: #dc2626; }
     </style>
 </head>
 <body>
 
-<!-- Header Profile Area -->
 <div class="header-container">
     <div class="profile-header-info">
         <div class="logo-circle" id="avatarLetter">M</div>
@@ -70,7 +137,6 @@
     </div>
 </div>
 
-<!-- Tampilan Saldo & Paket Investasi -->
 <div class="main-card">
     <div class="total-kontrak-box">
         <div class="kontrak-title">Total Uang Kontrak <i class="fas fa-eye" style="font-size: 10px; margin-left: 3px;"></i></div>
@@ -95,7 +161,6 @@
     </div>
 </div>
 
-<!-- Menu Pilihan Pilihan Akun -->
 <div class="menu-section">
     <a href="#" class="menu-item">
         <div class="menu-left">
@@ -121,7 +186,7 @@
 </div>
 
 <div class="menu-section">
-    <a href="#" class="menu-item">
+    <a href="https://wa.me/6283862596697" target="_blank" class="menu-item">
         <div class="menu-left">
             <div class="menu-icon-wrapper purple"><i class="fas fa-headset"></i></div>
             <div class="menu-title">Pusat Bantuan / CS</div>
@@ -141,7 +206,17 @@
     <p>© 2026 Mitra Nusantara. Hak Cipta Dilindungi.</p>
 </div>
 
-<!-- BOTTOM NAVIGATION BAR (SINKRON DENGAN BERANDA - MENU AKUN AKTIF) -->
+<div class="modal-overlay" id="logoutModal">
+    <div class="modal-box">
+        <h3>Konfirmasi Keluar</h3>
+        <p>Apakah Anda yakin ingin keluar dari aplikasi?</p>
+        <div class="modal-buttons">
+            <button class="modal-btn btn-cancel" onclick="tutupModalLogout()">Batal</button>
+            <button class="modal-btn btn-confirm" onclick="eksekusiLogout()">Oke</button>
+        </div>
+    </div>
+</div>
+
 <div class="nav">
     <a href="beranda.html">
         <i class="fas fa-home"></i><span>Beranda</span>
@@ -196,15 +271,21 @@
         window.location.href = 'login.html';
     }
 
-    // Fungsi Logout
+    // EDIT: Logika pemanggilan custom pop-up logout buatan sendiri
     function prosesLogout(e) {
         e.preventDefault();
-        if(confirm("Apakah Anda yakin ingin keluar dari aplikasi?")) {
-            localStorage.removeItem('n15_user');
-            window.location.href = 'login.html';
-        }
+        document.getElementById('logoutModal').classList.add('show');
+    }
+
+    function tutupModalLogout() {
+        document.getElementById('logoutModal').classList.remove('show');
+    }
+
+    function eksekusiLogout() {
+        localStorage.removeItem('n15_user');
+        window.location.href = 'login.html';
     }
 </script>
 
 </body>
-            </html>
+</html>
