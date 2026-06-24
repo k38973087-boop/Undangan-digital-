@@ -3,255 +3,502 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promo Mitra Nusantara</title>
+    <title>Forum Kemitraan Resmi - Mitra Nusantara</title>
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        
-        body { 
-            background: #f2f5f8; 
-            padding: 20px; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
+        :root {
+            --primary-color: #002b80;
+            --secondary-color: #3b82f6;
+            --accent-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
         }
 
-        /* Container Card Utama Promo */
-        .promo-container { 
-            background: #0057d9; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- HEADER & HERO --- */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom-left-radius: 24px;
+            border-bottom-right-radius: 24px;
+            box-shadow: 0 4px 20px rgba(0, 43, 128, 0.15);
+        }
+
+        .header-container i {
+            font-size: 45px;
+            margin-bottom: 15px;
+            color: #38bdf8;
+        }
+
+        header h1 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 14px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
             width: 100%;
-            max-width: 420px; 
-            padding: 25px 15px; 
-            border-radius: 24px; 
-            color: white; 
-            text-align: center; 
-            box-shadow: 0 8px 25px rgba(0, 87, 217, 0.3); 
-        }
-        
-        /* Headline Teks Atas */
-        .promo-headline { 
-            font-size: 15px; 
-            font-weight: 700; 
-            line-height: 1.5; 
-            margin-bottom: 20px; 
-            padding: 0 5px; 
-        }
-        .promo-headline span { 
-            color: #facc15; 
-        }
-        
-        /* Struktur Tabel Flexbox */
-        .promo-table { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 10px; 
-        }
-        
-        /* Header Tabel (Kuning) */
-        .table-header-row { 
-            display: flex; 
-            gap: 6px; 
-        }
-        .th-cell { 
-            background: #facc15; 
-            color: #002b80; 
-            font-size: 11px; 
-            font-weight: 800; 
-            padding: 10px 4px; 
-            border-radius: 10px; 
-            flex: 1; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-        }
-        
-        /* Baris Konten Isi Tabel */
-        .table-body-section { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 6px; 
-            margin-bottom: 6px; 
-        }
-        .table-main-row { 
-            display: flex; 
-            gap: 6px; 
-        }
-        
-        /* Kolom Samping Kiri (Pemenang & Periode) */
-        .td-side-block { 
-            background: #0046b0; 
-            border-radius: 14px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            font-size: 11px; 
-            font-weight: 700; 
-            padding: 10px; 
-            text-align: center; 
-            line-height: 1.4; 
-        }
-        .td-side-block.pemenang-col { 
-            width: 26%; 
-        }
-        .td-side-block.periode-col { 
-            width: 22%; 
-            font-weight: 600; 
-            color: #e2e8f0; 
-        }
-        
-        /* Kolom Kanan Berisi Baris Berlipat */
-        .td-right-group { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 6px; 
-        }
-        .td-sub-item { 
-            display: flex; 
-            gap: 6px; 
-            width: 100%; 
-        }
-        .cell-rank { 
-            background: #0046b0; 
-            padding: 12px 8px; 
-            border-radius: 12px; 
-            flex: 1.1; 
-            font-size: 11px; 
-            font-weight: 600; 
-            text-align: center; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-        }
-        .cell-prize { 
-            background: #0046b0; 
-            padding: 12px 8px; 
-            border-radius: 12px; 
-            flex: 0.9; 
-            font-size: 11px; 
-            font-weight: 700; 
-            text-align: center; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-        }
-        
-        /* Bagian Syarat & Ketentuan Bawah */
-        .promo-snk { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 8px; 
-            margin-top: 18px; 
-            font-size: 13px; 
-            font-weight: 700; 
-            color: white; 
-            cursor: pointer; 
-            user-select: none;
-        }
-        .promo-snk i { 
-            font-size: 11px; 
-            color: #facc15; 
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        /* DESAIN TOMBOL GABUNG WHATSAPP */
-        .btn-whatsapp {
+        /* --- SECTION REGULASI & EDUKASI --- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            margin-top: -20px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border-top: 4px solid var(--secondary-color);
+        }
+
+        .info-card.secure { border-top-color: var(--accent-color); }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .card-title i {
+            font-size: 22px;
+        }
+
+        .info-card p {
+            font-size: 13.5px;
+            color: #475569;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        .highlight-box {
+            background-color: #f0f7ff;
+            border-left: 4px solid var(--secondary-color);
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #0369a1;
+            margin-top: 10px;
+        }
+
+        /* --- KATALOG PRODUK MITRA --- */
+        .section-title {
+            font-size: 22px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .badge-lifetime {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: #dcfce7;
+            color: #15803d;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .product-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background-color: #eff6ff;
+            color: var(--secondary-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            background: #25D366;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .product-card h3 {
+            font-size: 16px;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .contract-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .product-features li {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .product-features li i {
+            color: var(--accent-color);
+            font-size: 14px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-wa {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #25d366;
             color: white;
             text-decoration: none;
-            font-size: 14px;
-            font-weight: 700;
-            padding: 14px;
-            border-radius: 14px;
-            margin-top: 18px;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-            transition: all 0.2s ease;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
         }
-        .btn-whatsapp:hover {
-            background: #20ba5a;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
+
+        .btn-wa:hover {
+            background-color: #1fbc54;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
         }
-        .btn-whatsapp:active {
-            transform: translateY(1px);
+
+        /* FLOATING MAIN WA */
+        .floating-wa {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 999;
+            transition: transform 0.2s;
         }
-        .btn-whatsapp i {
-            font-size: 18px;
+
+        .floating-wa:hover {
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 12px;
+            color: var(--text-muted);
+            background-color: #fff;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            header { padding: 30px 15px; }
+            header h1 { font-size: 22px; }
+            .info-grid { margin-top: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="promo-container">
-        <div class="promo-headline">
-            Semakin sering kamu isi saldo <span>Mitra Nusantara</span>, semakin besar peluang kamu jadi <span>100 pemenang</span> setiap minggu.
+    <!-- HERO HEADER -->
+    <header>
+        <div class="header-container">
+            <i class="fas fa-handshake-alt"></i>
+            <h1>Forum Edukasi & Kemitraan</h1>
+            <p>Pusat Informasi Regulasi, Transparansi Dana Jaminan Kontrak, dan Aliansi Strategis Mitra Nusantara.</p>
         </div>
+    </header>
 
-        <div class="promo-table">
-            <div class="table-header-row">
-                <div class="th-cell" style="max-width: 26%;">Pemenang</div>
-                <div class="th-cell" style="max-width: 22%;">Periode</div>
-                <div class="th-cell">Jumlah Pemenang</div>
-                <div class="th-cell">Hadiah</div>
-            </div>
+    <div class="container">
 
-            <div class="table-body-section">
-                <div class="table-main-row">
-                    <div class="td-side-block pemenang-col">Pemenang Mingguan</div>
-                    <div class="td-side-block periode-col">1-30 Juni</div>
-                    <div class="td-right-group">
-                        <div class="td-sub-item">
-                            <div class="cell-rank">Peringkat 1-5</div>
-                            <div class="cell-prize">Rp500.000</div>
-                        </div>
-                        <div class="td-sub-item">
-                            <div class="cell-rank">Peringkat 6-35</div>
-                            <div class="cell-prize">Rp200.000</div>
-                        </div>
-                        <div class="td-sub-item">
-                            <div class="cell-rank">Peringkat 36-100</div>
-                            <div class="cell-prize">Rp50.000</div>
-                        </div>
-                    </div>
+        <!-- SECTION INFORMASI REGULASI -->
+        <div class="info-grid">
+            
+            <!-- Edukasi Jaminan Kontrak -->
+            <div class="info-card">
+                <div class="card-title">
+                    <i class="fas fa-file-invoice-dollar" style="color: var(--secondary-color);"></i>
+                    <span>Ketentuan Dana Jaminan Kontrak</span>
+                </div>
+                <p>Perlu dipahami secara transparan oleh seluruh calon pengelola, bahwa <b>Uang Jaminan Kontrak BUKANLAH BIAYA PEMBAYARAN ATAU PEMBELIAN</b>, melainkan dana deposit sah sebagai komitmen jaminan resmi untuk bergabung ke dalam sistem kemitraan terpadu Mitra Nusantara.</p>
+                <p>Seluruh dana kontrak ini bersifat aman dan <b>akan dikembalikan utuh (Fully Refundable)</b> kepada saldo akun pengelola setelah masa kontrak kerja yang disepakati telah selesai.</p>
+                <div class="highlight-box">
+                    <i class="fas fa-sync"></i> Apabila masa kontrak habis, Anda berhak mengajukan pengembalian dana total atau melakukan <b>perpanjangan kontrak</b> untuk terus melanjutkan profitabilitas kemitraan.
                 </div>
             </div>
 
-            <div class="table-body-section">
-                <div class="table-main-row">
-                    <div class="td-side-block pemenang-col">Pemenang Utama</div>
-                    <div class="td-side-block periode-col">1-30 Juni</div>
-                    <div class="td-right-group">
-                        <div class="td-sub-item">
-                            <div class="cell-rank">Peringkat 1</div>
-                            <div class="cell-prize">Rp1.500.000</div>
-                        </div>
-                        <div class="td-sub-item">
-                            <div class="cell-rank">Peringkat 2</div>
-                            <div class="cell-prize">Rp1.000.000</div>
-                        </div>
-                        <div class="td-sub-item">
-                            <div class="cell-rank">Peringkat 3</div>
-                            <div class="cell-prize">Rp750.000</div>
-                        </div>
-                    </div>
+            <!-- Kolaborasi Lazada & Mitra Dana -->
+            <div class="info-card secure">
+                <div class="card-title">
+                    <i class="fas fa-shield-alt" style="color: var(--accent-color);"></i>
+                    <span>Kolaborasi Bisnis & Sistem Penarikan</span>
+                </div>
+                <p>Dalam rangka ekspansi digital nasional, <b>Mitra Lazada secara resmi berkolaborasi dengan Mitra Dana</b> untuk menjalin kerjasama strategis multi-platform. Sinergi ini bertujuan mutlak untuk mendongkrak dan <b>meningkatkan rating performa produk toko</b> pada merchant Mitra Lazada dan fleksibilitas likuiditas di Mitra Dana.</p>
+                <p>Demi menjaga proteksi aset dan kepatuhan anti-fraud sistem keuangan pusat, segala bentuk <b>proses penarikan saldo (Withdrawal) HANYA AKAN DIPROSES ke rekening pribadi pengelola yang telah terverifikasi</b> di dalam ekosistem jaringan akun Mitra Dana Lazada Anda.</p>
+                <div class="highlight-box" style="background-color: #f0fdf4; border-left-color: var(--accent-color); color: #166534;">
+                    <i class="fas fa-check-circle"></i> Pastikan data bank dan verifikasi identitas di akun Mitra Dana Lazada Anda valid agar penarikan berjalan instan tanpa kendala.
                 </div>
             </div>
+
         </div>
 
-        <div class="promo-snk">
-            <i class="fas fa-caret-down"></i> Syarat & Ketentuan <i class="fas fa-caret-down"></i>
+        <!-- KATALOG PRODUK MITRA 1 - 10 -->
+        <h2 class="section-title">
+            <i class="fas fa-boxes-stacked"></i> Program Alokasi Produk Mitra
+        </h2>
+        
+        <div class="product-grid">
+
+            <!-- PRODUK MITRA 1 -->
+            <div class="product-card">
+                <span class="badge-lifetime">1x Seumur Hidup</span>
+                <div class="product-icon"><i class="fas fa-store"></i></div>
+                <h3>Produk Mitra 1</h3>
+                <div class="contract-price">Rp 1.000.000</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Kontrak permanen (Aset Aktif)</li>
+                    <li><i class="fas fa-chart-line"></i> Peningkatan Rating Level 1</li>
+                    <li><i class="fas fa-shield-alt"></i> Jaminan Pengembalian 100%</li>
+                </ul>
+                <a href="https://wa.me/6283862596697?text=Halo%20Admin%20Mitra%20Nusantara,%20saya%20tertarik%20untuk%20mengajukan%20kontrak%20*Produk%20Mitra%201*%20(Rp%201.000.000)." target="_blank" class="btn-wa">
+                    <i class="fab fa-whatsapp"></i> Ajukan Mitra 1
+                </a>
+            </div>
+
+            <!-- PRODUK MITRA 2 -->
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-cart-shopping"></i></div>
+                <h3>Produk Mitra 2</h3>
+                <div class="contract-price">Rp 2.500.000</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Durasi Kontrak: Siklus Fleksibel</li>
+                    <li><i class="fas fa-chart-line"></i> Booster Rating Toko Lazada</li>
+                    <li><i class="fas fa-wallet"></i> Komisi Harian Mitra Dana</li>
+                </ul>
+                <a href="https://wa.me/6283862596697?text=Halo%20Admin%20Mitra%20Nusantara,%20saya%20tertarik%20untuk%20mengajukan%20kontrak%20*Produk%20Mitra%202*%20(Rp%202.500.000)." target="_blank" class="btn-wa">
+                    <i class="fab fa-whatsapp"></i> Ajukan Mitra 2
+                </a>
+            </div>
+
+            <!-- PRODUK MITRA 3 -->
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-bag-shopping"></i></div>
+                <h3>Produk Mitra 3</h3>
+                <div class="contract-price">Rp 5.000.000</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Akses Produk Merchant Utama</li>
+                    <li><i class="fas fa-chart-line"></i> Skala Multiplier Rating x2</li>
+                    <li><i class="fas fa-history"></i> Opsi Perpanjangan Kontrak</li>
+                </ul>
+                <a href="https://wa.me/6283862596697?text=Halo%20Admin%20Mitra%20Nusantara,%20saya%20tertarik%20untuk%20mengajukan%20kontrak%20*Produk%20Mitra%203*%20(Rp%205.000.000)." target="_blank" class="btn-wa">
+                    <i class="fab fa-whatsapp"></i> Ajukan Mitra 3
+                </a>
+            </div>
+
+            <!-- PRODUK MITRA 4 -->
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-truck-fast"></i></div>
+                <h3>Produk Mitra 4</h3>
+                <div class="contract-price">Rp 10.000.000</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Prioritas Penyaluran Rating</li>
+                    <li><i class="fas fa-chart-line"></i> Aliansi Rating Lazada Global</li>
+                    <li><i class="fas fa-lock"></i> Dana Terproteksi Keamanan Terpadu</li>
+                </ul>
+                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Mitra%20Nusantara,%20saya%20tertarik%20untuk%20mengajukan%20kontrak%20*Produk%20Mitra%204*%20(Rp%2010.000.000)." target="_blank" class="btn-wa">
+                    <i class="fab fa-whatsapp"></i> Ajukan Mitra 4
+                </a>
+            </div>
+
+            <!-- PRODUK MITRA 5 -->
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-coins"></i></div>
+                <h3>Produk Mitra 5</h3>
+                <div class="contract-price">Rp 20.000.000</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Profitabilitas Margin Lebih Tinggi</li>
+                    <li><i class="fas fa-chart-line"></i> Optimasi Algoritma Rating</li>
+                    <li><i class="fas fa-user-shield"></i> Dedicated Manajer Akun</li>
+                </ul>
+                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Mitra%20Nusantara,%20saya%20tertarik%20untuk%20mengajukan%20kontrak%20*Produk%20Mitra%205*%20(Rp%2020.000.000)." target="_blank" class="btn-wa">
+                    <i class="fab fa-whatsapp"></i> Ajukan Mitra 5
+                </a>
+            </div>
+
+            <!-- PRODUK MITRA 6 -->
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-gem"></i></div>
+                <h3>Produk Mitra 6</h3>
+                <div class="contract-price">Rp 35.000.000</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Kontrak Eksklusif Merchant Premium</li>
+                    <li><i class="fas fa-chart-line"></i> Maksimalisasi Rating Produk Elite</li>
+                    <li><i class="fas fa-arrow-rotate-left"></i> Pengembalian Dana Otomatis</li>
+                </ul>
+                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Mitra%20Nusantara,%20saya%20tertarik%20untuk%20mengajukan%20kontrak%20*Produk%20Mitra%206*%20(Rp%2035.000.000)." target="_blank" class="btn-wa">
+                    <i class="fab fa-whatsapp"></i> Ajukan Mitra 6
+                </a>
+            </div>
+
+            <!-- PRODUK MITRA 7 -->
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-building"></i></div>
+                <h3>Produk Mitra 7</h3>
+                <div class="contract-price">Rp 50.000.000</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Alokasi Klaster Distribusi Utama</li>
+                    <li><i class="fas fa-chart-line"></i> Peningkatan Rating Skala Besar</li>
+                    <li><i class="fas fa-file-contract"></i> Akta Perjanjian Kemitraan Digital</li>
+                </ul>
+                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Mitra%20Nusantara,%20saya%20tertarik%20untuk%20mengajukan%20kontrak%20*Produk%20Mitra%207*%20(Rp%2050.000.000)." target="_blank" class="btn-wa">
+                    <i class="fab fa-whatsapp"></i> Ajukan Mitra 7
+                </a>
+            </div>
+
+            <!-- PRODUK MITRA 8 -->
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-vault"></i></div>
+                <h3>Produk Mitra 8</h3>
+                <div class="contract-price">Rp 75.000.000</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> VIP Pool Likuiditas Mitra Dana</li>
+                    <li><i class="fas fa-chart-line"></i> Rating Kontributor Utama Lazada</li>
+                    <li><i class="fas fa-shield"></i> Garansi Finansial Beragun Sistem</li>
+                </ul>
+                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Mitra%20Nusantara,%20saya%20tertarik%20untuk%20mengajukan%20kontrak%20*Produk%20Mitra%208*%20(Rp%2075.000.000)." target="_blank" class="btn-wa">
+                    <i class="fab fa-whatsapp"></i> Ajukan Mitra 8
+                </a>
+            </div>
+
+            <!-- PRODUK MITRA 9 -->
+            <div class="product-card">
+                <div class="product-icon"><i class="fas fa-crown"></i></div>
+                <h3>Produk Mitra 9</h3>
+                <div class="contract-price">Rp 100.000.000</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Kemitraan Strategis Level Platinum</li>
+                    <li><i class="fas fa-chart-line"></i> Penguasaan Rating Produk Utama</li>
+                    <li><i class="fas fa-clock-rotate-left"></i> Bebas Biaya Perpanjangan Kontrak</li>
+                </ul>
+                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Mitra%20Nusantara,%20saya%20tertarik%20untuk%20mengajukan%20kontrak%20*Produk%20Mitra%209*%20(Rp%20100.000.000)." target="_blank" class="btn-wa">
+                    <i class="fab fa-whatsapp"></i> Ajukan Mitra 9
+                </a>
+            </div>
+
+            <!-- PRODUK MITRA 10 -->
+            <div class="product-card" style="border-color: var(--warning-color); background: linear-gradient(to bottom, #fff, #fffgl, #fffef0);">
+                <div class="product-icon" style="background-color: #fef3c7; color: var(--warning-color);"><i class="fas fa-trophy"></i></div>
+                <h3>Produk Mitra 10 (Infinite)</h3>
+                <div class="contract-price" style="color: var(--warning-color);">Rp 150.000.000</div>
+                <ul class="product-features">
+                    <li><i class="fas fa-check"></i> Tingkat Konsolidasi Rating Tertinggi</li>
+                    <li><i class="fas fa-chart-line"></i> Prioritas Pencairan Utama 24/7</li>
+                    <li><i class="fas fa-star"></i> Benefit Khusus Aliansi Lazada & Dana</li>
+                </ul>
+                <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Mitra%20Nusantara,%20saya%20tertarik%20untuk%20mengajukan%20kontrak%20*Produk%20Mitra%2010*%20(Rp%20150.000.000)." target="_blank" class="btn-wa" style="background-color: var(--warning-color);">
+                    <i class="fab fa-whatsapp"></i> Ajukan Mitra 10
+                </a>
+            </div>
+
         </div>
 
-        <a href="https://wa.me/6283862596697?text=Halo%20Mitra%20Nusantara,%20saya%20ingin%20gabung%20ke%20program%20promo" target="_blank" class="btn-whatsapp">
-            <i class="fab fa-whatsapp"></i> Gabung ke WhatsApp
-        </a>
     </div>
 
+    <!-- MAIN FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/6281234567890?text=Halo%20Layanan%20Pelanggan%20Mitra%20Nusantara,%20saya%20ingin%20bertanya%20mengenai%20program%20kemitraan%20ini." class="floating-wa" target="_blank" title="Hubungi Customer Service">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Mitra Nusantara x Mitra Dana Lazada. All Rights Reserved.</p>
+        <p style="font-size: 10px; margin-top: 5px; opacity: 0.7;">Segala bentuk jaminan tunduk pada kebijakan privasi, syarat dan ketentuan kontrak platform terpadu.</p>
+    </footer>
+
 </body>
-                                               </html>
+</html>
+       
